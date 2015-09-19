@@ -1,39 +1,50 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BuildViewNode : MonoBehaviour {
+[RequireComponent(typeof(Rigidbody))]
+public class BuildViewNode : MonoBehaviour
+{
 
-    // Node Properties
-    private bool isStopSign = false;
-    private bool isRedLight = false;
-    private bool isSource = false;
-    private bool isSink = false;
+    public Transform node;
+    private Rigidbody myRigidBody;
+    private enum NodeType  {
+        StopSign,
+        RedLight,
+        Source,
+        Sink
+    }
+    private bool isClicked;
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    void Start()
+    {
+        myRigidBody = GetComponent<Rigidbody>();
+    }
 
-    // Select Node Property
-    void SetNodeProperty(string prop)
+    void Update()
     {
 
     }
 
-    // Remove selected nodes
-    void RemoveSelected()
-    {
 
+    private void OnGUI()
+    {
+        string msgtxt = "hello world!";
+        if (isClicked)
+        {
+            GUI.Box(new Rect(200, 100, 320, 110), msgtxt);
+        }
     }
 
-    // Remove all nodes
-    void RemoveAll()
+    
+    void OnMouseUp()
     {
-
+        // When you click, change the variables value
+        if (isClicked)
+        {
+            Debug.Log("Hello World");
+            isClicked = false;
+        }
+        else
+            isClicked = true;
     }
 }
