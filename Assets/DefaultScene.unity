@@ -751,7 +751,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   origin: {fileID: 463922157}
   destination: {fileID: 854895808}
-  lineDrawSpeed: 6
 --- !u!54 &1364122384
 Rigidbody:
   m_ObjectHideFlags: 0
