@@ -6,16 +6,15 @@ using System.Collections;
 public class BuildViewNode : MonoBehaviour
 {
 
-    public string[] nodeStrings = new string[] { "StopSign", "Traffic Light", "Source", "Sink" };
-    private enum NodeType { StopSign, TrafficLight, Source, Sink}
-    private NodeType nodeType;
+    private string[] nodeStrings = new string[] { "1a. StopSign", "1b. Traffic Light", "2. Source", "3. Sink" };
+    private enum NodeType { None, StopSign, TrafficLight, Source, Sink }
+    private NodeType[] selectedNodeTypes = new NodeType[3];
 
-    public GameObject node;
     private SphereCollider myCollider;
     private Rigidbody myRigidBody;
-    private Rect windowSize = new Rect(0, 0, Screen.width/4, Screen.height/4);
-    
-    private bool isClicked;
+    private Rect windowSize = new Rect(0, 0, Screen.width / 4, Screen.height / 4);
+
+    private bool isNodeClicked;
 
     //Pesudo Constructor for Node
     void Start()
@@ -26,49 +25,100 @@ public class BuildViewNode : MonoBehaviour
         myRigidBody.useGravity = false;
     }
 
+    void OnMouseDrag()
+    {
+        Vector2 mousePosition = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+        Vector2 objPosition = Camera.main.ScreenToWorldPoint(mousePosition);
+
+        transform.position = objPosition;
+    }
+
+
+    void OnMouseUp()
+    {
+        // When you click, change the variables value
+        if (isNodeClicked) isNodeClicked = false;
+        else isNodeClicked = true;
+    }
+
     private void OnGUI()
     {
         //Creates the Node Property Window
-        if (isClicked)
-            windowSize = GUI.Window(0, windowSize, NodePropertyWindow, "Set Node Property");
+        if (isNodeClicked)
+            windowSize = GUI.Window(0, windowSize, SetNodePropertyWindow, "Set Node Property");
     }
 
     //Creates the buttons
-    private void NodePropertyWindow(int windowID)
+    private bool isStopSign = false;
+    private bool isTrafficLight = false;
+    private bool isSink = false;
+    private bool isSource = false;
+    
+    private void SetNodePropertyWindow(int windowID)
     {
         GUILayout.BeginVertical();
         GUILayout.Space(10);
 
         if(GUILayout.Button(nodeStrings[0]))
         {
-            nodeType = NodeType.StopSign;
-            Debug.Log(nodeType);
+            if(!isStopSign)
+            {
+                selectedNodeTypes[0] = NodeType.StopSign;
+                isStopSign = true;
+            }
+            else
+            {
+                selectedNodeTypes[0] = NodeType.None;
+                isStopSign = false;
+            }
+            Debug.Log(selectedNodeTypes[0].ToString() + " " + selectedNodeTypes[1].ToString() + " " + selectedNodeTypes[2].ToString());
+
         }
         if (GUILayout.Button(nodeStrings[1]))
         {
-            nodeType = NodeType.TrafficLight;
-            Debug.Log(nodeType);
+            if (!isTrafficLight)
+            {
+                selectedNodeTypes[0] = NodeType.TrafficLight;
+                isTrafficLight = true;
+            }
+            else
+            {
+                selectedNodeTypes[0] = NodeType.None;
+                isTrafficLight = false;
+            }
+            Debug.Log(selectedNodeTypes[0].ToString() + " " + selectedNodeTypes[1].ToString() + " " + selectedNodeTypes[2].ToString());
         }
         if (GUILayout.Button(nodeStrings[2]))
         {
-            nodeType = NodeType.Source;
-            Debug.Log(nodeType);
+            if (!isSource)
+            {
+                selectedNodeTypes[1] = NodeType.Source;
+                isSource = true;
+            }
+            else
+            {
+                selectedNodeTypes[1] = NodeType.None;
+                isSource = false;
+            }
+            Debug.Log(selectedNodeTypes[0].ToString() + " " + selectedNodeTypes[1].ToString() + " " + selectedNodeTypes[2].ToString());
         }
         if (GUILayout.Button(nodeStrings[3]))
         {
-            nodeType = NodeType.Sink;
-            Debug.Log(nodeType);
+            if (!isSink)
+            {
+                selectedNodeTypes[2] = NodeType.Sink;
+                isSink = true;
+            }
+            else
+            {
+                selectedNodeTypes[2] = NodeType.None;
+                isSink = false;
+            }
+            Debug.Log(selectedNodeTypes[0].ToString() + " " + selectedNodeTypes[1].ToString() + " " + selectedNodeTypes[2].ToString());
         }
 
         GUILayout.EndVertical();
 
         GUI.DragWindow();
-    }
-    
-    void OnMouseUp()
-    {
-        // When you click, change the variables value
-        if (isClicked) isClicked = false;
-        else isClicked = true;
     }
 }
