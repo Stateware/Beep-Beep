@@ -12,11 +12,9 @@ public class BuildViewLink : MonoBehaviour {
 	private int laneNum = 1;
 	private LineRenderer lineRenderer;
 	private BoxCollider myCollider;
-	
-	public Vector2 offSetOri;			//offSet for moving the links
-	public Vector2 offSetDes;
 
-	// Use this for initialization
+
+	// Initialization
 	void Start () {
 		myCollider = gameObject.GetComponent<BoxCollider> ();
 		lineRenderer = GetComponent<LineRenderer> ();
@@ -46,7 +44,6 @@ public class BuildViewLink : MonoBehaviour {
 		Vector3 offPosition = new Vector3 (objPosition.x, objPosition.y, transform.position.z) - transform.position;
 		origin.transform.position += offPosition;
 		destination.transform.position += offPosition;
-
 	}
 
 
