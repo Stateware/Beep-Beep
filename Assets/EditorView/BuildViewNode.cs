@@ -1,8 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-
-[RequireComponent(typeof(Rigidbody))]
 public class BuildViewNode : MonoBehaviour
 {
 
@@ -11,7 +9,6 @@ public class BuildViewNode : MonoBehaviour
     private NodeType[] selectedNodeTypes = new NodeType[3];
 
     private SphereCollider myCollider;
-    private Rigidbody myRigidBody;
     private Rect windowSize = new Rect(0, 0, Screen.width / 4, Screen.height / 4);
 
     private bool isNodeClicked;
@@ -19,10 +16,8 @@ public class BuildViewNode : MonoBehaviour
     //Pesudo Constructor for Node
     void Start()
     {
-        myRigidBody = GetComponent<Rigidbody>();
         myCollider = gameObject.AddComponent<SphereCollider>();
         myCollider.radius = 0.75f;
-        myRigidBody.useGravity = false;
     }
 
     void OnMouseDrag()
