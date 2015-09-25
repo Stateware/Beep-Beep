@@ -11,41 +11,41 @@ public class BuildViewLink : MonoBehaviour {
 	public BuildViewNode destination;
 	private int laneNum = 1;
 	private LineRenderer lineRenderer;
-	private Collider myCollider;
+	private BoxCollider myCollider;
 	
 	public Vector2 offSetOri;			//offSet for moving the links
 	public Vector2 offSetDes;
 
 	// Use this for initialization
 	void Start () {
-		myCollider = gameObject.GetComponent<BoxCollider>();
+		myCollider = gameObject.GetComponent<BoxCollider> ();
+		lineRenderer = GetComponent<LineRenderer> ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		lineRenderer = GetComponent<LineRenderer>();
 		lineRenderer.SetPosition (0, origin.transform.position);
 		lineRenderer.SetWidth (.25f, .25f);
-
 		lineRenderer.SetPosition(1, destination.transform.position);
 
-		//the collider is positioned in the middle of the link
+		// Positions the BoxCollider in the middle of the link
 		transform.position = (origin.transform.position + destination.transform.position) / 2;
 
-		//Calculate the offSets
-		offSetOri = origin.transform.position - transform.position;
-		offSetDes = destination.transform.position - transform.position;
+		// Fit the BoxCollider with the parameter of the link
+		transform.position = (origin.transform.position + destination.transform.position) / 2;
+		float colliderWidth = Mathf.Max (origin.transform.position.x, destination.transform.position.x) - Mathf.Min (origin.transform.position.x, destination.transform.position.x);
+		float colliderHeight = Mathf.Max (origin.transform.position.y, destination.transform.position.y) - Mathf.Min (origin.transform.position.y, destination.transform.position.y);
+		myCollider.size = new Vector3 (colliderWidth, colliderHeight, myCollider.size.z);
 	}
 
-	void OnMouseDrag()
-	{
-		Vector2 mousePosition = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+	void OnMouseDrag () {
+		Vector2 mousePosition = new Vector2 (Input.mousePosition.x, Input.mousePosition.y);
+		Vector2 objPosition = Camera.main.ScreenToWorldPoint (mousePosition);
 
-		Vector2 objPosition = Camera.main.ScreenToWorldPoint(mousePosition);
-
-		//Move the nodes along with the link being moved
-		origin.transform.position = objPosition + offSetOri;
-		destination.transform.position = objPosition + offSetDes;
+		// Get the offset vector
+		Vector3 offPosition = new Vector3 (objPosition.x, objPosition.y, transform.position.z) - transform.position;
+		origin.transform.position += offPosition;
+		destination.transform.position += offPosition;
 
 	}
 
