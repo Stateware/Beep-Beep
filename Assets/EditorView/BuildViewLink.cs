@@ -11,29 +11,41 @@ public class BuildViewLink : MonoBehaviour {
 	public BuildViewNode destination;
 	private int laneNum = 1;
 	private LineRenderer lineRenderer;
-	private BoxCollider myCollider;
-
-
+	private BoxCollider lineCollider;
+	private float lineRendererWidth = 0.35f;
+	
 	// Initialization
 	void Start () {
-		myCollider = gameObject.GetComponent<BoxCollider> ();
 		lineRenderer = GetComponent<LineRenderer> ();
+		lineCollider = gameObject.AddComponent<BoxCollider> ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		lineRenderer.SetPosition (0, origin.transform.position);
-		lineRenderer.SetWidth (.25f, .25f);
-		lineRenderer.SetPosition(1, destination.transform.position);
+		// Store origin and destination position
+		Vector3 originPos = origin.transform.position;
+		Vector3 destinationPos = destination.transform.position;
 
-		// Positions the BoxCollider in the middle of the link
-		transform.position = (origin.transform.position + destination.transform.position) / 2;
+		// Draw links
+		lineRenderer.SetPosition (0, originPos);
+		lineRenderer.SetWidth (lineRendererWidth, lineRendererWidth);
+		lineRenderer.SetPosition (1, destinationPos);
 
-		// Fit the BoxCollider with the parameter of the link
-		transform.position = (origin.transform.position + destination.transform.position) / 2;
-		float colliderWidth = Mathf.Max (origin.transform.position.x, destination.transform.position.x) - Mathf.Min (origin.transform.position.x, destination.transform.position.x);
-		float colliderHeight = Mathf.Max (origin.transform.position.y, destination.transform.position.y) - Mathf.Min (origin.transform.position.y, destination.transform.position.y);
-		myCollider.size = new Vector3 (colliderWidth, colliderHeight, myCollider.size.z);
+		// Set the size of lineCollider to the lineRenderer size
+		float lineLength = Vector3.Distance (originPos, destinationPos);
+		lineCollider.size = new Vector3 (lineLength, lineRendererWidth, 0);
+		lineCollider.transform.position = (originPos + destinationPos) / 2;
+
+		float angle = Mathf.Abs (originPos.y - destinationPos.y) / Mathf.Abs (originPos.x - destinationPos.x);
+
+		// If the angle is in second or fourth quadrant
+		if ((originPos.y - destinationPos.y) * (originPos.x - destinationPos.x) < 0)
+			angle *= -1;
+
+		angle = Mathf.Rad2Deg * Mathf.Atan (angle);
+
+		// Rotate lineCollider to lineRenderer's angle
+		lineCollider.transform.eulerAngles = new Vector3 (0, 0, angle);
 	}
 
 	void OnMouseDrag () {
