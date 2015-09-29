@@ -33,10 +33,14 @@ public class BuildViewNode : MonoBehaviour
 
     void OnMouseUp()
     {
+        Debug.Log(this.name + " " + this.selectedNodeTypes[0].ToString() + " " + this.selectedNodeTypes[1].ToString() + " " + this.selectedNodeTypes[2].ToString());
+
         // When you click, change the variables value
-        if (isNodeClicked) isNodeClicked = false;
-        else isNodeClicked = true;
-    }
+        if (isNodeClicked)
+            isNodeClicked = false;
+        else
+            isNodeClicked = true;
+     }
 
     private void OnGUI()
     {
@@ -46,10 +50,10 @@ public class BuildViewNode : MonoBehaviour
     }
 
     //Creates the buttons
-    private bool isStopSign = false;
-    private bool isTrafficLight = false;
-    private bool isSink = false;
-    private bool isSource = false;
+    private bool isStopSign;
+    private bool isTrafficLight;
+    private bool isSink;
+    private bool isSource;
     
     private void SetNodePropertyWindow(int windowID)
     {
@@ -60,65 +64,65 @@ public class BuildViewNode : MonoBehaviour
         {
             if(!isStopSign)
             {
-                selectedNodeTypes[0] = NodeType.StopSign;
-                isStopSign = true;
+                this.selectedNodeTypes[0] = NodeType.StopSign;
+                this.isStopSign = true;
             }
             else
             {
-                selectedNodeTypes[0] = NodeType.None;
-                isStopSign = false;
+                this.selectedNodeTypes[0] = NodeType.None;
+                this.isStopSign = false;
             }
-            Debug.Log(selectedNodeTypes[0].ToString() + " " + selectedNodeTypes[1].ToString() + " " + selectedNodeTypes[2].ToString());
-
+            Debug.Log(this.name + " " + this.selectedNodeTypes[0].ToString() + " " + this.selectedNodeTypes[1].ToString() + " " + this.selectedNodeTypes[2].ToString());
         }
         if (GUILayout.Button(nodeStrings[1]))
         {
             if (!isTrafficLight)
             {
-                selectedNodeTypes[0] = NodeType.TrafficLight;
-                isTrafficLight = true;
+                this.selectedNodeTypes[0] = NodeType.TrafficLight;
+                this.isTrafficLight = true;
             }
             else
             {
-                selectedNodeTypes[0] = NodeType.None;
-                isTrafficLight = false;
+                this.selectedNodeTypes[0] = NodeType.None;
+                this.isTrafficLight = false;
             }
-            Debug.Log(selectedNodeTypes[0].ToString() + " " + selectedNodeTypes[1].ToString() + " " + selectedNodeTypes[2].ToString());
+            Debug.Log(this.name + " " + this.selectedNodeTypes[0].ToString() + " " + this.selectedNodeTypes[1].ToString() + " " + this.selectedNodeTypes[2].ToString());
         }
         if (GUILayout.Button(nodeStrings[2]))
         {
             if (!isSource)
             {
-                selectedNodeTypes[1] = NodeType.Source;
-                isSource = true;
+                this.selectedNodeTypes[1] = NodeType.Source;
+                this.isSource = true;
             }
             else
             {
-                selectedNodeTypes[1] = NodeType.None;
-                isSource = false;
+                this.selectedNodeTypes[1] = NodeType.None;
+                this.isSource = false;
             }
-            Debug.Log(selectedNodeTypes[0].ToString() + " " + selectedNodeTypes[1].ToString() + " " + selectedNodeTypes[2].ToString());
+            Debug.Log(this.name + " " + this.selectedNodeTypes[0].ToString() + " " + this.selectedNodeTypes[1].ToString() + " " + this.selectedNodeTypes[2].ToString());
         }
         if (GUILayout.Button(nodeStrings[3]))
         {
             if (!isSink)
             {
-                selectedNodeTypes[2] = NodeType.Sink;
-                isSink = true;
+                this.selectedNodeTypes[2] = NodeType.Sink;
+                this.isSink = true;
             }
             else
             {
-                selectedNodeTypes[2] = NodeType.None;
-                isSink = false;
+                this.selectedNodeTypes[2] = NodeType.None;
+                this.isSink = false;
             }
-            Debug.Log(selectedNodeTypes[0].ToString() + " " + selectedNodeTypes[1].ToString() + " " + selectedNodeTypes[2].ToString());
+            Debug.Log(this.name + " " + this.selectedNodeTypes[0].ToString() + " " + this.selectedNodeTypes[1].ToString() + " " + this.selectedNodeTypes[2].ToString());
         }
 
         GUILayout.EndVertical();
-
         GUI.DragWindow();
     }
 
+    int nodeItr = 0;
+    bool isActivated;
     public void SpawnNewNode()
     {
         Vector2 mousePosition = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
@@ -127,5 +131,14 @@ public class BuildViewNode : MonoBehaviour
         transform.position = spawnPosition;
 
         GameObject nodeClone = (GameObject) Instantiate(NodePrefab, transform.position, Quaternion.identity);
+        
+        nodeClone.GetComponent<BuildViewNode>().isActivated = false;
+        nodeClone.GetComponent<BuildViewNode>().selectedNodeTypes = new NodeType[3];
+        nodeClone.GetComponent<BuildViewNode>().isStopSign = false;
+        nodeClone.GetComponent<BuildViewNode>().isTrafficLight = false;
+        nodeClone.GetComponent<BuildViewNode>().isSource = false;
+        nodeClone.GetComponent<BuildViewNode>().isSink = false;
+        nodeClone.name = "node" + nodeItr;
+        nodeItr++;
     }
 }
