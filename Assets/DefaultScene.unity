@@ -681,6 +681,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00c15c1209f289e459c7ae227f973ab1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  NodePrefab: {fileID: 0}
 --- !u!212 &463922159
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -952,7 +953,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 726796638}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 11491512, guid: 6d266921e2506bb4cbe590a72e58291b, type: 2}
+        m_MethodName: SpawnNewNode
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &726796638
@@ -1102,6 +1114,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00c15c1209f289e459c7ae227f973ab1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  NodePrefab: {fileID: 0}
 --- !u!4 &854895809
 Transform:
   m_ObjectHideFlags: 0

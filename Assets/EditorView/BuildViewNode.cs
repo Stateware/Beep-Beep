@@ -8,6 +8,8 @@ public class BuildViewNode : MonoBehaviour
     private enum NodeType { None, StopSign, TrafficLight, Source, Sink }
     private NodeType[] selectedNodeTypes = new NodeType[3];
 
+    public GameObject NodePrefab;
+
     private SphereCollider myCollider;
     private Rect windowSize = new Rect(0, 0, Screen.width / 4, Screen.height / 4);
 
@@ -115,5 +117,15 @@ public class BuildViewNode : MonoBehaviour
         GUILayout.EndVertical();
 
         GUI.DragWindow();
+    }
+
+    public void SpawnNewNode()
+    {
+        Vector2 mousePosition = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+        Vector2 spawnPosition = Camera.main.ScreenToWorldPoint(mousePosition);
+
+        transform.position = spawnPosition;
+
+        GameObject nodeClone = (GameObject) Instantiate(NodePrefab, transform.position, Quaternion.identity);
     }
 }
