@@ -4,9 +4,9 @@ using System.Collections;
 public class BuildViewLink : MonoBehaviour {
 
 	// Link properties
-	private bool isLeftDirected = false;
+	private bool isLeftDirected = true;
 	private bool isRightDirected = false;
-	private bool isUndirected = true;
+	private bool isUndirected = false;
 	public BuildViewNode origin;
 	public BuildViewNode destination;
 	private int laneNum = 1;
@@ -27,9 +27,19 @@ public class BuildViewLink : MonoBehaviour {
 		Vector3 destinationPos = destination.transform.position;
 
 		// Draw links
-		lineRenderer.SetPosition (0, originPos);
 		lineRenderer.SetWidth (lineRendererWidth, lineRendererWidth);
-		lineRenderer.SetPosition (1, destinationPos);
+		if (isUndirected) {
+			lineRenderer.SetPosition (0, originPos);
+			lineRenderer.SetPosition (1, destinationPos);
+		}
+		else if (isLeftDirected) {
+			lineRenderer.SetPosition (0, originPos);
+			lineRenderer.SetPosition (1, destinationPos);
+		}
+		else if (isRightDirected) {
+			lineRenderer.SetPosition (0, destinationPos);
+			lineRenderer.SetPosition (1, originPos);
+		}
 
 		// Set the size of lineCollider to the lineRenderer size
 		float lineLength = Vector3.Distance (originPos, destinationPos);
@@ -46,6 +56,8 @@ public class BuildViewLink : MonoBehaviour {
 
 		// Rotate lineCollider to lineRenderer's angle
 		lineCollider.transform.eulerAngles = new Vector3 (0, 0, angle);
+
+		lineRenderer.material.mainTextureScale = new Vector2(lineLength / 2, 1);
 	}
 
 	void OnMouseDrag () {
