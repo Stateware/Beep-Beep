@@ -35,11 +35,9 @@ public class BuildViewNode : MonoBehaviour
     {
         Debug.Log(this.name + " " + this.selectedNodeTypes[0].ToString() + " " + this.selectedNodeTypes[1].ToString() + " " + this.selectedNodeTypes[2].ToString());
 
-        // When you click, change the variables value
-        if (isNodeClicked)
-            isNodeClicked = false;
-        else
-            isNodeClicked = true;
+        // When you click, add self to Selection array
+        BuildViewSelectionHandler selectionHandler = GameObject.FindObjectOfType<BuildViewSelectionHandler>();
+        selectionHandler.AddNode(this);
      }
 
     private void OnGUI()
