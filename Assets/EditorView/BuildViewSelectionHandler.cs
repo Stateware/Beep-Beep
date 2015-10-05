@@ -29,12 +29,17 @@ public class BuildViewSelectionHandler : MonoBehaviour {
         // and the secondary node is the second node
         if (selectedNodes.Count >= 2)
         {
-            GameObject newLink = Instantiate(LinkPrefab);
-
-            BuildViewLink linkScript = newLink.GetComponent<BuildViewLink>();
-
-            linkScript.origin = selectedNodes[0];
-            linkScript.destination = selectedNodes[1];
+			for (int i = 1; i < selectedNodes.Count; i++) {
+				if (selectedNodes[i - 1] != selectedNodes[i]) {
+					GameObject newLink = Instantiate(LinkPrefab);
+					
+					BuildViewLink linkScript = newLink.GetComponent<BuildViewLink>();
+					
+					linkScript.origin = selectedNodes[i - 1];
+					linkScript.destination = selectedNodes[i];
+				}
+			}
+			selectedNodes.Clear();
         }
         else
         {
