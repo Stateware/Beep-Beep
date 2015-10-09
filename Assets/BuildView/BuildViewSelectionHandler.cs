@@ -3,6 +3,8 @@ using System.Collections.Generic;
 
 public class BuildViewSelectionHandler : MonoBehaviour {
 
+	public List<BuildViewNode> allNodes;
+
     public GameObject LinkPrefab;
 
     private List<BuildViewNode> selectedNodes;
@@ -46,4 +48,5 @@ public class BuildViewSelectionHandler : MonoBehaviour {
             Debug.LogError("Cannot instatiate a link with only less than 2 nodes selected.");
         }
     }
+
 }
