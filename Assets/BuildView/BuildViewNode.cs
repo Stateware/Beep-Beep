@@ -7,15 +7,9 @@ public class BuildViewNode : MonoBehaviour
     private string[] nodeStrings = new string[] { "1a. StopSign", "1b. Traffic Light", "2. Source", "3. Sink" };
     private enum NodeType { None, StopSign, TrafficLight, Source, Sink }
     private NodeType[] selectedNodeTypes = new NodeType[3];
-
-    public GameObject NodePrefab;
-
     private SphereCollider myCollider;
-    private Rect windowSize = new Rect(0, 0, Screen.width / 4, Screen.height / 4);
-
-    private bool isNodeClicked;
-
-    //Pesudo Constructor for Node
+    public GameObject NodePrefab;
+  
     void Start()
     {
         myCollider = gameObject.AddComponent<SphereCollider>();
@@ -26,26 +20,15 @@ public class BuildViewNode : MonoBehaviour
     {
         Vector2 mousePosition = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
         Vector2 objPosition = Camera.main.ScreenToWorldPoint(mousePosition);
-
         transform.position = objPosition;
     }
-
-
+        
     void OnMouseUp()
     {
-        Debug.Log(this.name + " " + this.selectedNodeTypes[0].ToString() + " " + this.selectedNodeTypes[1].ToString() + " " + this.selectedNodeTypes[2].ToString());
-
-        // When you click, add self to Selection array
+        // When you click, add self to Selection array. Works with creating links.
         BuildViewSelectionHandler selectionHandler = GameObject.FindObjectOfType<BuildViewSelectionHandler>();
         selectionHandler.AddNode(this);
      }
-
-    private void OnGUI()
-    {
-        //Creates the Node Property Window
-        if (isNodeClicked)
-            windowSize = GUI.Window(0, windowSize, SetNodePropertyWindow, "Set Node Property");
-    }
 
     //Creates the buttons
     private bool isStopSign;
@@ -120,7 +103,6 @@ public class BuildViewNode : MonoBehaviour
     }
 
     int nodeItr = 0;
-    bool isActivated;
     public void SpawnNewNode()
     {
         Vector2 mousePosition = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
@@ -130,7 +112,6 @@ public class BuildViewNode : MonoBehaviour
 
         GameObject nodeClone = (GameObject) Instantiate(NodePrefab, transform.position, Quaternion.identity);
         
-        nodeClone.GetComponent<BuildViewNode>().isActivated = false;
         nodeClone.GetComponent<BuildViewNode>().selectedNodeTypes = new NodeType[3];
         nodeClone.GetComponent<BuildViewNode>().isStopSign = false;
         nodeClone.GetComponent<BuildViewNode>().isTrafficLight = false;
