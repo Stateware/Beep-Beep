@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-using static BuildViewNode;
+
 public class CarSpawn : MonoBehaviour {
 
 	// Use this for initialization
@@ -15,8 +15,4 @@ public class CarSpawn : MonoBehaviour {
 	
 	}
 
-    private class NodePrefab
-    {
-
-    }
 }
