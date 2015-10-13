@@ -9,6 +9,10 @@ public class BuildViewSelectionHandler : MonoBehaviour {
 
     private List<BuildViewNode> selectedNodes;
 
+    public GameObject nodePropertyDropdown;
+    public GameObject sourceCheckbox;
+    public GameObject sinkCheckbox;
+
     void Start()
     {
         selectedNodes = new List<BuildViewNode>();
@@ -19,6 +23,8 @@ public class BuildViewSelectionHandler : MonoBehaviour {
         Debug.Log("A node was added.");
         selectedNodes.Add(newNode);
     }
+
+
 
     public void ClearSelection()
     {
@@ -47,6 +53,11 @@ public class BuildViewSelectionHandler : MonoBehaviour {
         {
             Debug.LogError("Cannot instatiate a link with only less than 2 nodes selected.");
         }
+    }
+
+    public void SetProperty(int id)
+    {
+        Debug.Log("this " + id);
     }
 
 }
