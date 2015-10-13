@@ -11,7 +11,7 @@ GameObject:
   - 120: {fileID: 12037206}
   - 114: {fileID: 11498210}
   m_Layer: 0
-  m_Name: LinkPrefab
+  m_Name: RoadPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
