@@ -12,7 +12,7 @@ public class CarSpawn : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-	
+	    
 	}
 
 }
