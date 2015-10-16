@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class BuildViewSelectionHandler : MonoBehaviour {
 
-	public List<BuildViewNode> allNodes;
+    public List<BuildViewNode> allNodes;
 
     public GameObject LinkPrefab;
 
@@ -24,11 +24,11 @@ public class BuildViewSelectionHandler : MonoBehaviour {
         selectedNodes.Add(newNode);
     }
 
-
-
     public void ClearSelection()
     {
+        // Set all node textures to deselected texture
         selectedNodes.Clear();
+        // Set all UI elements .Interactable = false
     }
 
     public void Link()
