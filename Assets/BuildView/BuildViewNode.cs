@@ -3,18 +3,17 @@ using System.Collections;
 
 public class BuildViewNode : MonoBehaviour
 {
-    public enum NodeType {None, StopSign, TrafficLight}
-    private NodeType property;
-    private bool isSource;
-    private bool isSink;
+    public enum NodeType { None, StopSign, TrafficLight}
+    public enum NodeGateType {None, Source, Sink, Dual}
+    private NodeType nodeProperty;
+    private NodeGateType nodeGateTypeProperty;
     private SphereCollider myCollider;
     public GameObject NodePrefab;
-  
+    
     void Awake()
     {
-        this.isSink = false;
-        this.isSource = false;
-        this.property = NodeType.None;
+        this.nodeProperty = NodeType.None;
+        this.nodeGateTypeProperty = NodeGateType.None;
         Debug.Log("awake!");
     }
 
@@ -40,44 +39,30 @@ public class BuildViewNode : MonoBehaviour
 
     public NodeType getNodeProperty()
     {
-        return this.property;
+        return this.nodeProperty;
     }
 
-    public bool getIsSource()
+    public NodeGateType getNodeGateTypeProperty()
     {
-        return this.isSource;
-    }
-
-    public bool getIsSink()
-    {
-        return this.isSink;
+        return this.nodeGateTypeProperty;
     }
 
     public void setNodeProperty(NodeType newProperty)
     {
-        this.property = newProperty;
+        this.nodeProperty = newProperty;
     }
 
-    public void setIsSource(bool newIsSource)
+    public void setNodeGateTypeProperty(NodeGateType newProperty)
     {
-        this.isSource = newIsSource;
-    }
-
-    public void setIsSink(bool newIsSink)
-    {
-        this.isSink = newIsSink;
+        this.nodeGateTypeProperty = newProperty;
     }
 
     public void SpawnNewNode()
     {
         Vector2 mousePosition = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
         Vector2 spawnPosition = Camera.main.ScreenToWorldPoint(mousePosition);
-
         transform.position = spawnPosition;
 
         GameObject nodeClone = (GameObject) Instantiate(NodePrefab, transform.position, Quaternion.identity);
-
-        nodeClone.GetComponent<BuildViewNode>();
-
     }
 }
