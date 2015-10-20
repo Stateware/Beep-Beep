@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections.Generic;
 
 public class BuildViewSelectionHandler : MonoBehaviour {
@@ -18,17 +19,25 @@ public class BuildViewSelectionHandler : MonoBehaviour {
         selectedNodes = new List<BuildViewNode>();
     }
 
+
     public void AddNode(BuildViewNode newNode)
     {
         Debug.Log("A node was added.");
         selectedNodes.Add(newNode);
+
+        //change this later?
+        nodePropertyDropdown.GetComponent<Dropdown>().interactable = true;
+        sinkCheckbox.GetComponent<Toggle>().interactable = true;
+        sourceCheckbox.GetComponent<Toggle>().interactable = true;
     }
 
     public void ClearSelection()
     {
         // Set all node textures to deselected texture
         selectedNodes.Clear();
-        // Set all UI elements .Interactable = false
+        nodePropertyDropdown.GetComponent<Dropdown>().interactable = false;
+        sinkCheckbox.GetComponent<Toggle>().interactable = false;
+        sourceCheckbox.GetComponent<Toggle>().interactable = false;
     }
 
     public void Link()
