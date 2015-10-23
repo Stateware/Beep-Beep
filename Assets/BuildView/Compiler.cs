@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using System.Collections.Generic;	
 
 public class Compiler : MonoBehaviour {
 	public BuildViewNode[] nodes;
@@ -19,7 +19,7 @@ public class Compiler : MonoBehaviour {
 			{
 				node_adj_matrix[index].Add(false);
 			}
-			Console.WriteLine(node.ToString());
+			//Console.WriteLine(node.ToString());
 			++index;
 		}
 		
