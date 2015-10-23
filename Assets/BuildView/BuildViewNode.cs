@@ -57,6 +57,7 @@ public class BuildViewNode : MonoBehaviour
         this.nodeGateTypeProperty = newProperty;
     }
 
+	int nodeItr = 0;
     public void SpawnNewNode()
     {
         Vector2 mousePosition = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
@@ -64,5 +65,6 @@ public class BuildViewNode : MonoBehaviour
         transform.position = spawnPosition;
 
         GameObject nodeClone = (GameObject) Instantiate(NodePrefab, transform.position, Quaternion.identity);
-    }
+		nodeClone.name = "" + nodeItr++;
+	}
 }

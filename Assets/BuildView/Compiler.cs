@@ -1,9 +1,12 @@
-﻿
+﻿using UnityEngine;
+using System.Collections;
+
+
 public class Compiler : MonoBehaviour {
 	public BuildViewNode[] nodes;
 	
 	public BuildViewLink[] links;
-	void compile()
+	void compiler()
 	{
 		nodes = UnityEngine.Object.FindObjectsOfType<BuildViewNode>();
 		
