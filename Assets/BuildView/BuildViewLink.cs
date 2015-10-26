@@ -13,7 +13,9 @@ public class BuildViewLink : MonoBehaviour {
 	private LineRenderer lineRenderer;
 	private BoxCollider lineCollider;
 	private float lineRendererWidth = 0.35f;
-	
+	int originID;
+	int destinationID;
+	string toLogger;
 	// Initialization
 	void Start () {
 		lineRenderer = GetComponent<LineRenderer> ();
@@ -25,7 +27,7 @@ public class BuildViewLink : MonoBehaviour {
 		// Store origin and destination position
 		Vector3 originPos = origin.transform.position;
 		Vector3 destinationPos = destination.transform.position;
-
+		
 		// Draw links
 		lineRenderer.SetWidth (lineRendererWidth, lineRendererWidth);
 		if (isUndirected) {
@@ -58,6 +60,12 @@ public class BuildViewLink : MonoBehaviour {
 		lineCollider.transform.eulerAngles = new Vector3 (0, 0, angle);
 
 		lineRenderer.material.mainTextureScale = new Vector2(lineLength / 2, 1);
+
+		this.originID = (int)origin.name;
+		this.destinationID = (int)destination.name;		
+
+		toLogger = "Node #"+origin.name + " -> " + "Node #"+destination.name;
+		Debug.Log (toLogger);
 	}
 
 	void OnMouseDrag () {
@@ -69,7 +77,6 @@ public class BuildViewLink : MonoBehaviour {
 		origin.transform.position += offPosition;
 		destination.transform.position += offPosition;
 	}
-
 
 	// Select link property
 	void setLinkProperty(string prop) {

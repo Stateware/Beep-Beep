@@ -19,14 +19,14 @@ public class Compiler : MonoBehaviour {
 			{
 				node_adj_matrix[index].Add(false);
 			}
-			//Console.WriteLine(node.ToString());
+
 			++index;
 		}
 		
 		links = UnityEngine.Object.FindObjectsOfType<BuildViewLink>();
 		foreach (object link in links)
 		{
-			
+			node_adj_matrix[link.originID][link.destinationID]=true;
 		}
 	}
 	

@@ -9,8 +9,9 @@ public class BuildViewNode : MonoBehaviour
     private NodeGateType nodeGateTypeProperty;
     private SphereCollider myCollider;
     public GameObject NodePrefab;
-    
-    void Awake()
+	int nodeID = 0;
+
+	void Awake()
     {
         this.nodeProperty = NodeType.None;
         this.nodeGateTypeProperty = NodeGateType.None;
@@ -57,7 +58,7 @@ public class BuildViewNode : MonoBehaviour
         this.nodeGateTypeProperty = newProperty;
     }
 
-	int nodeItr = 0;
+
     public void SpawnNewNode()
     {
         Vector2 mousePosition = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
@@ -65,6 +66,7 @@ public class BuildViewNode : MonoBehaviour
         transform.position = spawnPosition;
 
         GameObject nodeClone = (GameObject) Instantiate(NodePrefab, transform.position, Quaternion.identity);
-		nodeClone.name = "" + nodeItr++;
+		nodeClone.name = ""+nodeID++;
+		Debug.Log(nodeClone.name);
 	}
 }
