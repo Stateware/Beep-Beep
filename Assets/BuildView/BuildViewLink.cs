@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
+using System.Linq;
 using System.Collections;
+using System.Collections.Generic;
 
 public class BuildViewLink : MonoBehaviour {
 
@@ -61,8 +63,8 @@ public class BuildViewLink : MonoBehaviour {
 
 		lineRenderer.material.mainTextureScale = new Vector2(lineLength / 2, 1);
 
-		this.originID = (int)origin.name;
-		this.destinationID = (int)destination.name;		
+		this.originID = Int32.Parse(origin.name);
+		this.destinationID = Int32.Parse(destination.name);		
 
 		toLogger = "Node #"+origin.name + " -> " + "Node #"+destination.name;
 		Debug.Log (toLogger);
