@@ -11,7 +11,7 @@ GameObject:
   - 120: {fileID: 12037206}
   - 114: {fileID: 11498210}
   m_Layer: 0
-  m_Name: RoadPrefab
+  m_Name: CarModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -37,7 +37,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 184726}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 25d1efcde8a554e478cd7fd16b7a8956, type: 3}
+  m_Script: {fileID: 11500000, guid: cf9ba8efeeed040539d3c4ce9218257d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!120 &12037206
