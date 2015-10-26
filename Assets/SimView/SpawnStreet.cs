@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BuildViewStreet : MonoBehaviour {
+public class SpawnStreet : MonoBehaviour {
 
 	private LineRenderer roadRenderer;
 	public BuildViewLink[] allLinks;
+
+
 
 	// Use this for initialization
 	void Start () {
@@ -19,6 +21,19 @@ public class BuildViewStreet : MonoBehaviour {
 			roadRenderer.SetWidth(0.35f, 0.35f);
 			roadRenderer.SetPosition (0, originPos);
 			roadRenderer.SetPosition (1, destiPos);
+
+
+			SimViewRoad curRoad = new SimViewRoad();
+
+			curRoad.setProperties();
+
+
+
+
+
+
+
+
 		}
 
 	}
