@@ -9,12 +9,15 @@ public class SimViewCar : MonoBehaviour {
 	private float currentTravelDistance = 0.0f;
 	private float currRoadLength;
 
-	private Vector3 origin = new Vector3(-7, -3, 0);
-	private Vector3 destination = new Vector3(6, 6, 0);
+	private Vector3 origin;
+	private Vector3 destination;
 
 
 	// Use this for initialization
 	void Start () {
+		transform.localScale = new Vector3 (0.5f, 0.5f, 0.5f);
+		origin = new Vector3 (Random.Range(-9, 9), Random.Range(-5, 5), 0);
+		destination = new Vector3 (Random.Range(-9, 9), Random.Range(-5, 5), 0);
 		transform.position = origin;
 	}
 	
