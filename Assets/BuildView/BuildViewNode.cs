@@ -4,7 +4,7 @@ using System.Collections;
 public class BuildViewNode : MonoBehaviour
 {
 
-    private Node node;
+    public Node node;
     private SphereCollider myCollider;
     public GameObject NodePrefab;
 

@@ -37,7 +37,7 @@ public class Compiler : MonoBehaviour {
 	private string generateAssetPath()
 	{
 		BuildViewNode allNodeProperties = GameObject.FindObjectOfType<BuildViewNode>();
-		if (allNodeProperties.getNodeProperty() == BuildViewNode.NodeType.TrafficLight)
+        /*if (allNodeProperties.getNodeProperty() == BuildViewNode.NodeType.TrafficLight)
 		{
 			return BuildViewNode.NodeType.TrafficLight.ToString();
 		}
@@ -50,5 +50,7 @@ public class Compiler : MonoBehaviour {
 			return BuildViewNode.NodeGateType.Source.ToString();
 		}
 		return BuildViewNode.NodeGateType.Sink.ToString();
+        */
+        return "";
 	}
 }
