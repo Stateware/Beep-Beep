@@ -10,6 +10,7 @@ public class BuildViewNode : MonoBehaviour
     private SphereCollider myCollider;
     public GameObject NodePrefab;
 	int nodeID = 0;
+	bool is_connected=false;
 
 	void Awake()
     {
@@ -58,6 +59,13 @@ public class BuildViewNode : MonoBehaviour
         this.nodeGateTypeProperty = newProperty;
     }
 
+	public bool isConnected(){
+		return is_connected;
+	}
+
+	public void setConnected(){
+		is_connected = true;
+	}
 
     public void SpawnNewNode()
     {
@@ -67,6 +75,7 @@ public class BuildViewNode : MonoBehaviour
 
         GameObject nodeClone = (GameObject) Instantiate(NodePrefab, transform.position, Quaternion.identity);
 		nodeClone.name = ""+nodeID++;
+		
 		Debug.Log(nodeClone.name);
 	}
 }

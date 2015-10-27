@@ -63,8 +63,10 @@ public class BuildViewLink : MonoBehaviour {
 
 		lineRenderer.material.mainTextureScale = new Vector2(lineLength / 2, 1);
 
-		this.originID = Int32.Parse(origin.name);
-		this.destinationID = Int32.Parse(destination.name);		
+		if (!origin.isConnected() || !destination.isConnected()) {
+			origin.setConnected();
+			destination.setConnected();
+		}
 
 		toLogger = "Node #"+origin.name + " -> " + "Node #"+destination.name;
 		Debug.Log (toLogger);

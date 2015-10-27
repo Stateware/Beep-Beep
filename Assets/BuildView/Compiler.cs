@@ -8,10 +8,11 @@ public class Compiler : MonoBehaviour {
 	public BuildViewLink[] links;
 	void compiler()
 	{
-		nodes = UnityEngine.Object.FindObjectsOfType<BuildViewNode>();
-		
+		nodes = GameObject.FindObjectsOfType<BuildViewNode>();
+		/*
 		List< List<bool>> node_adj_matrix=new List< List<bool>>();
 		int index = 0;
+
 		foreach(object node in nodes)
 		{
 			node_adj_matrix.Add(new List<bool>());
@@ -28,6 +29,13 @@ public class Compiler : MonoBehaviour {
 		{
 			node_adj_matrix[link.originID][link.destinationID]=true;
 		}
+		*/
+		List<BuildViewNode> disconnected_nodes;
+		foreach (object node in nodes) {
+			if(!node.isConnected())
+				disconnected_nodes.Add(node);
+		}
+
 	}
 	
 	public void compileToActionPoint()
@@ -41,7 +49,11 @@ public class Compiler : MonoBehaviour {
 		string assetPathVar = this.generateAssetPath();
 		return (Sprite)Resources.Load(assetPathVar, typeof(Sprite));
 	}
-	
+
+	public void check_for_connectedness (){
+
+	}
+
 	private string generateAssetPath()
 	{
 		BuildViewNode allNodeProperties = GameObject.FindObjectOfType<BuildViewNode>();
