@@ -15,4 +15,8 @@ public class CarSpawn : MonoBehaviour {
 	    
 	}
 
+	void Spawn () {
+	
+	}
+
 }

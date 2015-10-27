@@ -24,18 +24,7 @@ public class SpawnStreet : MonoBehaviour {
 
 
 			SimViewRoad curRoad = new SimViewRoad();
-
-			curRoad.setProperties();
-
-
-
-
-
-
-
-
 		}
-
 	}
 
 	// Update is called once per frame

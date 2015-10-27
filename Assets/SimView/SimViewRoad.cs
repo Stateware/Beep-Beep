@@ -3,10 +3,10 @@ using System.Collections;
 
 public class SimViewRoad : MonoBehaviour {
 
-	private Vector3 origin;
-	private Vector3 destination;
+	public BuildViewNode origin;
+	public BuildViewNode destination;
 	private float length = 0.0f;
-	private LineRenderer roadRenderer;
+	public LineRenderer roadRenderer;
 
 
 
@@ -20,21 +20,10 @@ public class SimViewRoad : MonoBehaviour {
 	
 	}
 
-	public void setProperties (Vector3 theOrigin, Vector3 theDestination, LineRenderer theRoadRenderer){
+	public void setProperties (BuildViewNode theOrigin, BuildViewNode theDestination, LineRenderer theRoadRenderer){
 		origin = theOrigin;
 		destination = theDestination;
-		length = Vector3.Distance (origin, destination);
+		length = Vector3.Distance (origin.transform.position, destination.transform.position);
 		roadRenderer = theRoadRenderer;
-	}
-
-	public Vector3 getOrigin (){
-		return origin;
-	}
-
-	public Vector3 getDestination(){
-		return destination;
-	}
-	public float getLength (){
-		return length;
 	}
 }
