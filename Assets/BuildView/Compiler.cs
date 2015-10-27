@@ -3,23 +3,19 @@ using System.Collections;
 using System.Collections.Generic;	
 
 public class Compiler : MonoBehaviour {
-	public BuildViewNode[] nodes;
-	public BuildViewNode[] disconnected_nodes=new BuildViewNode[1000];
+	public Node[] nodes;
+	public Node[] disconnected_nodes=new Node[1000];
 
-	public BuildViewLink[] links;
 	void compiler()
 	{
-
-		List<string> diconnected_nodes;
-		nodes=BuildViewNode.FindObjectsOfType<BuildViewNode> ();
+		List<Node> diconnected_nodes;
+		nodes=Node.FindObjectsOfType<Node> ();
 		int index = 0;
 		for(int i=0; i<nodes.GetLength(1); i++) {
 			if(!nodes[i].isConnected())
 				disconnected_nodes[index++]=nodes[i];
 		}
-
-
-
+			
 	}
 	
 	public void compileToActionPoint()
