@@ -4,37 +4,21 @@ using System.Collections.Generic;
 
 public class Compiler : MonoBehaviour {
 	public BuildViewNode[] nodes;
-	
+	public BuildViewNode[] disconnected_nodes=new BuildViewNode[1000];
+
 	public BuildViewLink[] links;
 	void compiler()
 	{
-		nodes = GameObject.FindObjectsOfType<BuildViewNode>();
-		/*
-		List< List<bool>> node_adj_matrix=new List< List<bool>>();
+
+		List<string> diconnected_nodes;
+		nodes=BuildViewNode.FindObjectsOfType<BuildViewNode> ();
 		int index = 0;
+		for(int i=0; i<nodes.GetLength(1); i++) {
+			if(!nodes[i].isConnected())
+				disconnected_nodes[index++]=nodes[i];
+		}
 
-		foreach(object node in nodes)
-		{
-			node_adj_matrix.Add(new List<bool>());
-			foreach(object node_other in nodes)
-			{
-				node_adj_matrix[index].Add(false);
-			}
 
-			++index;
-		}
-		
-		links = UnityEngine.Object.FindObjectsOfType<BuildViewLink>();
-		foreach (object link in links)
-		{
-			node_adj_matrix[link.originID][link.destinationID]=true;
-		}
-		*/
-		List<BuildViewNode> disconnected_nodes;
-		foreach (object node in nodes) {
-			if(!node.isConnected())
-				disconnected_nodes.Add(node);
-		}
 
 	}
 	
