@@ -3,14 +3,12 @@ using System.Collections;
 
 public class BuildViewNode : MonoBehaviour
 {
-
     public Node node;
     private SphereCollider myCollider;
     public GameObject NodePrefab;
 
 	void Awake()
     {
-        Debug.Log("awake!");
         myCollider = gameObject.AddComponent<SphereCollider>();
         myCollider.radius = 0.75f;
         node = gameObject.AddComponent<Node>();

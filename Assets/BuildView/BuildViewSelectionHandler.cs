@@ -22,7 +22,6 @@ public class BuildViewSelectionHandler : MonoBehaviour {
 
     public void AddNode(BuildViewNode newNode)
     {
-        Debug.Log("A node was added.");
         selectedNodes.Add(newNode.node);
 
         //change this later?
@@ -66,7 +65,24 @@ public class BuildViewSelectionHandler : MonoBehaviour {
 
     public void SetProperty(int id)
     {
-        Debug.Log("this " + id);
+        for (int i = 0; i < selectedNodes.Count; i++)
+        {
+            switch (id)
+            {
+                case 0:
+                    selectedNodes[i].NodeProperty = Node.NodeType.None;
+                    break;
+
+                case 1:
+                    selectedNodes[i].NodeProperty = Node.NodeType.StopSign;
+                    break;
+
+                case 2:
+                    selectedNodes[i].NodeProperty = Node.NodeType.TrafficLight;
+                    break;
+            }
+            
+        }
     }
 
 }
