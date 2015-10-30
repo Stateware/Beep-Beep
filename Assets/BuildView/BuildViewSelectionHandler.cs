@@ -19,20 +19,27 @@ public class BuildViewSelectionHandler : MonoBehaviour {
         selectedNodes = new List<Node>();
     }
 
-
     public void AddNode(BuildViewNode newNode)
     {
-        selectedNodes.Add(newNode.node);
+        if (!selectedNodes.Contains(newNode.node))
+        {
+            selectedNodes.Add(newNode.node);
+            newNode.node.GetComponent<SpriteRenderer>().sprite = (Sprite)Resources.Load("BuildViewNode", typeof(Sprite));
 
-        //change this later?
-        nodePropertyDropdown.GetComponent<Dropdown>().interactable = true;
-        sinkCheckbox.GetComponent<Toggle>().interactable = true;
-        sourceCheckbox.GetComponent<Toggle>().interactable = true;
+            //change this later?
+            nodePropertyDropdown.GetComponent<Dropdown>().interactable = true;
+            sinkCheckbox.GetComponent<Toggle>().interactable = true;
+            sourceCheckbox.GetComponent<Toggle>().interactable = true;
+        }
     }
 
     public void ClearSelection()
     {
         // Set all node textures to deselected texture
+        for (int i = 0; i < selectedNodes.Count; i++)
+        {
+            selectedNodes[i].GetComponent<SpriteRenderer>().sprite = (Sprite)Resources.Load("BuildNode", typeof(Sprite));
+        }
         selectedNodes.Clear();
         nodePropertyDropdown.GetComponent<Dropdown>().interactable = false;
         sinkCheckbox.GetComponent<Toggle>().interactable = false;
@@ -45,17 +52,17 @@ public class BuildViewSelectionHandler : MonoBehaviour {
         // and the secondary node is the second node
         if (selectedNodes.Count >= 2)
         {
-			for (int i = 1; i < selectedNodes.Count; i++) {
-				if (selectedNodes[i - 1] != selectedNodes[i]) {
-					GameObject newLink = Instantiate(LinkPrefab);
-					
-					BuildViewLink linkScript = newLink.GetComponent<BuildViewLink>();
-					
-					linkScript.origin = selectedNodes[i - 1];
-					linkScript.destination = selectedNodes[i];
-				}
-			}
-			selectedNodes.Clear();
+            for (int i = 1; i < selectedNodes.Count; i++)
+            {
+                if (selectedNodes[i - 1] != selectedNodes[i])
+                {
+                    GameObject newLink = Instantiate(LinkPrefab);
+                    BuildViewLink linkScript = newLink.GetComponent<BuildViewLink>();
+                    linkScript.origin = selectedNodes[i - 1];
+                    linkScript.destination = selectedNodes[i];
+                }
+            }
+            this.ClearSelection();
         }
         else
         {
