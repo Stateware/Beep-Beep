@@ -9,8 +9,8 @@ public class BuildViewLink : MonoBehaviour {
 	private bool isLeftDirected = true;
 	private bool isRightDirected = false;
 	private bool isUndirected = false;
-	public BuildViewNode origin;
-	public BuildViewNode destination;
+	public Node origin;
+	public Node destination;
 	private int laneNum = 1;
 	private LineRenderer lineRenderer;
 	private BoxCollider lineCollider;
@@ -63,9 +63,9 @@ public class BuildViewLink : MonoBehaviour {
 
 		lineRenderer.material.mainTextureScale = new Vector2(lineLength / 2, 1);
 
-		if (!origin.isConnected() || !destination.isConnected()) {
-			origin.setConnected();
-			destination.setConnected();
+		if (!origin.IsConnected || !destination.IsConnected ) {
+			origin.IsConnected=true;
+			destination.IsConnected=true;
 		}
 
 		toLogger = "Node #"+origin.name + " -> " + "Node #"+destination.name;

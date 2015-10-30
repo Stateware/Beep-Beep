@@ -3,23 +3,19 @@ using System.Collections;
 using System.Collections.Generic;	
 
 public class Compiler : MonoBehaviour {
-	public BuildViewNode[] nodes;
-	public BuildViewNode[] disconnected_nodes=new BuildViewNode[1000];
+	public Node[] nodes;
+	public Node[] disconnected_nodes=new Node[1000];
 
-	public BuildViewLink[] links;
 	void compiler()
 	{
-
-		List<string> diconnected_nodes;
-		nodes=BuildViewNode.FindObjectsOfType<BuildViewNode> ();
+		List<Node> diconnected_nodes;
+		nodes=Node.FindObjectsOfType<Node> ();
 		int index = 0;
 		for(int i=0; i<nodes.GetLength(1); i++) {
-			if(!nodes[i].isConnected())
+			if(!nodes[i].IsConnected)
 				disconnected_nodes[index++]=nodes[i];
 		}
-
-
-
+			
 	}
 	
 	public void compileToActionPoint()
@@ -41,7 +37,7 @@ public class Compiler : MonoBehaviour {
 	private string generateAssetPath()
 	{
 		BuildViewNode allNodeProperties = GameObject.FindObjectOfType<BuildViewNode>();
-		if (allNodeProperties.getNodeProperty() == BuildViewNode.NodeType.TrafficLight)
+        /*if (allNodeProperties.getNodeProperty() == BuildViewNode.NodeType.TrafficLight)
 		{
 			return BuildViewNode.NodeType.TrafficLight.ToString();
 		}
@@ -54,5 +50,7 @@ public class Compiler : MonoBehaviour {
 			return BuildViewNode.NodeGateType.Source.ToString();
 		}
 		return BuildViewNode.NodeGateType.Sink.ToString();
+        */
+        return "";
 	}
 }

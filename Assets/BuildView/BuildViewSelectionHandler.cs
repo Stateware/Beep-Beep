@@ -8,7 +8,7 @@ public class BuildViewSelectionHandler : MonoBehaviour {
 
     public GameObject LinkPrefab;
 
-    private List<BuildViewNode> selectedNodes;
+    private List<Node> selectedNodes;
 
     public GameObject nodePropertyDropdown;
     public GameObject sourceCheckbox;
@@ -16,14 +16,14 @@ public class BuildViewSelectionHandler : MonoBehaviour {
 
     void Start()
     {
-        selectedNodes = new List<BuildViewNode>();
+        selectedNodes = new List<Node>();
     }
 
 
     public void AddNode(BuildViewNode newNode)
     {
         Debug.Log("A node was added.");
-        selectedNodes.Add(newNode);
+        selectedNodes.Add(newNode.node);
 
         //change this later?
         nodePropertyDropdown.GetComponent<Dropdown>().interactable = true;
