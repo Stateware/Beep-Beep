@@ -4,14 +4,13 @@ using System.Collections;
 public class BuildViewNode : MonoBehaviour
 {
     public Node node;
-    private SphereCollider myCollider;
     public GameObject NodePrefab;
+    private BuildViewSelectionHandler selectionHandler;
 
-	void Awake()
+    void Awake()
     {
-        myCollider = gameObject.AddComponent<SphereCollider>();
-        myCollider.radius = 0.75f;
         node = gameObject.AddComponent<Node>();
+        selectionHandler = GameObject.FindObjectOfType<BuildViewSelectionHandler>();
     }
 
     void OnMouseDrag()
@@ -24,9 +23,18 @@ public class BuildViewNode : MonoBehaviour
     void OnMouseUp()
     {
         // When you click, add self to Selection array. Works with creating links.
-        BuildViewSelectionHandler selectionHandler = GameObject.FindObjectOfType<BuildViewSelectionHandler>();
         selectionHandler.AddNode(this);
      }
+
+    //define miscellaneous mouse functions
+    void OnMouseOver()
+    {
+        if (Input.GetMouseButton(1)) // for right mouse click
+        {
+            selectionHandler.DeleteNodeInstances(this);
+            Destroy(this.NodePrefab);
+        }
+    }
 
     public void SpawnNewNode()
     {

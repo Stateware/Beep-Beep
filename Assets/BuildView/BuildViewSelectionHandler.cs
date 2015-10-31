@@ -1,22 +1,52 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 using System.Collections.Generic;
 
 public class BuildViewSelectionHandler : MonoBehaviour {
 
-    public List<BuildViewNode> allNodes;
-
-    public GameObject LinkPrefab;
-
+    private Hashtable connectedNodes;
     private List<Node> selectedNodes;
-
+    public List<BuildViewNode> allNodes;
+    public GameObject LinkPrefab;
     public GameObject nodePropertyDropdown;
     public GameObject sourceCheckbox;
     public GameObject sinkCheckbox;
 
+    private struct ConnectedNodes
+    {
+        public Node origin, destination;
+
+        public ConnectedNodes(Node origin, Node destination)
+        {
+            this.origin = origin;
+            this.destination = destination;
+        }
+    }
+
     void Start()
     {
         selectedNodes = new List<Node>();
+        connectedNodes = new Hashtable();
+    }
+
+    public void DeleteNodeInstances(BuildViewNode existingNode)
+    {
+        List<ConnectedNodes> nodesToBeDeleted = new List<ConnectedNodes>();
+        Node node = existingNode.node;
+        selectedNodes.Remove(existingNode.node);
+              
+        foreach(ConnectedNodes cn in connectedNodes.Keys)
+        {
+            if(cn.origin == node || cn.destination == node)
+                nodesToBeDeleted.Add(cn);
+        }
+
+        for(int i = nodesToBeDeleted.Count - 1; i >= 0; i--)
+        {
+            Destroy((GameObject) connectedNodes[nodesToBeDeleted[i]]);
+            connectedNodes.Remove(nodesToBeDeleted[i]);
+        }
     }
 
     public void AddNode(BuildViewNode newNode)
@@ -24,26 +54,19 @@ public class BuildViewSelectionHandler : MonoBehaviour {
         if (!selectedNodes.Contains(newNode.node))
         {
             selectedNodes.Add(newNode.node);
-            newNode.node.GetComponent<SpriteRenderer>().sprite = (Sprite)Resources.Load("BuildViewNode", typeof(Sprite));
-
-            //change this later?
-            nodePropertyDropdown.GetComponent<Dropdown>().interactable = true;
-            sinkCheckbox.GetComponent<Toggle>().interactable = true;
-            sourceCheckbox.GetComponent<Toggle>().interactable = true;
+            newNode.node.GetComponent<SpriteRenderer>().sprite = (Sprite) Resources.Load("BuildViewNode", typeof(Sprite));
+            ChangeGuiToggleSetting(true);
         }
     }
 
     public void ClearSelection()
     {
-        // Set all node textures to deselected texture
         for (int i = 0; i < selectedNodes.Count; i++)
         {
-            selectedNodes[i].GetComponent<SpriteRenderer>().sprite = (Sprite)Resources.Load("BuildNode", typeof(Sprite));
+            selectedNodes[i].GetComponent<SpriteRenderer>().sprite = (Sprite) Resources.Load("BuildNode", typeof(Sprite));
         }
         selectedNodes.Clear();
-        nodePropertyDropdown.GetComponent<Dropdown>().interactable = false;
-        sinkCheckbox.GetComponent<Toggle>().interactable = false;
-        sourceCheckbox.GetComponent<Toggle>().interactable = false;
+        ChangeGuiToggleSetting(false);
     }
 
     public void Link()
@@ -54,20 +77,40 @@ public class BuildViewSelectionHandler : MonoBehaviour {
         {
             for (int i = 1; i < selectedNodes.Count; i++)
             {
-                if (selectedNodes[i - 1] != selectedNodes[i])
+                //keys for our hash table, connectedNodes
+                ConnectedNodes nodePair = new ConnectedNodes(selectedNodes[i - 1], selectedNodes[i]);
+                ConnectedNodes reversedPair = new ConnectedNodes(selectedNodes[i], selectedNodes[i - 1]);
+                
+                if(!connectedNodes.Contains(nodePair))
                 {
-                    GameObject newLink = Instantiate(LinkPrefab);
-                    BuildViewLink linkScript = newLink.GetComponent<BuildViewLink>();
-                    linkScript.origin = selectedNodes[i - 1];
-                    linkScript.destination = selectedNodes[i];
-                }
+                    if (connectedNodes.Contains(reversedPair))
+                    {
+                        Destroy((GameObject) connectedNodes[reversedPair]);
+                        connectedNodes.Remove(reversedPair);
+                    }
+
+                    CreateLink(nodePair);
+                }                
             }
+
             this.ClearSelection();
         }
-        else
-        {
-            Debug.LogError("Cannot instatiate a link with only less than 2 nodes selected.");
-        }
+    }
+
+    private void CreateLink(ConnectedNodes nodePair)
+    {
+        GameObject newLink = Instantiate(LinkPrefab);
+        BuildViewLink linkScript = newLink.GetComponent<BuildViewLink>();
+        linkScript.origin = nodePair.origin;
+        linkScript.destination = nodePair.destination;
+        connectedNodes.Add(nodePair, newLink);
+    }
+
+    private void ChangeGuiToggleSetting(bool isInteractable)
+    {
+        nodePropertyDropdown.GetComponent<Dropdown>().interactable = isInteractable;
+        sinkCheckbox.GetComponent<Toggle>().interactable = isInteractable;
+        sourceCheckbox.GetComponent<Toggle>().interactable = isInteractable;
     }
 
     public void SetProperty(int id)
