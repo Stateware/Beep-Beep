@@ -11,18 +11,17 @@ public class BuildViewLink : MonoBehaviour {
 	private bool isUndirected = false;
 	public Node origin;
 	public Node destination;
-	private int laneNum = 1;
+    public Link link;
 	private LineRenderer lineRenderer;
 	private BoxCollider lineCollider;
 	private float lineRendererWidth = 0.35f;
-	int originID;
-	int destinationID;
-	string toLogger;
+
 	// Initialization
 	void Start ()
-    {
+    { 
 		lineRenderer = GetComponent<LineRenderer> ();
 		lineCollider = gameObject.AddComponent<BoxCollider> ();
+        link = gameObject.AddComponent<Link> ();
         lineRenderer.tag = "link";
     }
 	

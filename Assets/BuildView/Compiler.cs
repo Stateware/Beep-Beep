@@ -12,7 +12,7 @@ public class Compiler : MonoBehaviour {
 		nodes=Node.FindObjectsOfType<Node> ();
 		int index = 0;
 		for(int i=0; i<nodes.GetLength(1); i++) {
-			if(!nodes[i].IsConnected)
+			if(nodes[i].NumberOfConnections <= 0)
 				disconnected_nodes[index++]=nodes[i];
 		}
 			
