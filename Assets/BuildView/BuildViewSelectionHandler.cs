@@ -45,6 +45,7 @@ public class BuildViewSelectionHandler : MonoBehaviour {
         for(int i = nodesToBeDeleted.Count - 1; i >= 0; i--)
         {
             Destroy((GameObject) connectedNodes[nodesToBeDeleted[i]]);
+            updateNumberOfNodeConnections(nodesToBeDeleted[i], false);
             connectedNodes.Remove(nodesToBeDeleted[i]);
         }
     }
@@ -87,9 +88,12 @@ public class BuildViewSelectionHandler : MonoBehaviour {
                     {
                         Destroy((GameObject) connectedNodes[reversedPair]);
                         connectedNodes.Remove(reversedPair);
+                        updateNumberOfNodeConnections(reversedPair, false);
                     }
 
-                    CreateLink(nodePair);
+                    GameObject newLink = CreateLink(nodePair);
+                    connectedNodes.Add(nodePair, newLink);
+                    updateNumberOfNodeConnections(nodePair, true);
                 }                
             }
 
@@ -97,13 +101,20 @@ public class BuildViewSelectionHandler : MonoBehaviour {
         }
     }
 
-    private void CreateLink(ConnectedNodes nodePair)
+    private void updateNumberOfNodeConnections(ConnectedNodes nodePair, bool isAddingOneConnection)
+    {
+        int i = isAddingOneConnection ? 1 : 0;
+        nodePair.origin.NumberOfConnections += 2 * i - 1;
+        nodePair.destination.NumberOfConnections += 2 * i - 1;
+    }
+
+    private GameObject CreateLink(ConnectedNodes nodePair)
     {
         GameObject newLink = Instantiate(LinkPrefab);
         BuildViewLink linkScript = newLink.GetComponent<BuildViewLink>();
         linkScript.origin = nodePair.origin;
         linkScript.destination = nodePair.destination;
-        connectedNodes.Add(nodePair, newLink);
+        return newLink;
     }
 
     private void ChangeGuiToggleSetting(bool isInteractable)

@@ -19,13 +19,16 @@ public class BuildViewLink : MonoBehaviour {
 	int destinationID;
 	string toLogger;
 	// Initialization
-	void Start () {
+	void Start ()
+    {
 		lineRenderer = GetComponent<LineRenderer> ();
 		lineCollider = gameObject.AddComponent<BoxCollider> ();
-	}
+        lineRenderer.tag = "link";
+    }
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+    {
 		// Store origin and destination position
 		Vector3 originPos = origin.transform.position;
 		Vector3 destinationPos = destination.transform.position;
@@ -62,17 +65,10 @@ public class BuildViewLink : MonoBehaviour {
 		lineCollider.transform.eulerAngles = new Vector3 (0, 0, angle);
 
 		lineRenderer.material.mainTextureScale = new Vector2(lineLength / 2, 1);
-
-		if (!origin.IsConnected || !destination.IsConnected ) {
-			origin.IsConnected=true;
-			destination.IsConnected=true;
-		}
-
-		toLogger = "Node #"+origin.name + " -> " + "Node #"+destination.name;
-		Debug.Log (toLogger);
 	}
 
-	void OnMouseDrag () {
+	void OnMouseDrag ()
+    {
 		Vector2 mousePosition = new Vector2 (Input.mousePosition.x, Input.mousePosition.y);
 		Vector2 objPosition = Camera.main.ScreenToWorldPoint (mousePosition);
 
