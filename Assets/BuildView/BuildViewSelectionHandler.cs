@@ -13,7 +13,9 @@ public class BuildViewSelectionHandler : MonoBehaviour {
     public GameObject nodePropertyDropdown;
     public GameObject sourceCheckbox;
     public GameObject sinkCheckbox;
+    public GameObject swapButton;
     private Color originalCheckboxLabelColor;
+    private Color originalDropdownColor;
     public Color valuesNotUniformColor;
     
 
@@ -33,6 +35,7 @@ public class BuildViewSelectionHandler : MonoBehaviour {
         selectedNodes = new List<Node>();
         connectedNodes = new Hashtable();
         originalCheckboxLabelColor = sourceCheckbox.GetComponentInChildren<Text>().color;
+        originalDropdownColor = nodePropertyDropdown.GetComponent<Image>().color;
     }
 
     public void DeleteNodeInstances(BuildViewNode existingNode)
@@ -59,8 +62,8 @@ public class BuildViewSelectionHandler : MonoBehaviour {
     {
         selectedNodes.Remove(exisitingNode.node);
         exisitingNode.node.GetComponent<SpriteRenderer>().sprite = (Sprite)Resources.Load("BuildNode", typeof(Sprite));
-        if (selectedNodes.Count == 0)
-            RemoveUIInteractibility();
+        UpdateNodeInspector();
+        UpdateLinkInspector();
     }
 
     public void AddNode(BuildViewNode newNode)
@@ -69,29 +72,8 @@ public class BuildViewSelectionHandler : MonoBehaviour {
         {
             selectedNodes.Add(newNode.node);
             newNode.node.GetComponent<SpriteRenderer>().sprite = (Sprite) Resources.Load("BuildViewNode", typeof(Sprite));
-            ChangeGuiToggleSetting(true);
-        }
-        // the following lines are dependent on the fact that there is at least 1 element in selected nodes,
-        // which can be assumed from the above, as if the list doesn't contain it, it'll be added.
-        Assert.IsTrue(selectedNodes.Count > 0);
-
-        if (UniformSinkValues())
-        {
-            sinkCheckbox.GetComponent<Toggle>().isOn = newNode.node.IsSink;
-        }
-        else
-        {
-            sinkCheckbox.GetComponent<Toggle>().isOn = true;
-            sinkCheckbox.GetComponentInChildren<Text>().color = valuesNotUniformColor;
-        }
-        if (UniformSourceValues())
-        {
-            sourceCheckbox.GetComponent<Toggle>().isOn = newNode.node.IsSource;
-        }
-        else
-        {
-            sourceCheckbox.GetComponent<Toggle>().isOn = true;
-            sourceCheckbox.GetComponentInChildren<Text>().color = valuesNotUniformColor;
+            UpdateNodeInspector();
+            UpdateLinkInspector();
         }
     }
 
@@ -102,7 +84,7 @@ public class BuildViewSelectionHandler : MonoBehaviour {
             selectedNodes[i].GetComponent<SpriteRenderer>().sprite = (Sprite) Resources.Load("BuildNode", typeof(Sprite));
         }
         selectedNodes.Clear();
-        RemoveUIInteractibility();
+        UpdateNodeInspector();
     }
 
     public void Link()
@@ -134,6 +116,7 @@ public class BuildViewSelectionHandler : MonoBehaviour {
 
             this.ClearSelection();
         }
+        UpdateLinkInspector();
     }
 
     private void updateNumberOfNodeConnections(ConnectedNodes nodePair, bool isAddingOneConnection)
@@ -150,23 +133,6 @@ public class BuildViewSelectionHandler : MonoBehaviour {
         linkScript.origin = nodePair.origin;
         linkScript.destination = nodePair.destination;
         return newLink;
-    }
-
-    private void ChangeGuiToggleSetting(bool isInteractable)
-    {
-        nodePropertyDropdown.GetComponent<Dropdown>().interactable = isInteractable;
-        sinkCheckbox.GetComponent<Toggle>().interactable = isInteractable;
-        sourceCheckbox.GetComponent<Toggle>().interactable = isInteractable;
-
-    }
-
-    public void RemoveUIInteractibility()
-    {
-        nodePropertyDropdown.GetComponent<Dropdown>().interactable = false;
-        sinkCheckbox.GetComponent<Toggle>().interactable = false;
-        sinkCheckbox.GetComponentInChildren<Text>().color = originalCheckboxLabelColor;
-        sourceCheckbox.GetComponent<Toggle>().interactable = false;
-        sourceCheckbox.GetComponentInChildren<Text>().color = originalCheckboxLabelColor;
     }
 
     public void SetProperty(int id)
@@ -189,6 +155,7 @@ public class BuildViewSelectionHandler : MonoBehaviour {
             }
             
         }
+        UpdateNodeInspector();
     }
 
     public void SetSink(bool value)
@@ -197,6 +164,7 @@ public class BuildViewSelectionHandler : MonoBehaviour {
         {
             selectedNodes[i].IsSink = value;
         }
+        UpdateNodeInspector();
     }
 
     public void SetSource(bool value)
@@ -205,45 +173,86 @@ public class BuildViewSelectionHandler : MonoBehaviour {
         {
             selectedNodes[i].IsSource = value;
         }
+        UpdateNodeInspector();
     }
 
-    private bool UniformSinkValues()
+    public void Swap()
     {
-        if (selectedNodes.Count <= 1)
+        Debug.Log("This will swap the direction of the link.");
+    }
+
+    private void UpdateLinkInspector()
+    {
+        Debug.Log(connectedNodes.Count);
+        /*if (there is a link selected)
         {
-            return true;
+            swapButton.GetComponent<Button>().interactable = true;
+        }*/
+    }
+
+    private void UpdateNodeInspector()
+    {
+        if (selectedNodes.Count <= 0)
+        {
+            nodePropertyDropdown.GetComponent<Dropdown>().interactable = false;
+            nodePropertyDropdown.GetComponent<Image>().color = originalDropdownColor;
+            sinkCheckbox.GetComponent<Toggle>().interactable = false;
+            sinkCheckbox.GetComponentInChildren<Text>().color = originalCheckboxLabelColor;
+            sourceCheckbox.GetComponent<Toggle>().interactable = false;
+            sourceCheckbox.GetComponentInChildren<Text>().color = originalCheckboxLabelColor;
         }
-        else
+        else if (selectedNodes.Count == 1)
+        {
+            nodePropertyDropdown.GetComponent<Dropdown>().interactable = true;
+            nodePropertyDropdown.GetComponent<Dropdown>().value = (int) selectedNodes[0].NodeProperty;
+            nodePropertyDropdown.GetComponent<Image>().color = originalDropdownColor;
+            sinkCheckbox.GetComponent<Toggle>().interactable = true;
+            sinkCheckbox.GetComponent<Toggle>().isOn = selectedNodes[0].IsSink;
+            sinkCheckbox.GetComponentInChildren<Text>().color = originalCheckboxLabelColor;
+            sourceCheckbox.GetComponent<Toggle>().interactable = true;
+            sourceCheckbox.GetComponent<Toggle>().isOn = selectedNodes[0].IsSource;
+            sourceCheckbox.GetComponentInChildren<Text>().color = originalCheckboxLabelColor;
+        }
+        else //implied (selectedNodes.Count > 1)
         {
             bool firstSinkValue = selectedNodes[0].IsSink;
-            for (int i = 1; i < selectedNodes.Count; i++)
-            {
-                if (selectedNodes[i] != firstSinkValue)
-                {
-                    return false;
-                }
-            }
-            return true;
-        }
-    }
-
-    private bool UniformSourceValues()
-    {
-        if (selectedNodes.Count <= 1)
-        {
-            return true;
-        }
-        else
-        {
+            bool uniformSinkValues = true;
             bool firstSourceValue = selectedNodes[0].IsSource;
-            for (int i = 1; i < selectedNodes.Count; i++)
+            bool uniformSourceValues = true;
+            Node.NodeType firstNodeType = selectedNodes[0].NodeProperty;
+            bool uniformNodeTypes = true;
+
+            for (int i = 1; i < selectedNodes.Count && (uniformSinkValues || uniformSourceValues || uniformNodeTypes); i++)
             {
-                if (selectedNodes[i] != firstSourceValue)
+                if (uniformSinkValues && firstSinkValue != selectedNodes[i].IsSink)
                 {
-                    return false;
+                    uniformSinkValues = false;
+                }
+
+                if (uniformSourceValues && firstSourceValue != selectedNodes[i].IsSource)
+                {
+                    uniformSourceValues = false;
+                }
+
+                if (uniformNodeTypes && firstNodeType != selectedNodes[i].NodeProperty)
+                {
+                    uniformNodeTypes = false;
                 }
             }
-            return true;
+            
+            if (!uniformSinkValues)
+            {
+                sinkCheckbox.GetComponentInChildren<Text>().color = valuesNotUniformColor;
+            }
+            if (!uniformSourceValues)
+            {
+                sourceCheckbox.GetComponentInChildren<Text>().color = valuesNotUniformColor;
+            }
+            if (!uniformNodeTypes)
+            {
+                nodePropertyDropdown.GetComponent<Image>().color = valuesNotUniformColor;
+            }
+
         }
     }
 }
