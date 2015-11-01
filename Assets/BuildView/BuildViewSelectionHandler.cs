@@ -50,6 +50,14 @@ public class BuildViewSelectionHandler : MonoBehaviour {
         }
     }
 
+    public void RemoveNode(BuildViewNode exisitingNode)
+    {
+        selectedNodes.Remove(exisitingNode.node);
+        exisitingNode.node.GetComponent<SpriteRenderer>().sprite = (Sprite)Resources.Load("BuildNode", typeof(Sprite));
+        if (selectedNodes.Count == 0)
+            ChangeGuiToggleSetting(false);
+    }
+
     public void AddNode(BuildViewNode newNode)
     {
         if (!selectedNodes.Contains(newNode.node))

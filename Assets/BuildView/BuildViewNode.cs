@@ -23,7 +23,10 @@ public class BuildViewNode : MonoBehaviour
     void OnMouseUp()
     {
         // When you click, add self to Selection array. Works with creating links.
-        selectionHandler.AddNode(this);
+        if (!selectionHandler.selectedNodes.Contains(this.node))
+            selectionHandler.AddNode(this);
+        else
+            selectionHandler.RemoveNode(this);
      }
 
     //define miscellaneous mouse functions
