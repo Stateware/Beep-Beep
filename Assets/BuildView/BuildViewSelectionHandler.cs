@@ -5,15 +5,15 @@ using System.Collections.Generic;
 
 public class BuildViewSelectionHandler : MonoBehaviour {
 
-    private Hashtable connectedNodes;
-    private List<Node> selectedNodes;
+    public Hashtable connectedNodes;
+    public List<Node> selectedNodes;
     public List<BuildViewNode> allNodes;
     public GameObject LinkPrefab;
     public GameObject nodePropertyDropdown;
     public GameObject sourceCheckbox;
     public GameObject sinkCheckbox;
 
-    private struct ConnectedNodes
+    public struct ConnectedNodes
     {
         public Node origin, destination;
 

@@ -35,4 +35,13 @@ public class SimViewCar : MonoBehaviour {
 		}
 		transform.position = Vector3.MoveTowards(transform.position, destination, speed * Time.deltaTime);
 	}
+
+    void OnLevelWasLoaded(int level)
+    {
+        Debug.Log("Checking Level in simviewcar");
+        if(level == 1)
+        {
+            Debug.Log("level 1");
+        }
+    }
 }

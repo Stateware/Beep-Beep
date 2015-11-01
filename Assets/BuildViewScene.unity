@@ -684,6 +684,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c3dd38bf6174f5418656a9ecfade13d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selectedNodes: []
   allNodes: []
   LinkPrefab: {fileID: 184726, guid: 264fc2bfbaf5af64ba15596e76bb6627, type: 2}
   nodePropertyDropdown: {fileID: 1816940939}
@@ -2255,8 +2256,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11500000, guid: 49bc23b4878ff9f419707c292c8d3ed0, type: 3}
-        m_MethodName: 
+      - m_Target: {fileID: 1423671242}
+        m_MethodName: Compile
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2313,6 +2314,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nodes: []
+  links: []
+  selectionHandler: {fileID: 0}
+  DisconnectedNodes: []
   disconnected_nodes:
   - {fileID: 0}
   - {fileID: 0}
