@@ -9,7 +9,6 @@ public class BuildViewBackground : MonoBehaviour {
         if (!EventSystem.current.IsPointerOverGameObject())
         {
             Camera.main.GetComponent<BuildViewSelectionHandler>().ClearSelection();
-            Debug.Log("Seleciton (attempted) cleared");
         }
     }
 }

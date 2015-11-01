@@ -34,7 +34,7 @@ public class Node : MonoBehaviour
     public bool IsSink
     {
         get { return _isSink; }
-        set { _isSink = value; }
+        set { Debug.Log("Setting sink"); _isSink = value; }
     }
 
     public string Name
