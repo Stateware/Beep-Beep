@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.Assertions;
 
 public class BuildViewSelectionHandler : MonoBehaviour {
 
@@ -12,6 +13,9 @@ public class BuildViewSelectionHandler : MonoBehaviour {
     public GameObject nodePropertyDropdown;
     public GameObject sourceCheckbox;
     public GameObject sinkCheckbox;
+    private Color originalCheckboxLabelColor;
+    public Color valuesNotUniformColor;
+    
 
     public struct ConnectedNodes
     {
@@ -28,6 +32,7 @@ public class BuildViewSelectionHandler : MonoBehaviour {
     {
         selectedNodes = new List<Node>();
         connectedNodes = new Hashtable();
+        originalCheckboxLabelColor = sourceCheckbox.GetComponentInChildren<Text>().color;
     }
 
     public void DeleteNodeInstances(BuildViewNode existingNode)
@@ -55,7 +60,7 @@ public class BuildViewSelectionHandler : MonoBehaviour {
         selectedNodes.Remove(exisitingNode.node);
         exisitingNode.node.GetComponent<SpriteRenderer>().sprite = (Sprite)Resources.Load("BuildNode", typeof(Sprite));
         if (selectedNodes.Count == 0)
-            ChangeGuiToggleSetting(false);
+            RemoveUIInteractibility();
     }
 
     public void AddNode(BuildViewNode newNode)
@@ -66,6 +71,28 @@ public class BuildViewSelectionHandler : MonoBehaviour {
             newNode.node.GetComponent<SpriteRenderer>().sprite = (Sprite) Resources.Load("BuildViewNode", typeof(Sprite));
             ChangeGuiToggleSetting(true);
         }
+        // the following lines are dependent on the fact that there is at least 1 element in selected nodes,
+        // which can be assumed from the above, as if the list doesn't contain it, it'll be added.
+        Assert.IsTrue(selectedNodes.Count > 0);
+
+        if (UniformSinkValues())
+        {
+            sinkCheckbox.GetComponent<Toggle>().isOn = newNode.node.IsSink;
+        }
+        else
+        {
+            sinkCheckbox.GetComponent<Toggle>().isOn = true;
+            sinkCheckbox.GetComponentInChildren<Text>().color = valuesNotUniformColor;
+        }
+        if (UniformSourceValues())
+        {
+            sourceCheckbox.GetComponent<Toggle>().isOn = newNode.node.IsSource;
+        }
+        else
+        {
+            sourceCheckbox.GetComponent<Toggle>().isOn = true;
+            sourceCheckbox.GetComponentInChildren<Text>().color = valuesNotUniformColor;
+        }
     }
 
     public void ClearSelection()
@@ -75,7 +102,7 @@ public class BuildViewSelectionHandler : MonoBehaviour {
             selectedNodes[i].GetComponent<SpriteRenderer>().sprite = (Sprite) Resources.Load("BuildNode", typeof(Sprite));
         }
         selectedNodes.Clear();
-        ChangeGuiToggleSetting(false);
+        RemoveUIInteractibility();
     }
 
     public void Link()
@@ -130,6 +157,16 @@ public class BuildViewSelectionHandler : MonoBehaviour {
         nodePropertyDropdown.GetComponent<Dropdown>().interactable = isInteractable;
         sinkCheckbox.GetComponent<Toggle>().interactable = isInteractable;
         sourceCheckbox.GetComponent<Toggle>().interactable = isInteractable;
+
+    }
+
+    public void RemoveUIInteractibility()
+    {
+        nodePropertyDropdown.GetComponent<Dropdown>().interactable = false;
+        sinkCheckbox.GetComponent<Toggle>().interactable = false;
+        sinkCheckbox.GetComponentInChildren<Text>().color = originalCheckboxLabelColor;
+        sourceCheckbox.GetComponent<Toggle>().interactable = false;
+        sourceCheckbox.GetComponentInChildren<Text>().color = originalCheckboxLabelColor;
     }
 
     public void SetProperty(int id)
@@ -154,4 +191,59 @@ public class BuildViewSelectionHandler : MonoBehaviour {
         }
     }
 
+    public void SetSink(bool value)
+    {
+        for (int i = 0; i < selectedNodes.Count; i++)
+        {
+            selectedNodes[i].IsSink = value;
+        }
+    }
+
+    public void SetSource(bool value)
+    {
+        for (int i = 0; i < selectedNodes.Count; i++)
+        {
+            selectedNodes[i].IsSource = value;
+        }
+    }
+
+    private bool UniformSinkValues()
+    {
+        if (selectedNodes.Count <= 1)
+        {
+            return true;
+        }
+        else
+        {
+            bool firstSinkValue = selectedNodes[0].IsSink;
+            for (int i = 1; i < selectedNodes.Count; i++)
+            {
+                if (selectedNodes[i] != firstSinkValue)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+    }
+
+    private bool UniformSourceValues()
+    {
+        if (selectedNodes.Count <= 1)
+        {
+            return true;
+        }
+        else
+        {
+            bool firstSourceValue = selectedNodes[0].IsSource;
+            for (int i = 1; i < selectedNodes.Count; i++)
+            {
+                if (selectedNodes[i] != firstSourceValue)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+    }
 }
