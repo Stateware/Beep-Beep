@@ -68,8 +68,8 @@ public class BuildViewLink : MonoBehaviour {
 			destination.IsConnected=true;
 		}
 
-		toLogger = "Node #"+origin.name + " -> " + "Node #"+destination.name;
-		Debug.Log (toLogger);
+		//toLogger = "Node #"+origin.name + " -> " + "Node #"+destination.name;
+		//Debug.Log (toLogger);
 	}
 
 	void OnMouseDrag () {
