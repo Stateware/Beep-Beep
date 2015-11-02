@@ -38,25 +38,6 @@ public class SimViewCar : MonoBehaviour {
 			angle *= -1;
 		
 		angle = Mathf.Rad2Deg * Mathf.Atan (angle);
-<<<<<<< HEAD
-=======
-		
-		// Rotate lineCollider to lineRenderer's angle
-		transform.eulerAngles = new Vector3 (0, 0, angle);
-		// Vector3 origin = roads [currRoadIndex].origin.transform.position;
-		// Vector3 destination = roads [currRoadIndex].destination.transform.position;
-		// transform.position = Vector3.Lerp(origin, destination, speed * Time.deltaTime);
-		if (transform.position == destination && i != 5) {
-
-			destination = path [i];
-
-			origin = path [i];
-			destination = path [i + 1];
-			i = i + 1;
-		}
-		transform.position = Vector3.MoveTowards(transform.position, destination, speed * Time.deltaTime);
-
->>>>>>> e606fb2b38bab4d1c3e904915ae3f180c5e3e936
 
 		return angle;
 	}
