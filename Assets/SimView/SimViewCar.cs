@@ -5,14 +5,14 @@ public class SimViewCar : MonoBehaviour {
 	public SimViewRoad[] roads;
 	private int currRoadIndex = 0;
 
-	private float speed = 8f;
+	private float speed = 4f;
 	private float currentTravelDistance = 0.0f;
 	private float currRoadLength;
 	
 	private Vector3 origin;
 	private Vector3 destination;
 	
-	private Vector3[] path = {new Vector3(1, -3, 0), new Vector3(2, 2, 0), new Vector3(-3, -4, 0), new Vector3(2, 1, 0), new Vector3(-3, 5, 0), new Vector3(-2, 1, 0)};
+	private Vector3[] path = {new Vector3(4, -3, -2), new Vector3(2, 4, -2), new Vector3(-3, -4, -2), new Vector3(7, 1, -2), new Vector3(-3, 3, -2), new Vector3(4, -3, -2)};
 
 	private int i = 2;
 	// Use this for initialization
@@ -30,6 +30,9 @@ public class SimViewCar : MonoBehaviour {
 			i++;
 		}
 		transform.position = Vector3.MoveTowards (transform.position, destination, speed * Time.deltaTime);
+		// Test
+		if (i == 6)
+			i = 1;
 	}
 
 	public float getAngle() {
