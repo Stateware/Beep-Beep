@@ -30,7 +30,7 @@ public class SimViewCar : MonoBehaviour {
 		// Vector3 destination = roads [currRoadIndex].destination.transform.position;
 		// transform.position = Vector3.Lerp(origin, destination, speed * Time.deltaTime);
 		if (transform.position == destination && i != 5) {
-			destination = path [i + 1];
+			destination = path [i];
 			i = i + 1;
 		}
 		transform.position = Vector3.MoveTowards(transform.position, destination, speed * Time.deltaTime);
