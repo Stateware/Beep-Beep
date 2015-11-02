@@ -36,6 +36,9 @@ public class Compiler : MonoBehaviour {
 		for(int i=0; i<nodes.GetLength(1); i++) {
 			if(DisconnectedNodes[i].NumberOfConnections <= 0)
 				disconnected_nodes[index++]= DisconnectedNodes[i];
+
+            //call ErrorView.appendErrorText() for each disconnected node to add error message
+            //call ErrorView.setDisplayGUI(true) to show error view text area
 		}
 	}
 */
