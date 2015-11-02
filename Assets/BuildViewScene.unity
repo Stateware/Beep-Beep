@@ -623,7 +623,7 @@ MonoBehaviour:
   sourceCheckbox: {fileID: 616332751}
   sinkCheckbox: {fileID: 1009292815}
   swapButton: {fileID: 343432194}
-  valuesNotUniformColor: {r: 1, g: 0, b: 0, a: 1}
+  valuesNotUniformColor: {r: .867647052, g: .64281559, b: .401924759, a: .916000009}
 --- !u!1 &392054532
 GameObject:
   m_ObjectHideFlags: 0
