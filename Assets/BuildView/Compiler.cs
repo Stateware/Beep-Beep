@@ -12,7 +12,7 @@ public class Compiler : MonoBehaviour {
     public Hashtable adjacencyList;
     public GameObject ActionPointPrefab;
     public GameObject RoadPrefab;
-    public Node[] DisconnectedNodes;
+    public List<Node> DisconnectedNodes=new List<Node>();
 	//public Node[] disconnected_nodes=new Node[1000];
 
     void Awake()
@@ -32,32 +32,41 @@ public class Compiler : MonoBehaviour {
             Debug.Log("Still in level 0");
         }
     }
-/*
+	private void GetAllGameObjects()
+	{
+		nodes = GameObject.FindGameObjectsWithTag("Node");
+		links = GameObject.FindGameObjectsWithTag("Link");
+		connectedNodes = selectionHandler.connectedNodes;
+	}
+
 	private void IdentifyDisconnectedNodes()
 	{
-		List<Node> diconnected_nodes;
-        DisconnectedNodes = Node.FindObjectsOfType<Node> ();
+		bool found_disconnected = false;	
+		
+		
 		int index = 0;
-		for(int i=0; i<nodes.GetLength(1); i++) {
-			if(DisconnectedNodes[i].NumberOfConnections <= 0)
-				disconnected_nodes[index++]= DisconnectedNodes[i];
-
-            //call ErrorView.appendErrorText() for each disconnected node to add error message
-            //call ErrorView.setDisplayGUI(true) to show error view text area
+		for (int i=0; i<nodes.GetLength(1); i++) {
+			if (nodes [i].GetComponent<BuildViewNode>().node.NumberOfConnections == 0) {
+				found_disconnected = true;
+				DisconnectedNodes.Add(nodes [i].GetComponent<BuildViewNode>().node);
+			}
+		}
+		
+		if (found_disconnected) {
+			ErrorView error=new ErrorView();
+			string error_text="You have " + DisconnectedNodes.Count + " disconnected nodes.";
+			error.appendErrorText(error_text);
+			for(int j=0; j<DisconnectedNodes.Count; j++){	
+				DisconnectedNodes[j].GetComponent<SpriteRenderer>().sprite = (Sprite) Resources.Load("BuildViewNodeDISCONNECTED", typeof(Sprite));
+			}
 		}
 	}
-*/
     public void check_for_connectedness ()
     {
 
 	}
 
-    private void GetAllGameObjects()
-    {
-        nodes = GameObject.FindGameObjectsWithTag("Node");
-        links = GameObject.FindGameObjectsWithTag("Link");
-        connectedNodes = selectionHandler.connectedNodes;
-    }
+
 
     struct DestinationActionPointAndRoad
     {
