@@ -3,14 +3,14 @@ using System.Collections;
 
 public class ActionPoint : MonoBehaviour
 {
-    private Node _nodeProperties;
+    private GameObject _nodeProperties;
 
-    public void SetType(Node nodeProperties)
+    public ActionPoint(GameObject nodeProperties)
     {
         this.NodeProperties = nodeProperties;
     }
      
-    public Node NodeProperties
+    public GameObject NodeProperties
     {
         get { return _nodeProperties; }
         set { _nodeProperties = value; SetActionPointProperties(); }
@@ -18,12 +18,13 @@ public class ActionPoint : MonoBehaviour
 
     private void SetActionPointProperties()
     {
-        if (_nodeProperties.IsSink)
+        Node node = _nodeProperties.GetComponent<BuildViewNode>().node;
+        if (node.IsSink)
             SetSink();
-        if (_nodeProperties.IsSource)
+        if (node.IsSource)
             SetSource();
 
-        switch(_nodeProperties.NodeProperty)
+        switch(node.NodeProperty)
         {
             case Node.NodeType.StopSign:
                 SetStopSign();

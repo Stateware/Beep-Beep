@@ -46,6 +46,6 @@ public class BuildViewNode : MonoBehaviour
         transform.position = spawnPosition;
 
         GameObject nodeClone = (GameObject) Instantiate(NodePrefab, transform.position, Quaternion.identity);
-        nodeClone.tag = "node";
+        nodeClone.tag = "Node";
 	}
 }
