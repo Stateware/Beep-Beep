@@ -6,6 +6,7 @@ public class SimViewCar : MonoBehaviour {
 	private int currRoadIndex = 0;
 
 	private float speed = 4f;
+	private float angle;
 	private float currentTravelDistance = 0.0f;
 	private float currRoadLength;
 	
@@ -19,14 +20,16 @@ public class SimViewCar : MonoBehaviour {
 	void Start () {
 		transform.position = path [0];
 		destination = path [1];
-		transform.eulerAngles = new Vector3 (0, 0, getAngle ());
+		setAngle ();
+		transform.eulerAngles = new Vector3 (0, 0, angle);
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if (transform.position == destination && i <= 5) {
 			destination = path [i];
-			transform.eulerAngles = new Vector3 (0, 0, getAngle ());
+			setAngle ();
+			transform.eulerAngles = new Vector3 (0, 0, angle);
 			i++;
 		}
 		transform.position = Vector3.MoveTowards (transform.position, destination, speed * Time.deltaTime);
@@ -35,14 +38,15 @@ public class SimViewCar : MonoBehaviour {
 			i = 1;
 	}
 
-	public float getAngle() {
-		float angle = Mathf.Abs (transform.position.y - destination.y) / Mathf.Abs (transform.position.x - destination.x);
+	public void setAngle() {
+		angle = Mathf.Abs (transform.position.y - destination.y) / Mathf.Abs (transform.position.x - destination.x);
 		if ((transform.position.y - destination.y) * (transform.position.x - destination.x) < 0)
 			angle *= -1;
 		
 		angle = Mathf.Rad2Deg * Mathf.Atan (angle);
 
-		return angle;
+		if (transform.position.x - destination.x > 0)
+			angle += 180;
 	}
 
     void OnLevelWasLoaded(int level)

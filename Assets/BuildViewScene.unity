@@ -531,6 +531,7 @@ GameObject:
   - 124: {fileID: 371838159}
   - 81: {fileID: 371838158}
   - 114: {fileID: 371838163}
+  - 114: {fileID: 371838164}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -568,7 +569,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: .192156866, g: .301960796, b: .474509805, a: .0196078438}
+  m_BackGroundColor: {r: .760784388, g: .760784388, b: .760784388, a: .0196078438}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -602,7 +603,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 650876309}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!114 &371838163
@@ -624,6 +626,18 @@ MonoBehaviour:
   sinkCheckbox: {fileID: 1009292815}
   swapButton: {fileID: 343432194}
   valuesNotUniformColor: {r: .867647052, g: .64281559, b: .401924759, a: .916000009}
+--- !u!114 &371838164
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 371838157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e3fdc53f34418d4c97cc30196fe1937, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  panSpeed: -1
 --- !u!1 &392054532
 GameObject:
   m_ObjectHideFlags: 0
@@ -918,6 +932,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 650876309}
   - 212: {fileID: 650876308}
+  - 114: {fileID: 650876310}
   m_Layer: 0
   m_Name: BuildViewSceneBackground
   m_TagString: Untagged
@@ -958,11 +973,22 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 650876307}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_Father: {fileID: 371838162}
+  m_RootOrder: 0
+--- !u!114 &650876310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 650876307}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b013d33abaf48d04189c733848ce1dd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &726796636
 GameObject:
   m_ObjectHideFlags: 0
