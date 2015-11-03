@@ -25,7 +25,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 104714}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.1518774, y: 3.75881481, z: 0}
+  m_LocalPosition: {x: 8.37501812, y: 3.68267775, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -41,6 +41,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00c15c1209f289e459c7ae227f973ab1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  node: {fileID: 0}
   NodePrefab: {fileID: 104714}
 --- !u!135 &13511808
 SphereCollider:
@@ -78,7 +79,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 7d3e8bf6b87c6e544809c37c0ff7b230, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 641eec354b7154c45a6d415bd3565515, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:
@@ -91,6 +92,11 @@ Prefab:
       propertyPath: NodePrefab
       value: 
       objectReference: {fileID: 104714}
+    - target: {fileID: 0}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 641eec354b7154c45a6d415bd3565515,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 104714}

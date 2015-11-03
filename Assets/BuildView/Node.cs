@@ -9,13 +9,14 @@ public class Node : MonoBehaviour
     private bool _isSink;
     private bool _isConnected;
     private string _name;
+    private int _numberOfConnections;
 
     public Node()
     {
         this.NodeProperty = NodeType.None;
         this.IsSource = true;
         this.IsSink = true;
-        this.IsConnected = false;
+        this.NumberOfConnections = 0;
     }
 
     public NodeType NodeProperty
@@ -33,7 +34,7 @@ public class Node : MonoBehaviour
     public bool IsSink
     {
         get { return _isSink; }
-        set { _isSink = value; }
+        set { Debug.Log("Setting sink"); _isSink = value; }
     }
 
     public string Name
@@ -42,9 +43,9 @@ public class Node : MonoBehaviour
         set { _name = value; }
     }
 
-    public bool IsConnected
+    public int NumberOfConnections
     {
-        get { return _isConnected; }
-        set { _isConnected = value; }
+        get { return _numberOfConnections; }
+        set { _numberOfConnections = value; }
     }
 }

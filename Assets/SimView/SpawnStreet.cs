@@ -5,6 +5,7 @@ public class SpawnStreet : MonoBehaviour {
 
 	private LineRenderer roadRenderer;
 	public BuildViewLink[] allLinks;
+	public GameObject roadPrefab;
 
 
 
@@ -22,8 +23,7 @@ public class SpawnStreet : MonoBehaviour {
 			roadRenderer.SetPosition (0, originPos);
 			roadRenderer.SetPosition (1, destiPos);
 
-
-			SimViewRoad curRoad = new SimViewRoad();
+			GameObject curRoad = Instantiate(roadPrefab);
 		}
 	}
 
