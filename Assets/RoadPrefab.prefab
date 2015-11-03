@@ -42,7 +42,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   origin: {fileID: 0}
   destination: {fileID: 0}
-  roadRenderer: {fileID: 0}
 --- !u!120 &12037206
 LineRenderer:
   m_ObjectHideFlags: 1

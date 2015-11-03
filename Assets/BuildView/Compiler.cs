@@ -3,12 +3,17 @@ using System.Collections;
 using System.Collections.Generic;	
 
 public class Compiler : MonoBehaviour {
-    public GameObject[] nodes;
-    public GameObject[] links;
-    public Hashtable connectedNodes;
-    public BuildViewSelectionHandler selectionHandler;
+    private GameObject[] nodes;
+    private GameObject[] links;
+    private List<GameObject> actionPoints;
+    private List<GameObject> roads;
+    private Hashtable connectedNodes;
+    private BuildViewSelectionHandler selectionHandler;
+    public Hashtable adjacencyList;
+    public GameObject ActionPointPrefab;
+    public GameObject RoadPrefab;
     public Node[] DisconnectedNodes;
-	public Node[] disconnected_nodes=new Node[1000];
+	//public Node[] disconnected_nodes=new Node[1000];
 
     void Awake()
     {
@@ -49,24 +54,49 @@ public class Compiler : MonoBehaviour {
 
     private void GetAllGameObjects()
     {
-        nodes = GameObject.FindGameObjectsWithTag("node");
-        links = GameObject.FindGameObjectsWithTag("link");
+        nodes = GameObject.FindGameObjectsWithTag("Node");
+        links = GameObject.FindGameObjectsWithTag("Link");
         connectedNodes = selectionHandler.connectedNodes;
+    }
+
+    struct DestinationActionPointAndRoad
+    {
+        public GameObject destination;
+        public GameObject road;
+
+        public DestinationActionPointAndRoad(GameObject destination, GameObject road)
+        {
+            this.destination = destination;
+            this.road = road;
+        }
     }
 
     private void ChangeBuildViewObjectsToSimViewObjects()
     {
-        foreach(GameObject n in nodes)
-        {
+        Debug.Log("nodes " + nodes.Length);
+        Debug.Log("links " + links.Length);
 
+        foreach (GameObject n in nodes)
+        {
+            GameObject actionPoint = (GameObject) Instantiate(ActionPointPrefab);
+            actionPoint.transform.parent = n.transform;
+            actionPoint.tag = "ActionPoint";
+            //actionPoints.Add(actionPoint);
+            Debug.Log("node " + actionPoint.GetComponentInParent<BuildViewNode>().node.IsSource.ToString());
         }
+   /*
         foreach(GameObject l in links)
         {
-
+            GameObject road = (GameObject)Instantiate(RoadPrefab);
+            road.transform.parent = l.transform;
+            road.GetComponentInParent<BuildViewLink>();
+            road.tag = "Road";
+            roads.Add(road);
         }
-        foreach(BuildViewSelectionHandler.ConnectedNodes cn in connectedNodes.Keys)
+    */
+        foreach (BuildViewSelectionHandler.ConnectedNodes cn in connectedNodes.Keys)
         {
-            Debug.Log(cn.ToString());
+            
         }
     }
 
@@ -79,9 +109,9 @@ public class Compiler : MonoBehaviour {
     public void Compile()
     {
         GetAllGameObjects();
+        SwitchScenes();
         //IdentifyDisconnectedNodes();
         ChangeBuildViewObjectsToSimViewObjects();
-        SwitchScenes();
     }
 
 }

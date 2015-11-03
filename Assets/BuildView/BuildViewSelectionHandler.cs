@@ -129,6 +129,7 @@ public class BuildViewSelectionHandler : MonoBehaviour {
     private GameObject CreateLink(ConnectedNodes nodePair)
     {
         GameObject newLink = Instantiate(LinkPrefab);
+        newLink.tag = "Link";
         BuildViewLink linkScript = newLink.GetComponent<BuildViewLink>();
         linkScript.origin = nodePair.origin;
         linkScript.destination = nodePair.destination;

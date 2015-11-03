@@ -1,10 +1,12 @@
 fileFormatVersion: 2
 guid: 49bc23b4878ff9f419707c292c8d3ed0
-timeCreated: 1444675076
+timeCreated: 1446585375
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - ActionPointPrefab: {fileID: 104714, guid: 6d266921e2506bb4cbe590a72e58291b, type: 2}
+  - RoadPrefab: {fileID: 184726, guid: 78a4af2cc22b44a0eb3196a64b47be85, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
