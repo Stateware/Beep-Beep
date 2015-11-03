@@ -62,12 +62,12 @@ public class BuildViewLink : MonoBehaviour {
 		lineCollider.transform.eulerAngles = new Vector3 (0, 0, angle);
 
 		lineRenderer.material.mainTextureScale = new Vector2(lineLength / 2, 1);
-
+		/*
 		if (!origin.IsConnected || !destination.IsConnected ) {
 			origin.IsConnected=true;
 			destination.IsConnected=true;
 		}
-
+*/
 		//toLogger = "Node #"+origin.name + " -> " + "Node #"+destination.name;
 		//Debug.Log (toLogger);
 	}
