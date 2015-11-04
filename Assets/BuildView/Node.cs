@@ -11,12 +11,20 @@ public class Node : MonoBehaviour
     private string _name;
     private int _numberOfConnections;
 
-    public Node()
+    void Start()
     {
         this.NodeProperty = NodeType.None;
         this.IsSource = true;
         this.IsSink = true;
         this.NumberOfConnections = 0;
+    }
+
+    public void setNode(Node node)
+    {
+        this.NodeProperty = node.NodeProperty;
+        this.IsSource = node.IsSource;
+        this.IsSink = node.IsSink;
+        this.NumberOfConnections = node.NumberOfConnections;
     }
 
     public NodeType NodeProperty
