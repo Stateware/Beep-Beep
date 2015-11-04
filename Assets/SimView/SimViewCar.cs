@@ -48,13 +48,4 @@ public class SimViewCar : MonoBehaviour {
 		if (transform.position.x - destination.x > 0)
 			angle += 180;
 	}
-
-    void OnLevelWasLoaded(int level)
-    {
-        Debug.Log("Checking Level in simviewcar");
-        if(level == 1)
-        {
-            Debug.Log("level 1");
-        }
-    }
 }

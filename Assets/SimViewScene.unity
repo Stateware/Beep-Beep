@@ -740,6 +740,7 @@ GameObject:
   - 124: {fileID: 1852831984}
   - 81: {fileID: 1852831983}
   - 114: {fileID: 1852831988}
+  - 114: {fileID: 1852831989}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -827,3 +828,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panSpeed: 1
+--- !u!114 &1852831989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1852831982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b3296ed75609234583b8900a8c6e674, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ActionPointPrefab: {fileID: 104714, guid: 6d266921e2506bb4cbe590a72e58291b, type: 2}
+  RoadPrefab: {fileID: 184726, guid: 78a4af2cc22b44a0eb3196a64b47be85, type: 2}

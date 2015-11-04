@@ -3,8 +3,8 @@ using System.Collections;
 using System.Collections.Generic;	
 
 public class Compiler : MonoBehaviour {
-    private GameObject[] nodes;
-    private GameObject[] links;
+    public GameObject[] nodes;
+    public GameObject[] links;
     public List<Node> disconnectedNodes;
     private ErrorView errorView;
 
@@ -18,7 +18,19 @@ public class Compiler : MonoBehaviour {
 	{
 		nodes = GameObject.FindGameObjectsWithTag("Node");
 		links = GameObject.FindGameObjectsWithTag("Link");
-	}
+    }
+
+    private void PreserveGameObjects()
+    {
+        foreach (GameObject node in nodes)
+        {
+            DontDestroyOnLoad(node);
+        }
+        foreach (GameObject link in links)
+        {
+            DontDestroyOnLoad(link);
+        }
+    }
 
 	private bool IdentifyDisconnectedNodes()
 	{
@@ -68,6 +80,7 @@ public class Compiler : MonoBehaviour {
         }
         else
         {
+            PreserveGameObjects();
             SwitchScenes();
         }
     }
