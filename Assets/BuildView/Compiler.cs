@@ -3,9 +3,9 @@ using System.Collections;
 using System.Collections.Generic;	
 
 public class Compiler : MonoBehaviour {
-    public GameObject[] nodes;
-    public GameObject[] links;
-    public List<Node> disconnectedNodes;
+    private GameObject[] nodes;
+    private GameObject[] links;
+    private List<Node> disconnectedNodes;
     private ErrorView errorView;
 
     void Awake()

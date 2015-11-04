@@ -55,23 +55,22 @@ public class Init : MonoBehaviour {
 
         foreach (GameObject node in nodes)
         {
-            GameObject actionPoint = (GameObject)Instantiate(ActionPointPrefab);
+            GameObject actionPoint = (GameObject)Instantiate(ActionPointPrefab, node.transform.position, node.transform.rotation);
             node.transform.parent = actionPoint.transform;
             actionPoint.tag = "ActionPoint";
             //actionPoints.Add(actionPoint);
             Debug.Log("node " + actionPoint.GetComponentInChildren<BuildViewNode>().node.IsSource.ToString());
             node.SetActive(false);
         }
-        /*
-             foreach(GameObject l in links)
-             {
-                 GameObject road = (GameObject)Instantiate(RoadPrefab);
-                 road.transform.parent = l.transform;
-                 road.GetComponentInParent<BuildViewLink>();
-                 road.tag = "Road";
-                 roads.Add(road);
-             }
         
+        foreach(GameObject link in links)
+        {
+            GameObject road = (GameObject)Instantiate(RoadPrefab, link.transform.position, link.transform.rotation);
+            road.transform.parent = link.transform;
+            road.tag = "Road";
+            road.SetActive(false);
+        }
+        /*
         foreach (BuildViewSelectionHandler.ConnectedNodes cn in connectedNodes.Keys)
         {
 
