@@ -40,9 +40,6 @@ public class Init : MonoBehaviour {
 
     private void GetAllGameObjects()
     {
-        BuildViewNode[] mynodes = Resources.FindObjectsOfTypeAll<BuildViewNode>();
-        Debug.Log("mynodes " + mynodes.Length);
-
         nodes = GameObject.FindGameObjectsWithTag("Node");
         links = GameObject.FindGameObjectsWithTag("Link");
         //connectedNodes = selectionHandler.connectedNodes;
@@ -57,18 +54,19 @@ public class Init : MonoBehaviour {
         {
             GameObject actionPoint = (GameObject)Instantiate(ActionPointPrefab, node.transform.position, node.transform.rotation);
             node.transform.parent = actionPoint.transform;
+            Node n = actionPoint.GetComponentInChildren<Node>();
             actionPoint.tag = "ActionPoint";
-            //actionPoints.Add(actionPoint);
-            Debug.Log("node " + actionPoint.GetComponentInChildren<BuildViewNode>().node.IsSource.ToString());
             node.SetActive(false);
+            Debug.Log("node " + n.IsSource.ToString());
         }
         
         foreach(GameObject link in links)
         {
             GameObject road = (GameObject)Instantiate(RoadPrefab, link.transform.position, link.transform.rotation);
-            road.transform.parent = link.transform;
+            link.transform.parent = road.transform;
+            Link l = road.GetComponentInChildren<Link>();
             road.tag = "Road";
-            road.SetActive(false);
+            link.SetActive(false);
         }
         /*
         foreach (BuildViewSelectionHandler.ConnectedNodes cn in connectedNodes.Keys)
