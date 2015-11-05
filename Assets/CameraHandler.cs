@@ -32,7 +32,7 @@ public class CameraHandler : MonoBehaviour
             Camera.main.orthographicSize = Camera.main.orthographicSize - 0.5f;
         }
 
-        if ((Input.GetAxis("Mouse ScrollWheel") < 0)) // back  && Camera.main.orthographicSize < maxZoom
+        if ((Input.GetAxis("Mouse ScrollWheel") < 0) && Camera.main.orthographicSize < 20) // back  && Camera.main.orthographicSize < maxZoom
         {
             Camera.main.orthographicSize = Camera.main.orthographicSize + 0.5f;
         }
