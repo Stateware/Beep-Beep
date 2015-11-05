@@ -52,6 +52,7 @@ public class Compiler : MonoBehaviour {
     {
         string error_text = "You have " + disconnectedNodes.Count + " disconnected nodes.";
         errorView.appendErrorText(error_text);
+        errorView.setDisplayGui(true);
         for (int j = 0; j < disconnectedNodes.Count; j++)
         {
             disconnectedNodes[j].GetComponent<SpriteRenderer>().sprite = (Sprite)Resources.Load("BuildViewNodeDISCONNECTED", typeof(Sprite));
