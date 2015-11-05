@@ -5,7 +5,10 @@ public class SimViewCar : MonoBehaviour {
 	public SimViewRoad[] roads;
 	private int currRoadIndex = 0;
 
-	private float speed = 4f;
+	private float minSpeed = 1f;
+	private float maxSpeed = 5f;
+	public float speed = 1f;
+	private float alertDistance = 3f;
 	private float angle;
 	private float currentTravelDistance = 0.0f;
 	private float currRoadLength;
@@ -30,9 +33,14 @@ public class SimViewCar : MonoBehaviour {
 			destination = path [i];
 			setAngle ();
 			transform.eulerAngles = new Vector3 (0, 0, angle);
+			speed = 1f;
 			i++;
 		}
 		transform.position = Vector3.MoveTowards (transform.position, destination, speed * Time.deltaTime);
+		if (Vector3.Distance (transform.position, destination) > alertDistance && speed < maxSpeed)
+			speed += 1f * Time.deltaTime;
+		else if (Vector3.Distance (transform.position, destination) < alertDistance && speed > minSpeed)
+			speed -= 2f * Time.deltaTime;
 		// Test
 		if (i == 6)
 			i = 1;
