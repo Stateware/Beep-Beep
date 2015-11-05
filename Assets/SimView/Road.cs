@@ -5,7 +5,7 @@ public class Road : MonoBehaviour
 {
     private Link _linkProperties;
     
-    public Road(Link linkProperties)
+    public void setRoad(Link linkProperties)
     {
         this.LinkProperties = linkProperties;
     }

@@ -6,7 +6,7 @@ public class Link : MonoBehaviour
     private int _numberOfLanes;
     private bool _isTwoWay;
 
-    public Link()
+    void Start()
     {
         this.NumberOfLanes = 1;
         this.IsTwoWay = true;

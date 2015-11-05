@@ -5,7 +5,7 @@ public class ActionPoint : MonoBehaviour
 {
     private GameObject _nodeProperties;
 
-    public ActionPoint(GameObject nodeProperties)
+    public void setActionPoint(GameObject nodeProperties)
     {
         this.NodeProperties = nodeProperties;
     }

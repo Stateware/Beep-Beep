@@ -7,6 +7,10 @@ public class SpawnStreet : MonoBehaviour {
 	public BuildViewLink[] allLinks;
 	public GameObject roadPrefab;
 
+	public GameObject road1lanePrefab;
+	public GameObject road2lanePrefab;
+	public GameObject road3lanePrefab;
+	public GameObject road4lanePrefab;
 
 
 	// Use this for initialization

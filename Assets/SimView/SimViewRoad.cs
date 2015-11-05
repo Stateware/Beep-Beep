@@ -7,8 +7,7 @@ public class SimViewRoad : MonoBehaviour {
 	public BuildViewNode destination;
 	private float length = 0.0f;
 	private LineRenderer roadRenderer;
-
-
+	
 
 	// Use this for initialization
 	void Start () {
