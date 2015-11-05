@@ -18,21 +18,33 @@ public class CameraHandler : MonoBehaviour
 
     void Update()
     {
-            if (Input.GetMouseButton(2))
-            {
-                    float x = Input.GetAxis("Mouse X") * panSpeed;
-                    float y = Input.GetAxis("Mouse Y") * panSpeed;
-                    transform.Translate(x, y, 0);
-                    Debug.Log("clicked and dragged screen");
-            }
+        bool bgBrowserEnabled = false;
+
+        if (Input.GetMouseButton(2))
+        {
+                float x = Input.GetAxis("Mouse X") * panSpeed;
+                float y = Input.GetAxis("Mouse Y") * panSpeed;
+                transform.Translate(x, y, 0);
+        }
 
         //zoom
-        if ((Input.GetAxis("Mouse ScrollWheel") > 0) && Camera.main.orthographicSize > 2) // forward   
+        GameObject canvas = GameObject.Find("Canvas");
+        if (canvas == null)
+        {
+            bgBrowserEnabled = false;
+        }
+        else
+        {
+            ImageFileFinder browserScript = canvas.GetComponent<ImageFileFinder>();
+            bgBrowserEnabled = browserScript.getBrowserEnabled();
+        }
+
+        if ((Input.GetAxis("Mouse ScrollWheel") > 0) && Camera.main.orthographicSize > 2 && !bgBrowserEnabled) // forward   
         {
             Camera.main.orthographicSize = Camera.main.orthographicSize - 0.5f;
         }
 
-        if ((Input.GetAxis("Mouse ScrollWheel") < 0) && Camera.main.orthographicSize < 20) // back  && Camera.main.orthographicSize < maxZoom
+        if ((Input.GetAxis("Mouse ScrollWheel") < 0) && Camera.main.orthographicSize < 20 && !bgBrowserEnabled) // back  && Camera.main.orthographicSize < maxZoom
         {
             Camera.main.orthographicSize = Camera.main.orthographicSize + 0.5f;
         }
