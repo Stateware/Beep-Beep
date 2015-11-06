@@ -11,7 +11,7 @@ GameObject:
   - 120: {fileID: 12037206}
   - 114: {fileID: 11498210}
   m_Layer: 0
-  m_Name: RoadPrefab
+  m_Name: Road3LanePrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -52,7 +52,7 @@ LineRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_Materials:
-  - {fileID: 2100000, guid: 670a5a0aa461b482fbbe99534ee70285, type: 2}
+  - {fileID: 2100000, guid: 0e2c0ba1f7b644863ae8101cb362cb0e, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -89,7 +89,11 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 670a5a0aa461b482fbbe99534ee70285, type: 2}
+      objectReference: {fileID: 2100000, guid: 0e2c0ba1f7b644863ae8101cb362cb0e, type: 2}
+    - target: {fileID: 0}
+      propertyPath: road3lanePrefab
+      value: 
+      objectReference: {fileID: 184726}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 184726}
