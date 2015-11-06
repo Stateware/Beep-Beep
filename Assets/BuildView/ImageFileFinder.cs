@@ -4,7 +4,6 @@ using UnityEditor;
 
 public class ImageFileFinder : MonoBehaviour
 {
-
     protected string m_textPath;
     private bool m_browserEnabled = false;
 
@@ -70,7 +69,7 @@ public class ImageFileFinder : MonoBehaviour
         byte[] fileData;
 
         SpriteRenderer defaultBg = Camera.main.GetComponentInChildren<SpriteRenderer>();   
-        SpriteRenderer userBg = GameObject.Find("BackgroundImage").GetComponent<SpriteRenderer>();
+        SpriteRenderer userBg = GameObject.Find("UserBackgroundImage").GetComponent<SpriteRenderer>();
         this.m_textPath = this.m_textPath.Replace('\\', '/');                                                               //unity only likes forward slashes
         Texture2D newTexture = new Texture2D((int)defaultBg.sprite.rect.height, (int)defaultBg.sprite.rect.width);  //i want to scale uploaded image to current background size 
                                                                                                                     //  but it isn't working?
