@@ -1,30 +1,24 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ActionPoint : MonoBehaviour
-{
-    private GameObject _nodeProperties;
+public class ActionPointController : MonoBehaviour {
 
-    public void setActionPoint(GameObject nodeProperties)
+    private Node nodeProperties;
+
+    public void initializeActionPoint()
     {
-        this.NodeProperties = nodeProperties;
-    }
-     
-    public GameObject NodeProperties
-    {
-        get { return _nodeProperties; }
-        set { _nodeProperties = value; SetActionPointProperties(); }
+        nodeProperties = gameObject.GetComponent<Node>();
+        SetActionPointProperties();
     }
 
     private void SetActionPointProperties()
     {
-        Node node = _nodeProperties.GetComponent<BuildViewNode>().node;
-        if (node.IsSink)
+        if (nodeProperties.IsSink)
             SetSink();
-        if (node.IsSource)
+        if (nodeProperties.IsSource)
             SetSource();
 
-        switch(node.NodeProperty)
+        switch (nodeProperties.NodeProperty)
         {
             case Node.NodeType.StopSign:
                 SetStopSign();
@@ -56,5 +50,4 @@ public class ActionPoint : MonoBehaviour
     {
         //do something
     }
-
 }

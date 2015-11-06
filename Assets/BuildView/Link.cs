@@ -6,8 +6,9 @@ public class Link : MonoBehaviour
     private int _numberOfLanes;
     private bool _isTwoWay;
 
-    void Start()
+    void Awake()
     {
+        DontDestroyOnLoad(gameObject);
         this.NumberOfLanes = 1;
         this.IsTwoWay = true;
     }

@@ -11,20 +11,13 @@ public class Node : MonoBehaviour
     private string _name;
     private int _numberOfConnections;
 
-    void Start()
+    void Awake()
     {
+        DontDestroyOnLoad(gameObject);
         this.NodeProperty = NodeType.None;
         this.IsSource = true;
         this.IsSink = true;
         this.NumberOfConnections = 0;
-    }
-
-    public void setNode(Node node)
-    {
-        this.NodeProperty = node.NodeProperty;
-        this.IsSource = node.IsSource;
-        this.IsSink = node.IsSink;
-        this.NumberOfConnections = node.NumberOfConnections;
     }
 
     public NodeType NodeProperty
@@ -42,7 +35,7 @@ public class Node : MonoBehaviour
     public bool IsSink
     {
         get { return _isSink; }
-        set { Debug.Log("Setting sink"); _isSink = value; }
+        set { _isSink = value; }
     }
 
     public string Name

@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEditor;
 using System.Collections;
 using System.Collections.Generic;	
 
@@ -18,18 +19,6 @@ public class Compiler : MonoBehaviour {
 	{
 		nodes = GameObject.FindGameObjectsWithTag("Node");
 		links = GameObject.FindGameObjectsWithTag("Link");
-    }
-
-    private void PreserveGameObjects()
-    {
-        foreach (GameObject node in nodes)
-        {
-            DontDestroyOnLoad(node);
-        }
-        foreach (GameObject link in links)
-        {
-            DontDestroyOnLoad(link);
-        }
     }
 
 	private bool IdentifyDisconnectedNodes()
@@ -61,6 +50,28 @@ public class Compiler : MonoBehaviour {
         disconnectedNodes.Clear();
     }
 
+    private void ChangeBuildViewObjectsToSimViewObjects()
+    {
+        Debug.Log("Number of nodes compiled into Action Points: " + nodes.Length);
+        Debug.Log("Number of links compiled into Roads: " + links.Length);
+
+        foreach (GameObject node in nodes)
+        {
+            Destroy(node.GetComponent<BuildViewNode>());
+            ActionPointController ap = node.AddComponent<ActionPointController>();
+            ap.initializeActionPoint();
+            node.name = "Action Point";
+            Debug.Log("This node is a source: " + node.GetComponent<Node>().IsSource.ToString());
+        }
+
+        foreach (GameObject link in links)
+        {
+            Destroy(link.GetComponent<BuildViewLink>());
+            RoadController rc = link.AddComponent<RoadController>();
+            rc.initializeRoad();
+            link.name = "Road";
+        }        
+    }
 
     public void check_for_connectedness ()
     {
@@ -81,7 +92,7 @@ public class Compiler : MonoBehaviour {
         }
         else
         {
-            PreserveGameObjects();
+            ChangeBuildViewObjectsToSimViewObjects();
             SwitchScenes();
         }
     }

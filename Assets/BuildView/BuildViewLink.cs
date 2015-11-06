@@ -18,10 +18,13 @@ public class BuildViewLink : MonoBehaviour {
 	int originID;
 	int destinationID;
 	string toLogger;
+    public Link link;
+
 	// Initialization
 	void Start () {
 		lineRenderer = GetComponent<LineRenderer> ();
 		lineCollider = gameObject.AddComponent<BoxCollider> ();
+        link = gameObject.AddComponent<Link>();
 	}
 	
 	// Update is called once per frame
