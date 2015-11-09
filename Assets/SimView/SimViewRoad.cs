@@ -30,6 +30,13 @@ public class SimViewRoad : MonoBehaviour {
 		roadRenderer.SetWidth (0.35f, 0.35f);
 		roadRenderer.SetPosition (0, originPos);
 		roadRenderer.SetPosition (1, destinationPos);
+
+
+		// Set the size of lineCollider to the lineRenderer size
+		float lineLength = Vector3.Distance (originPos, destinationPos);
+
+		// Tile the texture according to current length
+		roadRenderer.material.mainTextureScale = new Vector2(lineLength * 2, 1);
 	}
 			
 	public void Update () {

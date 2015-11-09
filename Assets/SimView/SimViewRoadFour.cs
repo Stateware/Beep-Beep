@@ -6,7 +6,7 @@ using System.Collections;
 //Dependencies:	compiler.cs, BuildViewLink.cs, SimViewRoad
 //Additional Notes: 
 
-public class SimViewRoadThree1 : SimViewRoad {
+public class SimViewRoadFour : SimViewRoad {
 
 	// Use this for initialization
 	void Start () {
