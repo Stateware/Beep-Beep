@@ -14,39 +14,42 @@ public class ActionPointController : MonoBehaviour {
     private void SetActionPointProperties()
     {
         if (nodeProperties.IsSink)
-            SetSink();
+            SetSinkComponents();
         if (nodeProperties.IsSource)
-            SetSource();
+            SetSourceComponents();
 
         switch (nodeProperties.NodeProperty)
         {
             case Node.NodeType.StopSign:
-                SetStopSign();
+                SetStopSignComponents();
                 break;
             case Node.NodeType.TrafficLight:
-                SetTrafficLight();
+                SetTrafficLightComponents();
                 break;
             default:
                 break;
         }
     }
 
-    private void SetSource()
+    private void SetSourceComponents()
+    {
+        GameObject car = Instantiate(Resources.Load("Prefabs/CarPrefab")) as GameObject;
+        
+        DontDestroyOnLoad(car);
+        car.transform.position = gameObject.transform.position;
+    }
+
+    private void SetSinkComponents()
     {
         //do something
     }
 
-    private void SetSink()
+    private void SetTrafficLightComponents()
     {
         //do something
     }
 
-    private void SetTrafficLight()
-    {
-        //do something
-    }
-
-    private void SetStopSign()
+    private void SetStopSignComponents()
     {
         //do something
     }
