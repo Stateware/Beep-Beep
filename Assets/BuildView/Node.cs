@@ -1,6 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
+//File name: Node.cs
+//Description: Contains all the setters and getters for gameobjects of type node
+//Dependencies: GameObject - NodePrefab (Clone)
+//Additional Notes: This script component will be static across scenes
+
 public class Node : MonoBehaviour
 {
     public enum NodeType { None, StopSign, TrafficLight }
@@ -11,6 +16,7 @@ public class Node : MonoBehaviour
     private string _name;
     private int _numberOfConnections;
 
+    //Description: Initializes all the nodes with default values and preserves the gameobject between scenes
     void Awake()
     {
         DontDestroyOnLoad(gameObject);
@@ -18,6 +24,13 @@ public class Node : MonoBehaviour
         this.IsSource = true;
         this.IsSink = true;
         this.NumberOfConnections = 0;
+    }
+
+    //Description: number of links connected to the node instance
+    public int NumberOfConnections
+    {
+        get { return _numberOfConnections; }
+        set { _numberOfConnections = value; }
     }
 
     public NodeType NodeProperty
@@ -36,17 +49,5 @@ public class Node : MonoBehaviour
     {
         get { return _isSink; }
         set { _isSink = value; }
-    }
-
-    public string Name
-    {
-        get { return _name; }
-        set { _name = value; }
-    }
-
-    public int NumberOfConnections
-    {
-        get { return _numberOfConnections; }
-        set { _numberOfConnections = value; }
     }
 }
