@@ -27,7 +27,7 @@ public class SimViewRoad : MonoBehaviour {
 		Vector3 destinationPos = destination.transform.position;
 		
 		// Draw links with the new roadRenderer
-		roadRenderer.SetWidth (0.35f, 0.35f);
+		roadRenderer.SetWidth (0.75f, 0.75f);
 		roadRenderer.SetPosition (0, originPos);
 		roadRenderer.SetPosition (1, destinationPos);
 
