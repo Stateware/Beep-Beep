@@ -4,6 +4,7 @@ using System.Collections;
 //File Name: 	SimViewRoadOne.cs
 //Description:	Subclass of SimViewRoad 
 //Dependencies:	compiler.cs, BuildViewLink.cs, SimViewRoad
+//	Author			: Haojun Sui, Yuehui Wang
 //Additional Notes: 
 
 
