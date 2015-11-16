@@ -62,7 +62,7 @@ public class BuildViewNode : MonoBehaviour
     //Post: A NodePrefab (Clone) is created and active in the gameworld.
     public void SpawnNewNode()
     {
-        Vector2 mousePosition = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+        Vector2 mousePosition = new Vector2(Input.mousePosition.x, Input.mousePosition.y + (100.0f / Camera.main.orthographicSize));
         Vector2 spawnPosition = Camera.main.ScreenToWorldPoint(mousePosition);
         transform.position = spawnPosition;
 
