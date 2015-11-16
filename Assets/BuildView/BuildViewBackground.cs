@@ -17,7 +17,7 @@ public class BuildViewBackground : MonoBehaviour {
      */
     void OnMouseUp()
     {
-        if (!EventSystem.current.IsPointerOverGameObject())
+        if (!EventSystem.current.IsPointerOverGameObject() && !Input.GetKey("space"))
         {
             Camera.main.GetComponent<BuildViewSelectionHandler>().ClearSelection();
         }
