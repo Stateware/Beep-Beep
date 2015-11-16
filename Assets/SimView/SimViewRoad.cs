@@ -4,6 +4,7 @@ using System.Collections;
 //File Name: 	SimViewRoad.cs
 //Description:	This is a class of the road, that SpawnStreet uses to build streets 
 //Dependencies:	compiler.cs, BuildViewLink.cs
+//	Author	  : Haojun Sui, Yuehui Wang
 //Additional Notes: 
 
 
