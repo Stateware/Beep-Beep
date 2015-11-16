@@ -13,6 +13,11 @@ public class ImageFileFinder : MonoBehaviour
     protected Texture2D m_directoryImage,
                         m_fileImage;
 
+    void Awake()
+    {
+        DontDestroyOnLoad(GameObject.Find("UserBackgroundImage"));
+    }
+
     protected void OnGUI()
     {
         if (m_fileBrowser != null)
@@ -68,7 +73,7 @@ public class ImageFileFinder : MonoBehaviour
     {
         byte[] fileData;
 
-        SpriteRenderer defaultBg = Camera.main.GetComponentInChildren<SpriteRenderer>();   
+        SpriteRenderer defaultBg = Camera.main.GetComponentInChildren<SpriteRenderer>();
         SpriteRenderer userBg = GameObject.Find("UserBackgroundImage").GetComponent<SpriteRenderer>();
         this.m_textPath = this.m_textPath.Replace('\\', '/');                                                               //unity only likes forward slashes
         Texture2D newTexture = new Texture2D((int)defaultBg.sprite.rect.height, (int)defaultBg.sprite.rect.width);  //i want to scale uploaded image to current background size 
@@ -78,5 +83,21 @@ public class ImageFileFinder : MonoBehaviour
 
         userBg.sprite = Sprite.Create(newTexture,
                                         new Rect(0, 0, newTexture.width, newTexture.height), new Vector2(0.5f, 0.5f), defaultBg.sprite.pixelsPerUnit);
+
+        transform.localScale = new Vector3(1, 1, 1);
+
+        float width = userBg.sprite.bounds.size.x; // 4.80f
+        float height = userBg.sprite.bounds.size.y; // 6.40f
+
+        float worldScreenHeight = Camera.main.orthographicSize * 2f + 1; // 10f
+        float worldScreenWidth = worldScreenHeight / Screen.height * Screen.width + 1; // 10f
+
+        Vector3 imgScale = new Vector3(1f, 1f, 1f);
+
+        imgScale.x = worldScreenWidth / width;
+        imgScale.y = worldScreenHeight / height;
+
+        // apply change
+        userBg.transform.localScale = imgScale;
     }
 }
