@@ -29,9 +29,7 @@ public class SpawnStreet : MonoBehaviour {
 			roadRenderer.SetPosition (0, originPos);
 			roadRenderer.SetPosition (1, destiPos);
 
-			if (
-		
-
+	
 			GameObject curRoad = Instantiate(roadPrefab);
 		}
 	}
