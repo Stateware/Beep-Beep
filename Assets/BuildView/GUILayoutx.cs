@@ -1,4 +1,10 @@
-﻿using UnityEngine;
+﻿//File Name:        GUILayoutx.cs
+//Description:      Handles the GUI of the filebrowser which will be invoked
+//Dependencies:     None
+//Additional Notes: This code is taken from the Unity Community Wiki and is open source, we have no directly edited anything
+//                      in this code for beep beep.
+
+using UnityEngine;
 
 public class GUILayoutx
 {

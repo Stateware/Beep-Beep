@@ -1,11 +1,13 @@
-﻿using UnityEngine;
+﻿//File Name:        FileBrowser.cs
+//Description:      File browser for selecting files or folders at runtime.
+//Dependencies:     GUILayoutx.cs
+//Additional Notes: This code is taken from the Unity Community Wiki and is open source, we have no directly edited anything
+//                      in this code for beep beep.
+
+using UnityEngine;
 using System;
 using System.IO;
 using System.Collections.Generic;
-
-/*
-	File browser for selecting files or folders at runtime.
- */
 
 public enum FileBrowserType
 {
