@@ -5,15 +5,28 @@
 // Dependencies: GameObject-	 Node
 
 using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;	
 
 public class Compiler : MonoBehaviour {
-	private GameObject[] nodes;
-	private GameObject[] links;
-	private List<Node> disconnectedNodes;
-	private ErrorView errorView;
-	
-	void Awake()
+    private GameObject[] nodes;
+    private GameObject[] links;
+    private List<Node> disconnectedNodes;
+    private ErrorView errorView;
+    private Hashtable connectedNodes;
+    public static Hashtable adjacencyList;
+
+    struct DestinationActionPointAndRoad
+    {
+        public GameObject destination, road;
+        public DestinationActionPointAndRoad(GameObject destination, GameObject road)
+        {
+            this.destination = destination;
+            this.road = road;
+        }
+    }
+
+    void Awake()
 	{
 		errorView = gameObject.AddComponent<ErrorView>();
 		disconnectedNodes = new List<Node>();
@@ -25,7 +38,8 @@ public class Compiler : MonoBehaviour {
 	{
 		nodes = GameObject.FindGameObjectsWithTag("Node");
 		links = GameObject.FindGameObjectsWithTag("Link");
-	}
+        connectedNodes = GameObject.FindObjectOfType<BuildViewSelectionHandler>().connectedNodes;
+    }
 	
 	//Description: Finds Node objects that are not connected to any other nodes and adds 
 	//			   them to Node array disconnectedNodes
@@ -86,8 +100,25 @@ public class Compiler : MonoBehaviour {
 			RoadController rc = link.AddComponent<RoadController>();
 			rc.initializeRoad();
 			link.name = "Road";
-		}        
-	}
+		}
+
+        foreach (BuildViewSelectionHandler.ConnectedNodes cn in connectedNodes.Keys)
+        {
+            DestinationActionPointAndRoad dapar = new DestinationActionPointAndRoad(cn.destination.gameObject, (GameObject) connectedNodes[cn]);
+            GameObject origin = cn.origin.gameObject;
+
+            if (!adjacencyList.ContainsKey(origin))
+            {
+                List<DestinationActionPointAndRoad> originConnections = new List<DestinationActionPointAndRoad>();
+                originConnections.Add(dapar);
+                adjacencyList.Add(origin, originConnections);
+            }
+            else
+            {
+                (adjacencyList[origin] as List<DestinationActionPointAndRoad>).Add(dapar);
+            }
+        }
+    }
 
 	//description: switches scenes
 	//pre: -
