@@ -32,7 +32,7 @@ public class CameraHandler : MonoBehaviour
     {
         bool bgBrowserEnabled = false;                          //if the file selection browser is up don't scroll
 
-        if (Input.GetMouseButton(2))                            //here uses the middle mouse button, may want or space & click later
+        if (Input.GetMouseButton(2) || (Input.GetMouseButton(0) && Input.GetKey("space")))                            //here uses the middle mouse button, may want or space & click later
         {
                 float x = Input.GetAxis("Mouse X") * panSpeed;
                 float y = Input.GetAxis("Mouse Y") * panSpeed;
