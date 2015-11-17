@@ -5,8 +5,8 @@ public class SpawnStreet : MonoBehaviour {
 
 	private LineRenderer roadRenderer;
 	public BuildViewLink[] allLinks;
-	public GameObject roadPrefab;
 
+	public GameObject roadPrefab;
 	public GameObject road1lanePrefab;
 	public GameObject road2lanePrefab;
 	public GameObject road3lanePrefab;
@@ -17,6 +17,8 @@ public class SpawnStreet : MonoBehaviour {
 	void Start () {
 		roadRenderer = GetComponent<LineRenderer> ();
 		allLinks = UnityEngine.Object.FindObjectsOfType<BuildViewLink>();
+
+
 		foreach (object go in allLinks) {
 			BuildViewLink link = (BuildViewLink)go;
 
@@ -27,12 +29,15 @@ public class SpawnStreet : MonoBehaviour {
 			roadRenderer.SetPosition (0, originPos);
 			roadRenderer.SetPosition (1, destiPos);
 
+			if (
+		
+
 			GameObject curRoad = Instantiate(roadPrefab);
 		}
 	}
 
 	// Update is called once per frame
 	void Update () {
-	
+		
 	}
 }

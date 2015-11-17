@@ -141,4 +141,9 @@ public class BuildViewLink : MonoBehaviour {
 		
 		angle = Mathf.Rad2Deg * Mathf.Atan (angle);
 	}
+
+	public int getLaneNum () {
+		return laneNum;	
+	}
+
 }
