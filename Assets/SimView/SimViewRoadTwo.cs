@@ -1,22 +1,20 @@
-﻿using UnityEngine;
-using System.Collections;
-
-//File Name: 	SimViewRoadTwo.cs
-//Description:	Subclass of SimViewRoad 
-//Dependencies:	compiler.cs, BuildViewLink.cs, SimViewRoad
-//	Author			: Haojun Sui, Yuehui Wang
-//Additional Notes: 
+﻿// File Name: 	     SimViewRoadTwo.cs
+// Description:	     Subclass of SimViewRoad for 2 lanes
+// Dependencies:     Compiler.cs, BuildViewLink.cs, SimViewRoad
+// Additional Notes: N/A
 
 public class SimViewRoadTwo : SimViewRoad {
-	
 
-	// Use this for initialization
-	void Start () {
-		base.Start();
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    // Description: 
+    // PRE: 
+    // POST: 
+    void Start()
+    {
+        base.Start();
+    }
+
+    // Description: 
+    // PRE:
+    // POST:
+    void Update() { }
 }

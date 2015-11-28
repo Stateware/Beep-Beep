@@ -1,27 +1,25 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿// File Name: 	     SimViewRoad.cs
+// Description:	     This is a class of the road, that SpawnStreet uses to build streets 
+// Dependencies:     Compiler.cs, BuildViewLink.cs
+// Additional Notes: N/A 
 
-//File Name: 	SimViewRoad.cs
-//Description:	This is a class of the road, that SpawnStreet uses to build streets 
-//Dependencies:	compiler.cs, BuildViewLink.cs
-//	Author	  : Haojun Sui, Yuehui Wang
-//Additional Notes: 
-
+using UnityEngine;
 
 public class SimViewRoad : MonoBehaviour {
 
 	public BuildViewNode origin;
 	public BuildViewNode destination;
-	private float length = 0.0f;
-	public LineRenderer roadRenderer;
-	private int numOfLane;
-	
+    public LineRenderer roadRenderer;
 
+    private float _length = 0.0f;
+	private int _numOfLane;
+	
 	//Description:	Initialize the roadRenderer with component LineRenderer and add the road texture 
 	//				the links retrived from build view
 	//PRE:			No roads on sim view
-	//Post:			variable roadRenderer obtains the component of LineRenderer and the road obatain textures
-	public void Start () {
+	//POST:			Variable roadRenderer obtains the component of LineRenderer and the road obatain textures
+	public void Start ()
+    {
 		roadRenderer = GetComponent<LineRenderer> ();
 		// Store origin and destination position
 		Vector3 originPos = origin.transform.position;
@@ -40,17 +38,21 @@ public class SimViewRoad : MonoBehaviour {
 		roadRenderer.material.mainTextureScale = new Vector2(lineLength * 2, 1);
 	}
 			
-	public void Update () {
+    // Description:
+    // PRE:
+    // POST:
+	public void Update ()
+    {
 	}
 
 	//Description:	Setter for SimViewRoad
 	//PRE:			The properties of origin, destination and roadRenderer are uninitialized
 	//Post:			Initialize origin, destination and roadRenderer with the parameters passed in 
-
-	public void setProperties (BuildViewNode theOrigin, BuildViewNode theDestination, int theNumOfLane){
+	public void SetProperties (BuildViewNode theOrigin, BuildViewNode theDestination, int theNumOfLane)
+    {
 		origin = theOrigin;
 		destination = theDestination;
-		length = Vector3.Distance (origin.transform.position, destination.transform.position);
-		numOfLane = theNumOfLane;
+		_length = Vector3.Distance (origin.transform.position, destination.transform.position);
+		_numOfLane = theNumOfLane;
 	}
 }

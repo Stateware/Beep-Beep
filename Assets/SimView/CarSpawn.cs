@@ -1,23 +1,34 @@
-﻿using UnityEngine;
+﻿// File Name: CarSpawn.cs
+// Description: 
+// Dependencies:
+// Additional Notes: 
+
+using UnityEngine;
 using System.Collections;
 
 public class CarSpawn : MonoBehaviour {
 	public GameObject CarPrefab;
 
-	// Use this for initialization
+	// Description: 
+    // PRE: 
+    // POST:
 	void Start ()
     {
-
+        // TODO: Implement?
 	}
 	
-	// Update is called once per frame
+	// Description: 
+    // PRE:
+    // POST:
 	void Update ()
     {
-	    
+	    // TODO: Implement?
 	}
 
+    // Description:
+    // PRE:
+    // POST:
 	public void Spawn () {
 		GameObject newCar = Instantiate (CarPrefab);
 	}
-
 }

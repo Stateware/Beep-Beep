@@ -106,7 +106,7 @@ public class Compiler : MonoBehaviour {
 		{
 			Destroy(link.GetComponent<BuildViewLink>());
 			RoadController rc = link.AddComponent<RoadController>();
-			rc.initializeRoad();
+			rc.InitializeRoad();
 			link.name = "Road";
 		}
 

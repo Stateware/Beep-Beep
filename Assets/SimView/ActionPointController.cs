@@ -1,24 +1,35 @@
-﻿using UnityEngine;
+﻿// File Name: ActionPointController.cs
+// Description: 
+// Dependencies:
+// Additional Notes:
+
+using UnityEngine;
 using System.Collections;
 
 public class ActionPointController : MonoBehaviour {
 
-    private Node nodeProperties;
+    private Node _nodeProperties;
 
+    // Description: 
+    // PRE:
+    // POST:
     public void initializeActionPoint()
     {
-        nodeProperties = gameObject.GetComponent<Node>();
+        _nodeProperties = gameObject.GetComponent<Node>();
         SetActionPointProperties();
     }
 
+    // Description:
+    // PRE:
+    // POST:
     private void SetActionPointProperties()
     {
-        if (nodeProperties.IsSink)
+        if (_nodeProperties.IsSink)
             SetSinkComponents();
-        if (nodeProperties.IsSource)
+        if (_nodeProperties.IsSource)
             SetSourceComponents();
 
-        switch (nodeProperties.NodeProperty)
+        switch (_nodeProperties.NodeProperty)
         {
             case Node.NodeType.StopSign:
                 SetStopSignComponents();
@@ -31,6 +42,9 @@ public class ActionPointController : MonoBehaviour {
         }
     }
 
+    // Description:
+    // PRE:
+    // POST:
     private void SetSourceComponents()
     {
         GameObject car = Instantiate(Resources.Load("Prefabs/CarPrefab")) as GameObject;
@@ -39,18 +53,27 @@ public class ActionPointController : MonoBehaviour {
         car.transform.position = gameObject.transform.position;
     }
 
+    // Description:
+    // PRE:
+    // POST: 
     private void SetSinkComponents()
     {
-        //do something
+        // TODO: Implement
     }
 
+    // Description:
+    // PRE:
+    // POST:
     private void SetTrafficLightComponents()
     {
-        //do something
+        // TODO: Implement
     }
 
+    // Description:
+    // PRE:
+    // POST: 
     private void SetStopSignComponents()
     {
-        //do something
+        // TODO: Implement
     }
 }
