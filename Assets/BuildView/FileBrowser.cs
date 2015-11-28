@@ -1,8 +1,8 @@
-﻿//File Name:        FileBrowser.cs
-//Description:      File browser for selecting files or folders at runtime.
-//Dependencies:     GUILayoutx.cs
-//Additional Notes: This code is taken from the Unity Community Wiki and is open source, we have no directly edited anything
-//                      in this code for beep beep.
+﻿// File Name:        FileBrowser.cs
+// Description:      File browser for selecting files or folders at runtime.
+// Dependencies:     GUILayoutx.cs
+// Additional Notes: !!NOTE!! This code is taken from the Unity Community Wiki and is open source, we have not directly edited anything
+//                   in this code for beep beep.
 
 using UnityEngine;
 using System;
@@ -17,9 +17,9 @@ public enum FileBrowserType
 
 public class FileBrowser
 {
-
     // Called when the user clicks cancel or select
     public delegate void FinishedCallback(string path);
+
     // Defaults to working directory
     public string CurrentDirectory
     {
@@ -33,7 +33,9 @@ public class FileBrowser
             SwitchDirectoryNow();
         }
     }
+
     protected string m_currentDirectory;
+
     // Optional pattern for filtering selectable files/folders. See:
     // http://msdn.microsoft.com/en-us/library/wz42302f(v=VS.90).aspx
     // and
@@ -50,6 +52,7 @@ public class FileBrowser
             ReadDirectoryContents();
         }
     }
+
     protected string m_filePattern;
 
     // Optional image for directories
@@ -65,6 +68,7 @@ public class FileBrowser
             BuildContent();
         }
     }
+
     protected Texture2D m_directoryImage;
 
     // Optional image for files
@@ -80,6 +84,7 @@ public class FileBrowser
             BuildContent();
         }
     }
+
     protected Texture2D m_fileImage;
 
     // Browser type. Defaults to File, but can be set to Folder
@@ -132,6 +137,7 @@ public class FileBrowser
     protected GUIStyle m_centredText;
 
     protected string m_name;
+
     protected Rect m_screenRect;
 
     protected Vector2 m_scrollPosition;

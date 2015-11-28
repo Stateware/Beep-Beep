@@ -1,8 +1,12 @@
-﻿using UnityEngine;
+﻿// File Name:        BuildViewSelectionHandler.cs
+// Description:      
+// Dependencies:    
+// Additional Notes: N/A
+
+using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine.Assertions;
 
 public class BuildViewSelectionHandler : MonoBehaviour {
 
@@ -14,15 +18,20 @@ public class BuildViewSelectionHandler : MonoBehaviour {
     public GameObject sourceCheckbox;
     public GameObject sinkCheckbox;
     public GameObject swapButton;
-    private Color originalCheckboxLabelColor;
-    private Color originalDropdownColor;
     public Color valuesNotUniformColor;
-    
+    private Color _originalCheckboxLabelColor;
+    private Color _originalDropdownColor;
 
+    // Description: 
+    // PRE:         
+    // POST:
     public struct ConnectedNodes
     {
         public Node origin, destination;
 
+        // Description: 
+        // PRE:         
+        // POST:
         public ConnectedNodes(Node origin, Node destination)
         {
             this.origin = origin;
@@ -30,14 +39,20 @@ public class BuildViewSelectionHandler : MonoBehaviour {
         }
     }
 
+    // Description: 
+    // PRE:         
+    // POST:
     void Start()
     {
         selectedNodes = new List<Node>();
         connectedNodes = new Hashtable();
-        originalCheckboxLabelColor = sourceCheckbox.GetComponentInChildren<Text>().color;
-        originalDropdownColor = nodePropertyDropdown.GetComponent<Image>().color;
+        _originalCheckboxLabelColor = sourceCheckbox.GetComponentInChildren<Text>().color;
+        _originalDropdownColor = nodePropertyDropdown.GetComponent<Image>().color;
     }
 
+    // Description: 
+    // PRE:         
+    // POST:
     public void DeleteNodeInstances(BuildViewNode existingNode)
     {
         List<ConnectedNodes> nodesToBeDeleted = new List<ConnectedNodes>();
@@ -53,11 +68,14 @@ public class BuildViewSelectionHandler : MonoBehaviour {
         for(int i = nodesToBeDeleted.Count - 1; i >= 0; i--)
         {
             Destroy((GameObject) connectedNodes[nodesToBeDeleted[i]]);
-            updateNumberOfNodeConnections(nodesToBeDeleted[i], false);
+            UpdateNumberOfNodeConnections(nodesToBeDeleted[i], false);
             connectedNodes.Remove(nodesToBeDeleted[i]);
         }
     }
 
+    // Description: 
+    // PRE:         
+    // POST:
     public void RemoveNode(BuildViewNode exisitingNode)
     {
         selectedNodes.Remove(exisitingNode.node);
@@ -66,6 +84,9 @@ public class BuildViewSelectionHandler : MonoBehaviour {
         UpdateLinkInspector();
     }
 
+    // Description: 
+    // PRE:         
+    // POST:
     public void AddNode(BuildViewNode newNode)
     {
         if (!selectedNodes.Contains(newNode.node))
@@ -77,6 +98,9 @@ public class BuildViewSelectionHandler : MonoBehaviour {
         }
     }
 
+    // Description: 
+    // PRE:         
+    // POST:
     public void ClearSelection()
     {
         for (int i = 0; i < selectedNodes.Count; i++)
@@ -87,15 +111,18 @@ public class BuildViewSelectionHandler : MonoBehaviour {
         UpdateNodeInspector();
     }
 
+    // Description: 
+    // PRE:         
+    // POST:
     public void Link()
     {
-        // spawn a new link where the origin is the first index,
+        // Spawn a new link where the origin is the first index,
         // and the secondary node is the second node
         if (selectedNodes.Count >= 2)
         {
             for (int i = 1; i < selectedNodes.Count; i++)
             {
-                //keys for our hash table, connectedNodes
+                // Keys for our hash table, connectedNodes
                 ConnectedNodes nodePair = new ConnectedNodes(selectedNodes[i - 1], selectedNodes[i]);
                 ConnectedNodes reversedPair = new ConnectedNodes(selectedNodes[i], selectedNodes[i - 1]);
                 
@@ -105,12 +132,12 @@ public class BuildViewSelectionHandler : MonoBehaviour {
                     {
                         Destroy((GameObject) connectedNodes[reversedPair]);
                         connectedNodes.Remove(reversedPair);
-                        updateNumberOfNodeConnections(reversedPair, false);
+                        UpdateNumberOfNodeConnections(reversedPair, false);
                     }
 
                     GameObject newLink = CreateLink(nodePair);
                     connectedNodes.Add(nodePair, newLink);
-                    updateNumberOfNodeConnections(nodePair, true);
+                    UpdateNumberOfNodeConnections(nodePair, true);
                 }                
             }
 
@@ -119,13 +146,19 @@ public class BuildViewSelectionHandler : MonoBehaviour {
         UpdateLinkInspector();
     }
 
-    private void updateNumberOfNodeConnections(ConnectedNodes nodePair, bool isAddingOneConnection)
+    // Description: 
+    // PRE:         
+    // POST:
+    private void UpdateNumberOfNodeConnections(ConnectedNodes nodePair, bool isAddingOneConnection)
     {
         int i = isAddingOneConnection ? 1 : 0;
         nodePair.origin.NumberOfConnections += 2 * i - 1;
         nodePair.destination.NumberOfConnections += 2 * i - 1;
     }
 
+    // Description: 
+    // PRE:         
+    // POST:
     private GameObject CreateLink(ConnectedNodes nodePair)
     {
         GameObject newLink = Instantiate(LinkPrefab);
@@ -136,6 +169,9 @@ public class BuildViewSelectionHandler : MonoBehaviour {
         return newLink;
     }
 
+    // Description: 
+    // PRE:         
+    // POST:
     public void SetProperty(int id)
     {
         for (int i = 0; i < selectedNodes.Count; i++)
@@ -159,6 +195,9 @@ public class BuildViewSelectionHandler : MonoBehaviour {
         UpdateNodeInspector();
     }
 
+    // Description: 
+    // PRE:         
+    // POST:
     public void SetSink(bool value)
     {
         for (int i = 0; i < selectedNodes.Count; i++)
@@ -168,6 +207,9 @@ public class BuildViewSelectionHandler : MonoBehaviour {
         UpdateNodeInspector();
     }
 
+    // Description: 
+    // PRE:         
+    // POST:
     public void SetSource(bool value)
     {
         for (int i = 0; i < selectedNodes.Count; i++)
@@ -177,11 +219,17 @@ public class BuildViewSelectionHandler : MonoBehaviour {
         UpdateNodeInspector();
     }
 
+    // Description: 
+    // PRE:         
+    // POST:
     public void Swap()
     {
         Debug.Log("This will swap the direction of the link.");
     }
 
+    // Description: 
+    // PRE:         
+    // POST:
     private void UpdateLinkInspector()
     {
         Debug.Log(connectedNodes.Count);
@@ -191,28 +239,31 @@ public class BuildViewSelectionHandler : MonoBehaviour {
         }*/
     }
 
+    // Description: 
+    // PRE:         
+    // POST:
     private void UpdateNodeInspector()
     {
         if (selectedNodes.Count <= 0)
         {
             nodePropertyDropdown.GetComponent<Dropdown>().interactable = false;
-            nodePropertyDropdown.GetComponent<Image>().color = originalDropdownColor;
+            nodePropertyDropdown.GetComponent<Image>().color = _originalDropdownColor;
             sinkCheckbox.GetComponent<Toggle>().interactable = false;
-            sinkCheckbox.GetComponentInChildren<Text>().color = originalCheckboxLabelColor;
+            sinkCheckbox.GetComponentInChildren<Text>().color = _originalCheckboxLabelColor;
             sourceCheckbox.GetComponent<Toggle>().interactable = false;
-            sourceCheckbox.GetComponentInChildren<Text>().color = originalCheckboxLabelColor;
+            sourceCheckbox.GetComponentInChildren<Text>().color = _originalCheckboxLabelColor;
         }
         else if (selectedNodes.Count == 1)
         {
             nodePropertyDropdown.GetComponent<Dropdown>().interactable = true;
             nodePropertyDropdown.GetComponent<Dropdown>().value = (int) selectedNodes[0].NodeProperty;
-            nodePropertyDropdown.GetComponent<Image>().color = originalDropdownColor;
+            nodePropertyDropdown.GetComponent<Image>().color = _originalDropdownColor;
             sinkCheckbox.GetComponent<Toggle>().interactable = true;
             sinkCheckbox.GetComponent<Toggle>().isOn = selectedNodes[0].IsSink;
-            sinkCheckbox.GetComponentInChildren<Text>().color = originalCheckboxLabelColor;
+            sinkCheckbox.GetComponentInChildren<Text>().color = _originalCheckboxLabelColor;
             sourceCheckbox.GetComponent<Toggle>().interactable = true;
             sourceCheckbox.GetComponent<Toggle>().isOn = selectedNodes[0].IsSource;
-            sourceCheckbox.GetComponentInChildren<Text>().color = originalCheckboxLabelColor;
+            sourceCheckbox.GetComponentInChildren<Text>().color = _originalCheckboxLabelColor;
         }
         else //implied (selectedNodes.Count > 1)
         {

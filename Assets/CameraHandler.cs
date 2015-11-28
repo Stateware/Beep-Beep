@@ -48,7 +48,7 @@ public class CameraHandler : MonoBehaviour
         else
         {
             ImageFileFinder browserScript = canvas.GetComponent<ImageFileFinder>();
-            bgBrowserEnabled = browserScript.getBrowserEnabled();
+            bgBrowserEnabled = browserScript.GetBrowserEnabled();
         }
 
         if ((Input.GetAxis("Mouse ScrollWheel") > 0) && Camera.main.orthographicSize > 2 && !bgBrowserEnabled) // forward, max is min distance is 2

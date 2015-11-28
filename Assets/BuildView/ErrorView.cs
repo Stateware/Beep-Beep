@@ -1,51 +1,50 @@
-﻿//File Name:        ErrorView.cs
-//Description:      Shows the errors that the compiler generates 
-//Dependencies:     None
-//Additional Notes: None
+﻿// File Name:        ErrorView.cs
+// Description:      Shows the errors that the compiler generates 
+// Dependencies:     N/A
+// Additional Notes: N/A
 
 using UnityEngine;
-using System.Collections;
 using System;
 
 public class ErrorView : MonoBehaviour {
 
-    private bool displayGUI = false;
-    private string errorText = "";
-    private int numError = 1;
+    private bool _displayGUI = false;
+    private string _errorText = "";
+    private int _numError = 1;
 
+    // Description: Called by the unity API
+    // PRE:        N/A
+    // POST:       Creates the error text view area
     void OnGUI()
-    //Desription: Called by the unity API
-    //PRE: None
-    //POST: Creates the error text view area
     {
-        if (this.displayGUI)
-            GUI.TextArea(new Rect(10, 550, 500, 100), this.errorText, 200);
+        if (this._displayGUI)
+            GUI.TextArea(new Rect(10, 550, 500, 100), this._errorText, 200);
     }
 
-    public void setErrorText(string newText)
-    //Desription: setter for the area text
-    //PRE: none
-    //POST: error text will be completely re-written
+    // Description: Setter for the area text
+    // PRE:         N/A
+    // POST:        Error text will be completely re-written
+    public void SetErrorText(string newText)
     {
-        this.errorText = newText;
+        this._errorText = newText;
     }
 
-    public void appendErrorText(string addToEndText)
-    //Desription: appends text error to the current error list, so it just shows them in order, top
-    //             being the newest, consider changing to an arraylist later
-    //PRE: -
-    //POST: addToEndText is now at the beginning of the errorText, and a new line is added
+    // Description: Appends text error to the current error list, so it just shows them in order, top
+    //              being the newest, consider changing to an arraylist later
+    // PRE:         N/A
+    // POST:        AddToEndText is now at the beginning of the errorText, and a new line is added
+    public void AppendErrorText(string addToEndText)
     {
-        this.errorText = String.Format("[{0}] {1}\n{2}", this.numError, addToEndText, this.errorText);
-        numError++;
+        this._errorText = String.Format("[{0}] {1}\n{2}", this._numError, addToEndText, this._errorText);
+        _numError++;
 
     }
 
-    public void setDisplayGui(bool display)
-    //Desription: setter to display the GUI (originaly it is invisible, will be set to true if compiler has errors
-    //PRE: -
-    //POST: Error View GUI will be displayed on the scene
+    // Desription:  Setter to display the GUI (originally it is invisible, will be set to true if compiler has errors)
+    // PRE:         N/A
+    // POST:        Error View GUI will be displayed on the scene
+    public void SetDisplayGui(bool display)
     {
-        this.displayGUI = display;
+        this._displayGUI = display;
     }
 }
