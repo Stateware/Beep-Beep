@@ -30,6 +30,8 @@ public class Compiler : MonoBehaviour {
     }
 
     // Description: Initializes Unity dependent variables
+	// Pre: 		N/A
+	// Post: 		Creates errorview to enable displaying errors, ArrayList disconnectedNodes is initialized 
     void Awake()
 	{
 		errorView = gameObject.AddComponent<ErrorView>();

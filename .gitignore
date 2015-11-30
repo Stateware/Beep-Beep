@@ -36,3 +36,5 @@ Thumbs.db
 
 # Keep this file though
 !Builds/Directory_Info.txt
+Assets/NodePrefab.prefab
+ProjectSettings/ProjectSettings.asset
