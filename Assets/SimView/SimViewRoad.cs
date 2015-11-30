@@ -4,6 +4,7 @@
 // Additional Notes: N/A 
 
 using UnityEngine;
+using System.Collections.Generic;
 
 public class SimViewRoad : MonoBehaviour {
 
@@ -13,6 +14,8 @@ public class SimViewRoad : MonoBehaviour {
 
     private float _length = 0.0f;
 	private int _numOfLane;
+	public List<SimViewCar> _roadQueue = new List<SimViewCar>();
+
 	
 	//Description:	Initialize the roadRenderer with component LineRenderer and add the road texture 
 	//				the links retrived from build view

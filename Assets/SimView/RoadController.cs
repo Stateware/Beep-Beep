@@ -9,9 +9,9 @@ public class RoadController : MonoBehaviour {
 
     private Link _linkProperties;
 
-    // Description:
-    // PRE:
-    // POST:
+    // Description: Initialize the links with components of Link
+    // PRE:	The links have their original properties
+    // POST: the links have roads' properties
     public void InitializeRoad()
     {
         _linkProperties = gameObject.GetComponent<Link>();
