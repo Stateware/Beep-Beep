@@ -5,9 +5,9 @@
 
 public class SimViewRoadOne : SimViewRoad {
 
-    // Description: 
-    // PRE: 
-    // POST: 
+    // Description: Inherite SimViewRoad.cs
+	//PRE:			Link with 1 lane doesn't have textures
+	//POST:			Variable roadRenderer obtains the component of LineRenderer and the road obatain textures
     void Start()
     {
         base.Start();
