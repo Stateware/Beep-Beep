@@ -14,7 +14,7 @@ public class SimViewRoad : MonoBehaviour {
 
     private float _length = 0.0f;
 	private int _numOfLane;
-	public List<SimViewCar> _roadQueue = new List<SimViewCar>();
+	public List<SimViewCar> roadQueue = new List<SimViewCar>();
 
 	
 	//Description:	Initialize the roadRenderer with component LineRenderer and add the road texture 
@@ -41,13 +41,7 @@ public class SimViewRoad : MonoBehaviour {
 		roadRenderer.material.mainTextureScale = new Vector2(lineLength * 2, 1);
 	}
 			
-    // Description:
-    // PRE:
-    // POST:
-	public void Update ()
-    {
-	}
-
+	
 	//Description:	Setter for SimViewRoad
 	//PRE:			The properties of origin, destination and roadRenderer are uninitialized
 	//Post:			Initialize origin, destination and roadRenderer with the parameters passed in 

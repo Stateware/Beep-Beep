@@ -12,9 +12,4 @@ public class SimViewRoadFour : SimViewRoad {
     {
 		base.Start();
 	}
-	
-	// Description: 
-    // PRE:
-    // POST:
-	void Update() {}
 }

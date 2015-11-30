@@ -100,9 +100,9 @@ public class BuildViewLink : MonoBehaviour {
 		_angle = Mathf.Rad2Deg * Mathf.Atan (_angle);
 	}
 
-    // Description: 
-    // PRE:         
-    // POST:        
+    // Description: Return the private variable _laneNum
+    // PRE:  private variable is not accessible from outside       
+    // POST:	return _laneNum as integer        
     public int GetLaneNum () {
 		return _laneNum;	
 	}
