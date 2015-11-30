@@ -3,7 +3,7 @@
 //			         with error(s) if isolated nodes or no source nodes are found; compiles with warnings
 //			         if no sink nodes are found.
 // Dependencies:     GameObject- Node
-// Additional Notes: N/A
+// Additional Notes: 
 
 using UnityEngine;
 using System.Collections;
@@ -17,9 +17,8 @@ public class Compiler : MonoBehaviour {
     private Hashtable connectedNodes;
     public static Hashtable adjacencyList;
 
-    // Description: 
-    // PRE:         
-    // POST:
+    // Description: stores the destination node and road
+    // Dependencies: ChangeBuildViewObjectsToSimViewObjects()  
     struct DestinationActionPointAndRoad
     {
         public GameObject destination, road;
@@ -30,9 +29,7 @@ public class Compiler : MonoBehaviour {
         }
     }
 
-    // Description: 
-    // PRE:         
-    // POST:
+    // Description: Initializes Unity dependent variables
     void Awake()
 	{
 		errorView = gameObject.AddComponent<ErrorView>();
@@ -136,10 +133,10 @@ public class Compiler : MonoBehaviour {
 		Application.LoadLevel("SimViewScene");
 	}
 
-	// Description: Main compile function that calls the other functions
-	// PRE:         N/A
-	// POST:        N/A
-	public void Compile()
+    // Description: Main compile function that calls the other functions
+    // PRE:         N/A
+    // POST:        calls compile functions procedurally
+    public void Compile()
 	{
 		GetAllGameObjects();
 		if(IdentifyDisconnectedNodes())
