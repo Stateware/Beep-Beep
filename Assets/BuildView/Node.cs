@@ -21,8 +21,6 @@ public class Node : MonoBehaviour
     private int _numberOfConnections;
 
     // Description: Initializes all the nodes with default values and preserves the gameobject between scenes
-    // PRE:         N/A
-    // POST:        N/A
     void Awake()
     {
         DontDestroyOnLoad(gameObject);
@@ -33,35 +31,27 @@ public class Node : MonoBehaviour
     }
 
     // Description: Number of links connected to the node instance
-    // PRE: 
-    // POST: 
     public int NumberOfConnections
     {
         get { return _numberOfConnections; }
         set { _numberOfConnections = value; }
     }
 
-    // Description: 
-    // PRE: 
-    // POST:
+    // Description: determines if this node is either a traffic light, stop sign, or none
     public NodeType NodeProperty
     {
         get { return _nodeProperty; }
         set { _nodeProperty = value; }
     }
 
-    // Description:
-    // PRE:
-    // POST: 
+    // Description: setter and getter
     public bool IsSource
     {
         get { return _isSource; }
         set { _isSource = value; }
     }
 
-    // Description:
-    // PRE:
-    // POST: 
+    // Description: setter and getter
     public bool IsSink
     {
         get { return _isSink; }

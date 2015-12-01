@@ -12,8 +12,6 @@ public class Link : MonoBehaviour
     private bool _isTwoWay;
 
     // Description: Initializes link and preserves the gameboject between scenes
-    // PRE:         
-    // POST:
     void Awake()
     {
         DontDestroyOnLoad(gameObject);
@@ -21,18 +19,14 @@ public class Link : MonoBehaviour
         this.IsTwoWay = true;
     }
 
-    // Description: 
-    // PRE:         
-    // POST:
+    //Description: Setter and getter for how many lanes this link has
     public int NumberOfLanes
     {
         get { return _numberOfLanes; }
         set { _numberOfLanes = value; }
     }
 
-    // Description: 
-    // PRE:         
-    // POST:
+    //Description: Setter and getter
     public bool IsTwoWay
     {
         get { return _isTwoWay; }
