@@ -1,5 +1,6 @@
-﻿// File Name:        BuildViewSelectionHandler.cs
-// Description:      
+// File Name:        BuildViewSelectionHandler.cs
+// Description:      This files handles the majority of UI interaction in the BuildView, in
+//                   addition to much of the logic that edits the data model.
 // Dependencies:    
 // Additional Notes: N/A
 
@@ -22,16 +23,15 @@ public class BuildViewSelectionHandler : MonoBehaviour {
     private Color _originalCheckboxLabelColor;
     private Color _originalDropdownColor;
 
-    // Description: 
-    // PRE:         
-    // POST:
+    // Description: This is a helper class that holds two nodes. It
+    //              is the base for what the ConnectedNodes hashtable uses.
     public struct ConnectedNodes
     {
         public Node origin, destination;
 
-        // Description: 
-        // PRE:         
-        // POST:
+        // Description: Constructs a ConnectedNode
+        // PRE:         NONE
+        // POST:        A ConnectedNodes object is created.
         public ConnectedNodes(Node origin, Node destination)
         {
             this.origin = origin;
@@ -39,9 +39,10 @@ public class BuildViewSelectionHandler : MonoBehaviour {
         }
     }
 
-    // Description: 
-    // PRE:         
-    // POST:
+    // Description: This is the Unity API function that is called before the first frame is drawn.
+    // PRE:         There is a text component in the sourceCheckbox and an image in the nodePropertyDropdown.
+    //              In addition, both of those should also be set in the inspector in the scene.
+    // POST:        The proper data structures are initialized and the default UI colors are stored.
     void Start()
     {
         selectedNodes = new List<Node>();
@@ -50,9 +51,9 @@ public class BuildViewSelectionHandler : MonoBehaviour {
         _originalDropdownColor = nodePropertyDropdown.GetComponent<Image>().color;
     }
 
-    // Description: 
-    // PRE:         
-    // POST:
+    // Description: Deletes a node and ensures all connected links are also deleted.
+    // PRE:         existingNode is a node that exists in the scene
+    // POST:        the node and it's connected links are removed/deleted
     public void DeleteNodeInstances(BuildViewNode existingNode)
     {
         List<ConnectedNodes> nodesToBeDeleted = new List<ConnectedNodes>();
@@ -73,9 +74,10 @@ public class BuildViewSelectionHandler : MonoBehaviour {
         }
     }
 
-    // Description: 
-    // PRE:         
-    // POST:
+    // Description: Removes a node from the list of selected nodes
+    // PRE:         the node given exists in selectedNodes and has a SpriteRenderer
+    // POST:        the node will no longer exist in selectedNodes and the UI
+    //              will accurately reflect this change
     public void RemoveNode(BuildViewNode exisitingNode)
     {
         selectedNodes.Remove(exisitingNode.node);
@@ -84,9 +86,9 @@ public class BuildViewSelectionHandler : MonoBehaviour {
         UpdateLinkInspector();
     }
 
-    // Description: 
-    // PRE:         
-    // POST:
+    // Description: Adds a node to the list of selected nodes and reflects these updates in the UI
+    // PRE:         The node given exists in the scene and has a SpriteRenderer
+    // POST:        The node is in the list of selected nodes
     public void AddNode(BuildViewNode newNode)
     {
         if (!selectedNodes.Contains(newNode.node))
@@ -98,9 +100,9 @@ public class BuildViewSelectionHandler : MonoBehaviour {
         }
     }
 
-    // Description: 
-    // PRE:         
-    // POST:
+    // Description: Removes all the selected nodes from selection list and reflects these updates in the UI
+    // PRE:         The nodes have a SpriteRenderer
+    // POST:        The list of selected nodes is empty
     public void ClearSelection()
     {
         for (int i = 0; i < selectedNodes.Count; i++)
@@ -111,9 +113,9 @@ public class BuildViewSelectionHandler : MonoBehaviour {
         UpdateNodeInspector();
     }
 
-    // Description: 
-    // PRE:         
-    // POST:
+    // Description: Adds a link between every node in order that they were selected
+    // PRE:         NONE
+    // POST:        There exists a link between every node selected (n-1 links)
     public void Link()
     {
         // Spawn a new link where the origin is the first index,
@@ -146,9 +148,9 @@ public class BuildViewSelectionHandler : MonoBehaviour {
         UpdateLinkInspector();
     }
 
-    // Description: 
-    // PRE:         
-    // POST:
+    // Description: Updates the number of connections in the BuildViewNode's information
+    // PRE:         The given nodepair has an origin and a destination nodes
+    // POST:        The number of connections for these nodes has been updated
     private void UpdateNumberOfNodeConnections(ConnectedNodes nodePair, bool isAddingOneConnection)
     {
         int i = isAddingOneConnection ? 1 : 0;
@@ -156,9 +158,9 @@ public class BuildViewSelectionHandler : MonoBehaviour {
         nodePair.destination.NumberOfConnections += 2 * i - 1;
     }
 
-    // Description: 
-    // PRE:         
-    // POST:
+    // Description: Creates the Link object to be placed between two nodes
+    // PRE:         nodePair contains two nodes
+    // POST:        There exists a link between each of the nodes in nodePair
     private GameObject CreateLink(ConnectedNodes nodePair)
     {
         GameObject newLink = Instantiate(LinkPrefab);
@@ -169,9 +171,9 @@ public class BuildViewSelectionHandler : MonoBehaviour {
         return newLink;
     }
 
-    // Description: 
-    // PRE:         
-    // POST:
+    // Description: Sets the property of every node in the list of selected nodes
+    // PRE:         id is between 0 and 2 inclusive
+    // POST:        All of the selected ndoes have a property that matches the given id
     public void SetProperty(int id)
     {
         for (int i = 0; i < selectedNodes.Count; i++)
@@ -195,9 +197,9 @@ public class BuildViewSelectionHandler : MonoBehaviour {
         UpdateNodeInspector();
     }
 
-    // Description: 
-    // PRE:         
-    // POST:
+    // Description: Sets the value of all of the selected nodes' sink attribute to the given value
+    // PRE:         NONE
+    // POST:        All of the selected nodes have matching Sink values that were given
     public void SetSink(bool value)
     {
         for (int i = 0; i < selectedNodes.Count; i++)
@@ -207,9 +209,9 @@ public class BuildViewSelectionHandler : MonoBehaviour {
         UpdateNodeInspector();
     }
 
-    // Description: 
-    // PRE:         
-    // POST:
+    // Description: Sets the value of all the selected nodes' source attribute to the given value
+    // PRE:         NONE
+    // POST:        All of the selected nodes have matching Source values that were given
     public void SetSource(bool value)
     {
         for (int i = 0; i < selectedNodes.Count; i++)
@@ -219,17 +221,17 @@ public class BuildViewSelectionHandler : MonoBehaviour {
         UpdateNodeInspector();
     }
 
-    // Description: 
-    // PRE:         
-    // POST:
+    // Description: Will swap the direction of the links that exist between the selected nodes
+    // PRE:         NONE
+    // POST:        NONE
     public void Swap()
     {
         Debug.Log("This will swap the direction of the link.");
     }
 
-    // Description: 
-    // PRE:         
-    // POST:
+    // Description: Updates all link related fields in the inspector
+    // PRE:         NONE
+    // POST:        The link related fields in the inspector accurately reflect the data
     private void UpdateLinkInspector()
     {
         Debug.Log(connectedNodes.Count);
@@ -239,9 +241,9 @@ public class BuildViewSelectionHandler : MonoBehaviour {
         }*/
     }
 
-    // Description: 
-    // PRE:         
-    // POST:
+    // Description: Updates all the node related fields in the inspector
+    // PRE:         NONE
+    // POST:        The node related fields in the inspector accurately reflect the data
     private void UpdateNodeInspector()
     {
         if (selectedNodes.Count <= 0)
