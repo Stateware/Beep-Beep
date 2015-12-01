@@ -1,4 +1,4 @@
-// File Name:        BuildViewSelectionHandler.cs
+﻿// File Name:        BuildViewSelectionHandler.cs
 // Description:      This files handles the majority of UI interaction in the BuildView, in
 //                   addition to much of the logic that edits the data model.
 // Dependencies:    
@@ -309,4 +309,25 @@ public class BuildViewSelectionHandler : MonoBehaviour {
 
         }
     }
+
+    public void SetDestination(int destinationId)
+    {
+        if (selectedNodes.Count == 1)
+        {
+            selectedNodes[0]._destinationId = destinationId;
+        }
+        else
+        {
+            Debug.LogError("Destinations can only be set for 1 node at a time. Currently selected: " + selectedNodes.Count);
+        }
+    }
+
+    public void SetRate(int carsPerMinute)
+    {
+        for (int i = 0; i < selectedNodes.Count; i++)
+        {
+            selectedNodes[i]._carsPerMinute = carsPerMinute;
+        }
+    }
+
 }

@@ -16,6 +16,8 @@ public class Node : MonoBehaviour
     private NodeType _nodeProperty;
     private bool _isSource;
     private bool _isSink;
+    public int _destinationId;
+    public int _carsPerMinute;
     private bool _isConnected;
     private string _name;
     private int _numberOfConnections;
