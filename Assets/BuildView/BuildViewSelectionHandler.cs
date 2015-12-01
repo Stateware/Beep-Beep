@@ -310,11 +310,23 @@ public class BuildViewSelectionHandler : MonoBehaviour {
         }
     }
 
-    public void SetDestination(int destinationId)
+    public void SetDestination(string destinationId)
     {
+        if (destinationId.Equals(""))
+        {
+            return; // do nothing
+        }
         if (selectedNodes.Count == 1)
         {
-            selectedNodes[0]._destinationId = destinationId;
+            int destinationInt = 0;
+            if (int.TryParse(destinationId, out destinationInt))
+            {
+                selectedNodes[0]._destinationId = destinationInt;
+            }
+            else
+            {
+                Debug.LogError("The given string can not parse to an int.");
+            }
         }
         else
         {
@@ -322,11 +334,21 @@ public class BuildViewSelectionHandler : MonoBehaviour {
         }
     }
 
-    public void SetRate(int carsPerMinute)
+    public void SetRate(string carsPerMinute)
     {
+        if (carsPerMinute.Equals(""))
+        {
+            return; // do nothing
+        }
+        int carsPerMinuteInt = 0;
+        if (!int.TryParse(carsPerMinute, out carsPerMinuteInt))
+        {
+            Debug.LogError("The given string can not parse to an int.");
+            return; // do nothing
+        }
         for (int i = 0; i < selectedNodes.Count; i++)
         {
-            selectedNodes[i]._carsPerMinute = carsPerMinute;
+            selectedNodes[i]._carsPerMinute = carsPerMinuteInt;
         }
     }
 
