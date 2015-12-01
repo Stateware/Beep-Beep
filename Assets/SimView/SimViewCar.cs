@@ -71,7 +71,21 @@ public class SimViewCar : MonoBehaviour {
 		float travelDistance = Vector3.Distance (transform.position, _origin);
 		float roadLength = Vector3.Distance (_origin, _destination);
 		float temp = _deac * _reactionTime;
-		float speedB = temp + Mathf.Sqrt (temp * temp - _deac * (2 * (roadLength - travelDistance - 0.02f) - _speed * _reactionTime));
+		float prevLength;
+		if (_currRoadIndex < roads.Length && roads [_currRoadIndex].roadQueue.Count != 0) {
+			int prevIndex = -1;
+			for (int i = 0; i < roads[_currRoadIndex].roadQueue.Count; i++) {
+				if (roads[_currRoadIndex].roadQueue[i] == this)
+					prevIndex = i - 1;
+			}
+			if (prevIndex == -1)
+				prevLength = roadLength;
+			else
+				prevLength = Vector3.Distance(roads[_currRoadIndex].roadQueue[prevIndex].transform.position, _origin);
+		}
+			prevLength = roadLength;
+
+		float speedB = temp + Mathf.Sqrt (temp * temp - _deac * (2 * (prevLength - travelDistance - 0.02f) - _speed * _reactionTime));
 		
 		return Mathf.Min (speedA, speedB);
 	}
