@@ -1,5 +1,5 @@
 ﻿// File Name: 	     SimViewRoad.cs
-// Description:	     This is a class of the road, that SpawnStreet uses to build streets 
+// Description:	     This is a class of the road, that RoadController uses to build streets 
 // Dependencies:     Compiler.cs, BuildViewLink.cs
 // Additional Notes: N/A 
 

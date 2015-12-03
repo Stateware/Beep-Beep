@@ -1,0 +1,8 @@
+Anyway, here is the documentation for the route choice model.
+
+Let i be an index for each route that is available between an OD pair.
+Let c_i be the cost or impedance of traveling on that route (for now, I recommend using travel distance)
+ 
+The probability of taking route i =   where   is a positive scale parameter that the user should be able to select / modify.
+ 
+Using these probabilities, each vehicle should randomly select one of the paths. The higher the probability, the more likely that path should be selected.
