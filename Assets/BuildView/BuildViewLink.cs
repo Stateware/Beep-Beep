@@ -38,8 +38,10 @@ public class BuildViewLink : MonoBehaviour {
 	// Description:  Update BuildViewLink's collider's angle, and change its texture accordingly. Update is called once per frame
 	// PRE:          BuildViewLink successfully initialzed and has origin and destination set
 	// POST:         BuildViewLink's collider's angle and texture updated
+
 	void Update () {
 		// Store origin and destination position
+
 		Vector3 originPos = origin.transform.position;
 		Vector3 destinationPos = destination.transform.position;
 		
@@ -61,7 +63,7 @@ public class BuildViewLink : MonoBehaviour {
 
 		// Set the size of lineCollider to the lineRenderer size
 		float lineLength = Vector3.Distance (originPos, destinationPos);
-		_lineCollider.size = new Vector3 (lineLength, _lineRendererWidth, 0);
+		_lineCollider.size = new Vector3 (lineLength, _lineRendererWidth, 2);
 		_lineCollider.transform.position = (originPos + destinationPos) / 2;
 
 		// Update angle of the collider for BuildViewLink
@@ -73,6 +75,7 @@ public class BuildViewLink : MonoBehaviour {
 		// Tile the texture according to current length
 		_lineRenderer.material.mainTextureScale = new Vector2(lineLength / 2, 1);
 	}
+
 
 	// Description: Move BuildViewLink, origin, and destination responsively
 	// PRE:         Origin and destination has been assigned
