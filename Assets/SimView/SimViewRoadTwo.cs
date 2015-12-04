@@ -5,16 +5,17 @@
 
 public class SimViewRoadTwo : SimViewRoad {
 
+	public BuildViewNode _origin;
+	public BuildViewNode _destination;
+	private int _numOfLane;
+	
 	// Description: Inherite SimViewRoad.cs
 	//PRE:			Link with 2 lanes doesn't have textures
 	//POST:			Variable roadRenderer obtains the component of LineRenderer and the road obatain textures
-    void Start()
+    public void Start()
     {
         base.Start();
+		base.SetProperties (_origin, _destination, _numOfLane);
     }
 
-    // Description: 
-    // PRE:
-    // POST:
-    void Update() { }
 }

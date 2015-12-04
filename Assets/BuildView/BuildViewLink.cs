@@ -63,7 +63,7 @@ public class BuildViewLink : MonoBehaviour {
 
 		// Set the size of lineCollider to the lineRenderer size
 		float lineLength = Vector3.Distance (originPos, destinationPos);
-		_lineCollider.size = new Vector3 (lineLength, _lineRendererWidth, 2);
+		_lineCollider.size = new Vector3 (lineLength, _lineRendererWidth, 1);
 		_lineCollider.transform.position = (originPos + destinationPos) / 2;
 
 		// Update angle of the collider for BuildViewLink
