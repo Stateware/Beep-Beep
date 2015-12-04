@@ -4,12 +4,17 @@
 // Additional Notes: N/A
 
 public class SimViewRoadFour : SimViewRoad {
+
+	public BuildViewNode _origin;
+	public BuildViewNode _destination;
+	private int _numOfLane;
     
 	//Description: Inherite SimViewRoad.cs
 	//PRE:			Link with 4 lanes doesn't have textures
 	//POST:			Variable roadRenderer obtains the component of LineRenderer and the road obatain textures 
-	void Start()
+	public void Start()
     {
 		base.Start();
+		base.SetProperties (_origin, _destination, _numOfLane);
 	}
 }
