@@ -17,6 +17,7 @@ public class SimViewCar : MonoBehaviour {
 	private float _reactionTime = 0.005f;
 	private float _acce = 0.5f;
 	private float _deac = -0.5f;
+	private int _wait = 0;
 	
 	private Vector3 _origin;
 	private Vector3 _destination;
@@ -43,6 +44,7 @@ public class SimViewCar : MonoBehaviour {
 	void Update ()
     {
 		if (Vector3.Distance(transform.position, _destination) < 0.1f && _currRoadIndex <= roads.Length) {
+			_wait = 0;
 			roads[_currRoadIndex].roadQueue.RemoveAt(0);
 			_currRoadIndex++;
 			if (_currRoadIndex < roads.Length) {
@@ -58,6 +60,11 @@ public class SimViewCar : MonoBehaviour {
 				Destroy (gameObject);
 		}
 		_speed = GetSpeed ();
+
+		if (Vector3.Distance (transform.position, _destination) > 0.5f && Vector3.Distance (transform.position, _destination) < 0.8f && _wait < 100) {
+			_wait++;
+			_speed = 0.0f;
+		}
 		
 		transform.position = Vector3.MoveTowards (transform.position, _destination, _speed * Time.deltaTime);
 	}
@@ -71,7 +78,7 @@ public class SimViewCar : MonoBehaviour {
 		float travelDistance = Vector3.Distance (transform.position, _origin);
 		float roadLength = Vector3.Distance (_origin, _destination);
 		float temp = _deac * _reactionTime;
-		float prevLength;
+		float prevLength = roadLength;
 		if (_currRoadIndex < roads.Length && roads [_currRoadIndex].roadQueue.Count != 0) {
 			int prevIndex = -1;
 			for (int i = 0; i < roads[_currRoadIndex].roadQueue.Count; i++) {
@@ -83,7 +90,6 @@ public class SimViewCar : MonoBehaviour {
 			else
 				prevLength = Vector3.Distance(roads[_currRoadIndex].roadQueue[prevIndex].transform.position, _origin);
 		}
-			prevLength = roadLength;
 
 		float speedB = temp + Mathf.Sqrt (temp * temp - _deac * (2 * (prevLength - travelDistance - 0.02f) - _speed * _reactionTime));
 		
