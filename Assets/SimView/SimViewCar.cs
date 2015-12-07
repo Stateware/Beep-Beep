@@ -29,6 +29,7 @@ public class SimViewCar : MonoBehaviour {
 	// POST: Car's initial position has been set and added to roadQueue
 	void Start ()
     {
+		GetComponent<SpriteRenderer>().color = new Color(Random.Range(0.5f, 1.0f), Random.Range(0.5f, 1.0f), Random.Range(0.5f, 1.0f));
 		_origin = roads[_currRoadIndex].origin.transform.position + new Vector3(0, 0, -2);
 		transform.position = _origin;
 		_destination = roads[_currRoadIndex].destination.transform.position + new Vector3(0, 0, -2);
@@ -54,14 +55,13 @@ public class SimViewCar : MonoBehaviour {
 				_destination = roads[_currRoadIndex].destination.transform.position + new Vector3(0, 0, -2);
 				_angle = GetAngle ();
 				transform.eulerAngles = new Vector3 (0, 0, _angle);
-				_speed = 0.0f;
 			}
 			else if (_currRoadIndex == roads.Length)
 				Destroy (gameObject);
 		}
 		_speed = GetSpeed ();
 
-		if (Vector3.Distance (transform.position, _destination) > 0.5f && Vector3.Distance (transform.position, _destination) < 0.8f && _wait < 100) {
+		if (Vector3.Distance (transform.position, _destination) > 0.5f && Vector3.Distance (transform.position, _destination) < 0.7f && _wait < 50) {
 			_wait++;
 			_speed = 0.0f;
 		}
@@ -73,7 +73,9 @@ public class SimViewCar : MonoBehaviour {
     // PRE: Car is in current roadQueue
     // POST: Updated speed is calculated
 	public float GetSpeed() {
-		float speedA = _speed + 2.5f * _acce * _reactionTime * (1 - _speed / _maxSpeed) * Mathf.Sqrt (0.025f + _speed / _maxSpeed);
+		float speedA = 0.0f, speedB = 0.0f;
+
+		speedA = _speed + 2.5f * _acce * _reactionTime * (1 - _speed / _maxSpeed) * Mathf.Sqrt (0.025f + _speed / _maxSpeed);
 		
 		float travelDistance = Vector3.Distance (transform.position, _origin);
 		float roadLength = Vector3.Distance (_origin, _destination);
@@ -85,13 +87,15 @@ public class SimViewCar : MonoBehaviour {
 				if (roads[_currRoadIndex].roadQueue[i] == this)
 					prevIndex = i - 1;
 			}
-			if (prevIndex == -1)
+			if (prevIndex == -1) {
 				prevLength = roadLength;
-			else
+				speedB = temp + Mathf.Sqrt (temp * temp - _deac * (2 * (prevLength - travelDistance - 0.02f) - _speed * _reactionTime));
+			}
+			else {
 				prevLength = Vector3.Distance(roads[_currRoadIndex].roadQueue[prevIndex].transform.position, _origin);
+				speedB = temp + Mathf.Sqrt (temp * temp - _deac * (2 * (prevLength - travelDistance - 0.4f) - _speed * _reactionTime));
+			}
 		}
-
-		float speedB = temp + Mathf.Sqrt (temp * temp - _deac * (2 * (prevLength - travelDistance - 0.02f) - _speed * _reactionTime));
 		
 		return Mathf.Min (speedA, speedB);
 	}

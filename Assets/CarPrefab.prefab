@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 184726}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -6.96999979, y: -2.5999999, z: 0}
-  m_LocalScale: {x: .600000024, y: .400000006, z: .400000006}
+  m_LocalScale: {x: .400000006, y: .300000012, z: .400000006}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -41,7 +41,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roads: []
-  speed: 1
 --- !u!212 &21269488
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -60,7 +59,9 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_MinimumChartSize: 4
   m_AutoUVMaxDistance: .5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
@@ -94,11 +95,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_LocalScale.x
-      value: .200000003
+      value: .400000006
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_LocalScale.y
-      value: .100000001
+      value: .300000012
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_LocalScale.z
