@@ -236,6 +236,11 @@ Prefab:
       propertyPath: m_Name
       value: N6
       objectReference: {fileID: 0}
+    - target: {fileID: 21252644, guid: 6d266921e2506bb4cbe590a72e58291b, type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: f38f276a83feff447b6c3aa6f7321a4d,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6d266921e2506bb4cbe590a72e58291b, type: 2}
   m_IsPrefabParent: 0
@@ -288,6 +293,11 @@ Prefab:
       propertyPath: m_Name
       value: N8
       objectReference: {fileID: 0}
+    - target: {fileID: 21252644, guid: 6d266921e2506bb4cbe590a72e58291b, type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: f38f276a83feff447b6c3aa6f7321a4d,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6d266921e2506bb4cbe590a72e58291b, type: 2}
   m_IsPrefabParent: 0
@@ -385,9 +395,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_MinimumChartSize: 4
   m_AutoUVMaxDistance: .5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
@@ -772,6 +780,11 @@ Prefab:
       propertyPath: m_Name
       value: N3
       objectReference: {fileID: 0}
+    - target: {fileID: 21252644, guid: 6d266921e2506bb4cbe590a72e58291b, type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: f38f276a83feff447b6c3aa6f7321a4d,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6d266921e2506bb4cbe590a72e58291b, type: 2}
   m_IsPrefabParent: 0
@@ -1072,6 +1085,11 @@ Prefab:
       propertyPath: m_Name
       value: N7
       objectReference: {fileID: 0}
+    - target: {fileID: 21252644, guid: 6d266921e2506bb4cbe590a72e58291b, type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: f38f276a83feff447b6c3aa6f7321a4d,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6d266921e2506bb4cbe590a72e58291b, type: 2}
   m_IsPrefabParent: 0
@@ -1136,6 +1154,11 @@ Prefab:
       propertyPath: m_Name
       value: N9
       objectReference: {fileID: 0}
+    - target: {fileID: 21252644, guid: 6d266921e2506bb4cbe590a72e58291b, type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: f38f276a83feff447b6c3aa6f7321a4d,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6d266921e2506bb4cbe590a72e58291b, type: 2}
   m_IsPrefabParent: 0
@@ -1370,6 +1393,15 @@ Prefab:
       propertyPath: m_Name
       value: N1
       objectReference: {fileID: 0}
+    - target: {fileID: 21252644, guid: 6d266921e2506bb4cbe590a72e58291b, type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
+    - target: {fileID: 21252644, guid: 6d266921e2506bb4cbe590a72e58291b, type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: f38f276a83feff447b6c3aa6f7321a4d,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6d266921e2506bb4cbe590a72e58291b, type: 2}
   m_IsPrefabParent: 0
@@ -1434,6 +1466,11 @@ Prefab:
       propertyPath: m_Name
       value: N2
       objectReference: {fileID: 0}
+    - target: {fileID: 21252644, guid: 6d266921e2506bb4cbe590a72e58291b, type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: f38f276a83feff447b6c3aa6f7321a4d,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6d266921e2506bb4cbe590a72e58291b, type: 2}
   m_IsPrefabParent: 0
@@ -1486,6 +1523,11 @@ Prefab:
       propertyPath: m_Name
       value: N4
       objectReference: {fileID: 0}
+    - target: {fileID: 21252644, guid: 6d266921e2506bb4cbe590a72e58291b, type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: f38f276a83feff447b6c3aa6f7321a4d,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6d266921e2506bb4cbe590a72e58291b, type: 2}
   m_IsPrefabParent: 0
@@ -1808,6 +1850,11 @@ Prefab:
       propertyPath: m_Name
       value: N5
       objectReference: {fileID: 0}
+    - target: {fileID: 21252644, guid: 6d266921e2506bb4cbe590a72e58291b, type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: f38f276a83feff447b6c3aa6f7321a4d,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6d266921e2506bb4cbe590a72e58291b, type: 2}
   m_IsPrefabParent: 0

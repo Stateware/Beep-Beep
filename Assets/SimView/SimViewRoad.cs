@@ -44,7 +44,8 @@ public class SimViewRoad : MonoBehaviour
 	// Description:	Setter for the RoadRender, being called by start
 	// PRE:			N/A
 	// POST:		Set the roadRender
-	public LineRenderer SetRoadRender(Vector3 oriPos, Vector3 desPos) {
+	public LineRenderer SetRoadRender(Vector3 oriPos, Vector3 desPos) 
+	{
 		LineRenderer roadRenderer = GetComponent<LineRenderer> ();
 		// Draw links with the new roadRenderer
 		roadRenderer.SetWidth (0.75f, 0.75f);
