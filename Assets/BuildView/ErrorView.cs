@@ -19,7 +19,9 @@ public class ErrorView : MonoBehaviour
     void OnGUI()
     {
         if (this._displayGUI)
+        {
             GUI.TextArea(new Rect(10, 550, 500, 100), this._errorText, 200);
+        }
     }
 
     // Description: Setter for the area text

@@ -80,7 +80,6 @@ public class BuildViewLink : MonoBehaviour
 		_lineRenderer.material.mainTextureScale = new Vector2(lineLength / 2, 1);
 	}
 
-
 	// Description: Move BuildViewLink, origin, and destination responsively
 	// PRE:         Origin and destination has been assigned
 	// POST:        BuildViewLink, origin, and destination's positions were changed
@@ -101,10 +100,12 @@ public class BuildViewLink : MonoBehaviour
 	void SetAngle(Vector3 originPos, Vector3 destinationPos)
     {
 		_angle = Mathf.Abs (originPos.y - destinationPos.y) / Mathf.Abs (originPos.x - destinationPos.x);
-		
-		// If the angle is in second or fourth quadrant
-		if ((originPos.y - destinationPos.y) * (originPos.x - destinationPos.x) < 0)
-			_angle *= -1;
+
+        // If the angle is in second or fourth quadrant
+        if ((originPos.y - destinationPos.y) * (originPos.x - destinationPos.x) < 0)
+        {
+            _angle *= -1;
+        }
 		
 		_angle = Mathf.Rad2Deg * Mathf.Atan (_angle);
 	}

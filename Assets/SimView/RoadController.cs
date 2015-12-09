@@ -25,13 +25,20 @@ public class RoadController : MonoBehaviour
     private void SetRoadProperties()
     {
 		int numOfLanes = _linkProperties.NumberOfLanes;
-		if (numOfLanes == 1) {
+		if (numOfLanes == 1)
+        {
 			gameObject.AddComponent<SimViewRoadOne> ();
-		} else if (numOfLanes == 2) {
+		}
+        else if (numOfLanes == 2)
+        {
 			gameObject.AddComponent<SimViewRoadTwo> ();	
-		} else if (numOfLanes == 3) {
+		}
+        else if (numOfLanes == 3)
+        {
 			gameObject.AddComponent<SimViewRoadThree> ();	
-		} else if (numOfLanes == 4) {
+		}
+        else if (numOfLanes == 4)
+        {
 			gameObject.AddComponent<SimViewRoadFour> ();	
 		}
     }

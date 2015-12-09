@@ -64,8 +64,10 @@ public class BuildViewSelectionHandler : MonoBehaviour
               
         foreach(ConnectedNodes cn in connectedNodes.Keys)
         {
-            if(cn.origin == node || cn.destination == node)
+            if (cn.origin == node || cn.destination == node)
+            {
                 nodesToBeDeleted.Add(cn);
+            }
         }
 
         for(int i = nodesToBeDeleted.Count - 1; i >= 0; i--)

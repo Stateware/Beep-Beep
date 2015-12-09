@@ -38,17 +38,13 @@ public class Node : MonoBehaviour
     }
 
     // Description: Number of links connected to the node instance
-    // PRE:
-    // POST:
     public int NumberOfConnections
     {
         get { return _numberOfConnections; }
         set { _numberOfConnections = value; }
     }
 
-    // Description: Determines if this node is either a traffic light, stop sign, or none
-    // PRE: 
-    // POST: 
+    // Description: Determines if this node is either a traffic light, stop sign, or none 
     public NodeType NodeProperty
     {
         get { return _nodeProperty; }
@@ -56,8 +52,6 @@ public class Node : MonoBehaviour
     }
 
     // Description: Setter and getter
-    // PRE: 
-    // POST:
     public bool IsSource
     {
         get { return _isSource; }
@@ -65,8 +59,6 @@ public class Node : MonoBehaviour
     }
 
     // Description: Setter and getter
-    // PRE:
-    // POST:
     public bool IsSink
     {
         get { return _isSink; }

@@ -52,17 +52,19 @@ public class SimViewCar : MonoBehaviour
 			roads[_currRoadIndex].roadQueue.RemoveAt(0);
 			_currRoadIndex++;
 
-			if (_currRoadIndex < roads.Length)
-			{
-				roads[_currRoadIndex].roadQueue.Add (this);
-				_origin = roads[_currRoadIndex].origin.transform.position + new Vector3(0, 0, -2);
-				transform.position = _origin;
-				_destination = roads[_currRoadIndex].destination.transform.position + new Vector3(0, 0, -2);
-				_angle = GetAngle ();
-				transform.eulerAngles = new Vector3 (0, 0, _angle);
-			}
-			else if (_currRoadIndex == roads.Length)
-				Destroy (gameObject);
+            if (_currRoadIndex < roads.Length)
+            {
+                roads[_currRoadIndex].roadQueue.Add(this);
+                _origin = roads[_currRoadIndex].origin.transform.position + new Vector3(0, 0, -2);
+                transform.position = _origin;
+                _destination = roads[_currRoadIndex].destination.transform.position + new Vector3(0, 0, -2);
+                _angle = GetAngle();
+                transform.eulerAngles = new Vector3(0, 0, _angle);
+            }
+            else if (_currRoadIndex == roads.Length)
+            {
+                Destroy(gameObject);
+            }
 		}
 
 		_speed = GetSpeed ();
@@ -95,8 +97,10 @@ public class SimViewCar : MonoBehaviour
 			int prevIndex = -1;
 			for (int i = 0; i < roads[_currRoadIndex].roadQueue.Count; i++)
 			{
-				if (roads[_currRoadIndex].roadQueue[i] == this)
-					prevIndex = i - 1;
+                if (roads[_currRoadIndex].roadQueue[i] == this)
+                {
+                    prevIndex = i - 1;
+                }
 			}
 			if (prevIndex == -1)
 			{
@@ -121,11 +125,15 @@ public class SimViewCar : MonoBehaviour
 		float temp;
 
 		temp = Mathf.Abs (transform.position.y - _destination.y) / Mathf.Abs (transform.position.x - _destination.x);
-		if ((transform.position.y - _destination.y) * (transform.position.x - _destination.x) < 0)
-			temp *= -1;
+        if ((transform.position.y - _destination.y) * (transform.position.x - _destination.x) < 0)
+        {
+            temp *= -1;
+        }
 		temp = Mathf.Rad2Deg * Mathf.Atan (temp);
-		if (transform.position.x - _destination.x > 0)
-			temp += 180;
+        if (transform.position.x - _destination.x > 0)
+        {
+            temp += 180;
+        }
 
 		return temp;
 	}

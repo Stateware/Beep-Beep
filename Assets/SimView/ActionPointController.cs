@@ -26,9 +26,13 @@ public class ActionPointController : MonoBehaviour
     private void SetActionPointProperties()
     {
         if (_nodeProperties.IsSink)
+        {
             SetSinkComponents();
+        }
         if (_nodeProperties.IsSource)
+        {
             SetSourceComponents();
+        }
 
         switch (_nodeProperties.NodeProperty)
         {

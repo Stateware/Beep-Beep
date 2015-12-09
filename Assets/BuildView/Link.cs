@@ -22,8 +22,6 @@ public class Link : MonoBehaviour
     }
 
     // Description: Setter and getter for how many lanes this link has
-    // PRE: 
-    // POST:
     public int NumberOfLanes
     {
         get { return _numberOfLanes; }
@@ -31,8 +29,6 @@ public class Link : MonoBehaviour
     }
 
     // Description: Setter and getter
-    // PRE:
-    // POST:
     public bool IsTwoWay
     {
         get { return _isTwoWay; }
