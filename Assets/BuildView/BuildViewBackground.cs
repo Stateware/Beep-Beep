@@ -1,4 +1,5 @@
-﻿// File Name:       BuildViewBackground.cs
+﻿// Copyright (c) 2015 Stateware Team -- Licensed GPL v3
+// File Name:       BuildViewBackground.cs
 // Description:     This script controls the interaction between the user and the background. This ensures that the
 //                  background persists with the camera zoom changes, and movement, and calls the appropriate function
 //                  when clicked.
@@ -8,8 +9,8 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class BuildViewBackground : MonoBehaviour {
-
+public class BuildViewBackground : MonoBehaviour
+{
     // Description: Unity3D API function that is called when a mouse is released over this object.
     // PRE:         The main camera has a BuildViewSelectionHandler component attached.
     // POST:        The selection of nodes is cleared.

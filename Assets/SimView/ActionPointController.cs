@@ -1,4 +1,5 @@
-﻿// File Name: ActionPointController.cs
+﻿// Copyright(c) 2015 Stateware Team -- Licensed GPL v3
+// File Name: ActionPointController.cs
 // Description: 
 // Dependencies:
 // Additional Notes:
@@ -6,14 +7,14 @@
 using UnityEngine;
 using System.Collections;
 
-public class ActionPointController : MonoBehaviour {
-
+public class ActionPointController : MonoBehaviour
+{
     private Node _nodeProperties;
 
     // Description: 
     // PRE:
     // POST:
-    public void initializeActionPoint()
+    public void InitializeActionPoint()
     {
         _nodeProperties = gameObject.GetComponent<Node>();
         SetActionPointProperties();

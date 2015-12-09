@@ -1,13 +1,13 @@
-﻿//	File:            BuildViewLink.cs
-//	Description:     This is the source code for BuildViewLink in BuildView
-//
+﻿// Copyright(c) 2015 Stateware Team -- Licensed GPL v3
+// File:             BuildViewLink.cs
+// Description:      This is the source code for BuildViewLink in BuildView
 // Dependencies:     N/A
 // Additional Notes: N/A
 
 using UnityEngine;
 
-public class BuildViewLink : MonoBehaviour {
-
+public class BuildViewLink : MonoBehaviour
+{
 	// Link properties
 	private bool _isLeftDirected = true;
 	private bool _isRightDirected = false;
@@ -29,7 +29,8 @@ public class BuildViewLink : MonoBehaviour {
 	// Description:  Initialize BuildViewLink
 	// PRE:          N/A
 	// POST:         Collider and LineRenderer set to BuildViewLink
-	void Start () {
+	void Start ()
+    {
 		_lineRenderer = GetComponent<LineRenderer> ();
 		_lineCollider = gameObject.AddComponent<BoxCollider> ();
         link = gameObject.AddComponent<Link>();
@@ -38,8 +39,8 @@ public class BuildViewLink : MonoBehaviour {
 	// Description:  Update BuildViewLink's collider's angle, and change its texture accordingly. Update is called once per frame
 	// PRE:          BuildViewLink successfully initialzed and has origin and destination set
 	// POST:         BuildViewLink's collider's angle and texture updated
-
-	void Update () {
+	void Update ()
+    {
 		// Store origin and destination position
 
 		Vector3 originPos = origin.transform.position;
@@ -48,15 +49,18 @@ public class BuildViewLink : MonoBehaviour {
 		// Draw links
 		_lineRenderer.SetWidth (_lineRendererWidth, _lineRendererWidth);
 
-		if (_isUndirected) {
+		if (_isUndirected)
+        {
 			_lineRenderer.SetPosition (0, originPos);
 			_lineRenderer.SetPosition (1, destinationPos);
 		}
-		else if (_isLeftDirected) {
+		else if (_isLeftDirected)
+        {
 			_lineRenderer.SetPosition (0, originPos);
 			_lineRenderer.SetPosition (1, destinationPos);
 		}
-		else if (_isRightDirected) {
+		else if (_isRightDirected)
+        {
 			_lineRenderer.SetPosition (0, destinationPos);
 			_lineRenderer.SetPosition (1, originPos);
 		}
@@ -80,7 +84,8 @@ public class BuildViewLink : MonoBehaviour {
 	// Description: Move BuildViewLink, origin, and destination responsively
 	// PRE:         Origin and destination has been assigned
 	// POST:        BuildViewLink, origin, and destination's positions were changed
-	void OnMouseDrag () {
+	void OnMouseDrag ()
+    {
 		Vector2 mousePosition = new Vector2 (Input.mousePosition.x, Input.mousePosition.y);
 		Vector2 objPosition = Camera.main.ScreenToWorldPoint (mousePosition);
 
@@ -93,7 +98,8 @@ public class BuildViewLink : MonoBehaviour {
 	// Description: Set collider's angle to current one
 	// PRE:         Angle is created
 	// POST:        BuildViewLink's collider's angle updated
-	void SetAngle(Vector3 originPos, Vector3 destinationPos) {
+	void SetAngle(Vector3 originPos, Vector3 destinationPos)
+    {
 		_angle = Mathf.Abs (originPos.y - destinationPos.y) / Mathf.Abs (originPos.x - destinationPos.x);
 		
 		// If the angle is in second or fourth quadrant
@@ -104,9 +110,10 @@ public class BuildViewLink : MonoBehaviour {
 	}
 
     // Description: Return the private variable _laneNum
-    // PRE:  private variable is not accessible from outside       
-    // POST:	return _laneNum as integer        
-    public int GetLaneNum () {
+    // PRE:         Private variable is not accessible from outside       
+    // POST:	    Return _laneNum as integer        
+    public int GetLaneNum ()
+    {
 		return _laneNum;	
 	}
 }

@@ -1,4 +1,5 @@
-﻿// File Name:        ErrorView.cs
+﻿// Copyright (c) 2015 Stateware Team -- Licensed GPL v3
+// File Name:        ErrorView.cs
 // Description:      Shows the errors that the compiler generates 
 // Dependencies:     N/A
 // Additional Notes: N/A
@@ -6,15 +7,15 @@
 using UnityEngine;
 using System;
 
-public class ErrorView : MonoBehaviour {
-
+public class ErrorView : MonoBehaviour
+{
     private bool _displayGUI = false;
     private string _errorText = "";
     private int _numError = 1;
 
     // Description: Called by the unity API
-    // PRE:        N/A
-    // POST:       Creates the error text view area
+    // PRE:         N/A
+    // POST:        Creates the error text view area
     void OnGUI()
     {
         if (this._displayGUI)

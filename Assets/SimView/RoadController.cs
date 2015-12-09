@@ -1,17 +1,18 @@
-﻿// File Name: 	     RoadController.cs
+﻿// Copyright(c) 2015 Stateware Team -- Licensed GPL v3
+// File Name: 	     RoadController.cs
 // Description:	     This file should switch the components from links to roads depending on the number of lanes
 // Dependencies:	 BuildViewLink.cs Link.cs
 // Additional Notes: We only take care of the numOfLanes here, directional is for future
 
 using UnityEngine;
 
-public class RoadController : MonoBehaviour {
-
+public class RoadController : MonoBehaviour
+{
     private Link _linkProperties;
 
     // Description: Initialize the links with components of Link
-    // PRE:	The links have their original properties
-    // POST: the links have roads' properties
+    // PRE:	        The links have their original properties
+    // POST:        The links have roads' properties
     public void InitializeRoad()
     {
         _linkProperties = gameObject.GetComponent<Link>();

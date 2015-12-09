@@ -1,3 +1,4 @@
+// Copyright(c) 2015 Stateware Team -- Licensed GPL v3
 // File Name:        CameraHandler.cs
 // Description:      Script that is attached to the camera that controlls the camera movement. Currently 
 //                   there is middle mouse to drag the camera around and scroll wheel to move in and out.

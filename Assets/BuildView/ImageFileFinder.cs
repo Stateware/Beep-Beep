@@ -1,7 +1,8 @@
 ﻿// File Name:        ImageFileFinder.cs
 // Description:      Provides the buttons on the scene that invoke the file browser. 
 // Dependencies:     FilerBrowser.cs, GUILayoutx.cs
-// Additional Notes: Currently these use depricated UI functions
+// Additional Notes: // Additional Notes: !!NOTE!! This code is taken from the Unity Community Wiki and is open source, we have no directly edited anything
+//                   in this code for beep beep. Currently these use depricated UI functions.
 
 using System.IO;
 using UnityEngine;

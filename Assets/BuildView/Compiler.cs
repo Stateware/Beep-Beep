@@ -1,4 +1,5 @@
-﻿// File Name:        Compiler.cs
+﻿// Copyright (c) 2015 Stateware Team -- Licensed GPL v3
+// File Name:        Compiler.cs
 // Description:      Forms the bridge between editor view and simulation view - stops compilation
 //			         with error(s) if isolated nodes or no source nodes are found; compiles with warnings
 //			         if no sink nodes are found.
@@ -9,16 +10,15 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;	
 
-public class Compiler : MonoBehaviour {
-    private GameObject[] nodes;
-    private GameObject[] links;
-    private List<Node> disconnectedNodes;
-    private ErrorView errorView;
-    private Hashtable connectedNodes;
+public class Compiler : MonoBehaviour
+{
+    private GameObject[] _nodes;
+    private GameObject[] _links;
+    private List<Node> _disconnectedNodes;
+    private ErrorView _errorView;
+    private Hashtable _connectedNodes;
     public static Hashtable adjacencyList;
 
-    // Description: stores the destination node and road
-    // Dependencies: ChangeBuildViewObjectsToSimViewObjects()  
     struct DestinationActionPointAndRoad
     {
         public GameObject destination, road;
@@ -30,12 +30,12 @@ public class Compiler : MonoBehaviour {
     }
 
     // Description: Initializes Unity dependent variables
-	// Pre: 		N/A
-	// Post: 		Creates errorview to enable displaying errors, ArrayList disconnectedNodes is initialized 
+	// PRE: 		N/A
+	// POST: 		Creates errorview to enable displaying errors, ArrayList disconnectedNodes is initialized 
     void Awake()
 	{
-		errorView = gameObject.AddComponent<ErrorView>();
-		disconnectedNodes = new List<Node>();
+		_errorView = gameObject.AddComponent<ErrorView>();
+		_disconnectedNodes = new List<Node>();
 	}
 
 	// Description: Constructs Node and Link arrays 
@@ -43,9 +43,9 @@ public class Compiler : MonoBehaviour {
 	// POST:       Nodes and links are filled with Node objects and Link objects
 	private void GetAllGameObjects()
 	{
-		nodes = GameObject.FindGameObjectsWithTag("Node");
-		links = GameObject.FindGameObjectsWithTag("Link");
-        connectedNodes = GameObject.FindObjectOfType<BuildViewSelectionHandler>().connectedNodes;
+		_nodes = GameObject.FindGameObjectsWithTag("Node");
+		_links = GameObject.FindGameObjectsWithTag("Link");
+        _connectedNodes = GameObject.FindObjectOfType<BuildViewSelectionHandler>().connectedNodes;
     }
 	
 	// Description: Finds Node objects that are not connected to any other nodes and adds 
@@ -56,12 +56,12 @@ public class Compiler : MonoBehaviour {
 	{
 		bool found_disconnected = false;	
 		
-		for (int i=0; i<nodes.Length; i++)
+		for (int i=0; i<_nodes.Length; i++)
 		{
-			if (nodes [i].GetComponent<BuildViewNode>().node.NumberOfConnections == 0)
+			if (_nodes [i].GetComponent<BuildViewNode>().node.NumberOfConnections == 0)
 			{
 				found_disconnected = true;
-				disconnectedNodes.Add(nodes [i].GetComponent<BuildViewNode>().node);
+				_disconnectedNodes.Add(_nodes [i].GetComponent<BuildViewNode>().node);
 			}
 		}
 		
@@ -73,15 +73,15 @@ public class Compiler : MonoBehaviour {
 	// POST:        Sprites of disconnected nodes are changed to the error sprite
 	private void DisplayDisconnectedNodes()
 	{
-		string error_text = "You have " + disconnectedNodes.Count + " disconnected nodes.";
-		errorView.AppendErrorText(error_text);
-		errorView.SetDisplayGui(true);
-		for (int j = 0; j < disconnectedNodes.Count; j++)
+		string error_text = "You have " + _disconnectedNodes.Count + " disconnected nodes.";
+		_errorView.AppendErrorText(error_text);
+		_errorView.SetDisplayGui(true);
+		for (int j = 0; j < _disconnectedNodes.Count; j++)
 		{
-			disconnectedNodes[j].GetComponent<SpriteRenderer>().sprite = (Sprite)Resources.Load("BuildViewNodeDISCONNECTED", typeof(Sprite));
+			_disconnectedNodes[j].GetComponent<SpriteRenderer>().sprite = (Sprite)Resources.Load("BuildViewNodeDISCONNECTED", typeof(Sprite));
 		}
 		
-		disconnectedNodes.Clear();
+		_disconnectedNodes.Clear();
 	}
 	
 	// Description: Changes links to roads and nodes to action points
@@ -89,19 +89,19 @@ public class Compiler : MonoBehaviour {
 	// POST:        Log displays the number of nodes and links that have been transformed to action points and roads
 	private void ChangeBuildViewObjectsToSimViewObjects()
 	{
-		Debug.Log("Number of nodes compiled into Action Points: " + nodes.Length);
-		Debug.Log("Number of links compiled into Roads: " + links.Length);
+		Debug.Log("Number of nodes compiled into Action Points: " + _nodes.Length);
+		Debug.Log("Number of links compiled into Roads: " + _links.Length);
 		
-		foreach (GameObject node in nodes)
+		foreach (GameObject node in _nodes)
 		{
 			Destroy(node.GetComponent<BuildViewNode>());
 			ActionPointController ap = node.AddComponent<ActionPointController>();
-			ap.initializeActionPoint();
+			ap.InitializeActionPoint();
 			node.name = "Action Point";
 			Debug.Log("This node is a source: " + node.GetComponent<Node>().IsSource.ToString());
 		}
 		
-		foreach (GameObject link in links)
+		foreach (GameObject link in _links)
 		{
 			Destroy(link.GetComponent<BuildViewLink>());
 			RoadController rc = link.AddComponent<RoadController>();
@@ -109,9 +109,9 @@ public class Compiler : MonoBehaviour {
 			link.name = "Road";
 		}
 
-        foreach (BuildViewSelectionHandler.ConnectedNodes cn in connectedNodes.Keys)
+        foreach (BuildViewSelectionHandler.ConnectedNodes cn in _connectedNodes.Keys)
         {
-            DestinationActionPointAndRoad dapar = new DestinationActionPointAndRoad(cn.destination.gameObject, (GameObject) connectedNodes[cn]);
+            DestinationActionPointAndRoad dapar = new DestinationActionPointAndRoad(cn.destination.gameObject, (GameObject) _connectedNodes[cn]);
             GameObject origin = cn.origin.gameObject;
 
             if (!adjacencyList.ContainsKey(origin))
@@ -137,7 +137,7 @@ public class Compiler : MonoBehaviour {
 
     // Description: Main compile function that calls the other functions
     // PRE:         N/A
-    // POST:        calls compile functions procedurally
+    // POST:        Calls compile functions procedurally
     public void Compile()
 	{
 		GetAllGameObjects();

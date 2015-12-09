@@ -2,7 +2,7 @@
 // Description:      File browser for selecting files or folders at runtime.
 // Dependencies:     GUILayoutx.cs
 // Additional Notes: !!NOTE!! This code is taken from the Unity Community Wiki and is open source, we have not directly edited anything
-//                   in this code for beep beep.
+//                   in this code for Beep Beep.
 
 using UnityEngine;
 using System;

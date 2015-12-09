@@ -1,4 +1,5 @@
-﻿// File Name:        BuildViewNode.cs
+﻿// Copyright(c) 2015 Stateware Team -- Licensed GPL v3
+// File Name:        BuildViewNode.cs
 // Description:      This Unity class defines all user interactions for node prefabs. 
 //                   It also creates node prefabs when SpawnNewNode is called.
 // Dependencies:     Gameobject: NodePrefab (Clone), Components: Node.c
@@ -8,9 +9,10 @@ using UnityEngine;
 
 public class BuildViewNode : MonoBehaviour
 {
+    private BuildViewSelectionHandler _selectionHandler;
+
     public Node node;
     public GameObject NodePrefab;
-    private BuildViewSelectionHandler _selectionHandler;
 
     // Description: Sets up references between scripts 
     // PRE:         Script Components Node.c and BuildViewSelectionHandler.c exist
