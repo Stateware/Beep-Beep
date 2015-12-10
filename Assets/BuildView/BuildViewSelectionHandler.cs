@@ -2,7 +2,7 @@
 // File Name:        BuildViewSelectionHandler.cs
 // Description:      This files handles the majority of UI interaction in the BuildView, in
 //                   addition to much of the logic that edits the data model.
-// Dependencies:    
+// Dependencies:     N/A
 // Additional Notes: N/A
 
 using UnityEngine;

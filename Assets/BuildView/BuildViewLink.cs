@@ -1,7 +1,7 @@
 ﻿// Copyright(c) 2015 Stateware Team -- Licensed GPL v3
 // File:             BuildViewLink.cs
 // Description:      This is the source code for BuildViewLink in BuildView
-// Dependencies:     N/A
+// Dependencies:     Link.cs, Node.cs
 // Additional Notes: N/A
 
 using UnityEngine;

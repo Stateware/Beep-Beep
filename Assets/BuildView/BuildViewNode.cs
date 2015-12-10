@@ -2,7 +2,7 @@
 // File Name:        BuildViewNode.cs
 // Description:      This Unity class defines all user interactions for node prefabs. 
 //                   It also creates node prefabs when SpawnNewNode is called.
-// Dependencies:     Gameobject: NodePrefab (Clone), Components: Node.c
+// Dependencies:     Gameobject: NodePrefab (Clone), Components: Node.cs
 // Additional Notes: N/A
 
 using UnityEngine;
