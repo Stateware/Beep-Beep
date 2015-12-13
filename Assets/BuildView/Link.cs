@@ -12,8 +12,9 @@ public class Link : MonoBehaviour
     private bool _isTwoWay;
 
     // Description: Initializes link and preserves the gameboject between scenes
-    // PRE:
-    // POST:
+    // PRE: Link.c is attached to a gameobject
+    // POST: gameobject is preserved when scenes are changed
+    //       sets default values
     void Awake()
     {
         DontDestroyOnLoad(gameObject);
