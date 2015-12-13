@@ -313,9 +313,9 @@ public class BuildViewSelectionHandler : MonoBehaviour
         }
     }
 
-    // Description: 
-    // PRE:         
-    // POST:        
+    // Description: Changes the goal destination of the cars spawned on this node.
+    // PRE:         NONE
+    // POST:        The destination of a node (if 1 is selected) is set to the given node number.
     public void SetDestination(string destinationId)
     {
         if (destinationId.Equals(""))
@@ -340,9 +340,9 @@ public class BuildViewSelectionHandler : MonoBehaviour
         }
     }
 
-    // Description: 
-    // PRE:         
-    // POST:
+    // Description: Changes the rate at which cars on this node are spawned.
+    // PRE:         NONE
+    // POST:        The amount of cars on these nodes is set to the given rate.
     public void SetRate(string carsPerMinute)
     {
         if (carsPerMinute.Equals(""))
