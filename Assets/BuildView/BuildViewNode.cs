@@ -42,9 +42,13 @@ public class BuildViewNode : MonoBehaviour
     {
         // When you click, add self to Selection array. Works with creating links.
         if (!_selectionHandler.selectedNodes.Contains(this.node))
+        {
             _selectionHandler.AddNode(this);
+        }
         else
+        {
             _selectionHandler.RemoveNode(this);
+        }
      }
 
     // Description: Destroys the NodePrefab (Clone) and any Link gameobjects connected to it

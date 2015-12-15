@@ -6,9 +6,10 @@
 
 public class SimViewRoadTwo : SimViewRoad
 {
-	public BuildViewNode _origin;
-	public BuildViewNode _destination;
-	private int _numOfLane;
+    private int _numOfLane;
+
+    public BuildViewNode origin;
+	public BuildViewNode destination;
 	
 	// Description: Inherits SimViewRoad.cs
 	// PRE:			Link with 2 lanes doesn't have textures
@@ -16,6 +17,6 @@ public class SimViewRoadTwo : SimViewRoad
     public void Start()
     {
         base.Start();
-		base.SetProperties (_origin, _destination, _numOfLane);
+		base.SetProperties (origin, destination, _numOfLane);
     }
 }
